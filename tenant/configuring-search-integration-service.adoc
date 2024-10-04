@@ -1,0 +1,86 @@
+---
+permalink: tenant/configuring-search-integration-service.html 
+sidebar: sidebar 
+keywords: how to configure search integration service 
+summary: O serviço de integração de pesquisa envia metadados de objetos para um índice de pesquisa de destino sempre que um objeto é criado, excluído ou seus metadados ou tags são atualizados. 
+---
+= Configure o serviço de integração de pesquisa
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O serviço de integração de pesquisa envia metadados de objetos para um índice de pesquisa de destino sempre que um objeto é criado, excluído ou seus metadados ou tags são atualizados.
+
+.Antes de começar
+* Os serviços de plataforma foram ativados para sua conta de locatário por um administrador do StorageGRID.
+* Você já criou um bucket do S3 cujo conteúdo você deseja indexar.
+* O endpoint que você pretende usar como destino para o serviço de integração de pesquisa já existe, e você tem sua URNA.
+* Você pertence a um grupo de usuários que tem o link:tenant-management-permissions.html["Gerencie todos os buckets ou permissão de acesso root"]. Essas permissões substituem as configurações de permissão nas políticas de grupo ou bucket ao configurar o bucket usando o Gerenciador do locatário.
+
+
+.Sobre esta tarefa
+Depois de configurar o serviço de integração de pesquisa para um bucket de origem, criar um objeto ou atualizar metadados ou tags de um objeto aciona metadados de objeto para serem enviados para o endpoint de destino. Se você ativar o serviço de integração de pesquisa para um bucket que já contém objetos, as notificações de metadados não serão enviadas automaticamente para objetos existentes. Você deve atualizar esses objetos existentes para garantir que seus metadados sejam adicionados ao índice de pesquisa de destino.
+
+.Passos
+. Use um editor de texto para criar o XML de notificação de metadados necessário para habilitar a integração de pesquisa.
++
+** Consulte as informações sobre o XML de configuração para integração de pesquisa.
+** Ao configurar o XML, use a URNA de um endpoint de integração de pesquisa como o destino.
+
+
++
+[listing]
+----
+<MetadataNotificationConfiguration>
+ <Rule>
+    <Status>Enabled</Status>
+    <Prefix></Prefix>
+    <Destination>
+       <Urn>arn:aws:es:us-east-1:11111111111111:domain/mydomain/myindex/mytype</Urn>
+       </Destination>
+ </Rule>
+</MetadataNotificationConfiguration>
+----
+. No Gerenciador do Locatário, selecione *STORAGE (S3)* > *Buckets*.
+. Selecione o nome do intervalo de origem.
++
+É apresentada a página de detalhes do balde.
+
+. Selecione *Platform services* > *Search integration*
+. Marque a caixa de seleção *Ativar integração de pesquisa*.
+. Cole a configuração de notificação de metadados na caixa de texto e selecione *Salvar alterações*.
++
+image::../media/tenant_bucket_search_integration_configuration.png[captura de tela da caixa de diálogo configuração de integração de pesquisa]
+
++
+
+NOTE: Os serviços de plataforma devem estar habilitados para cada conta de locatário por um administrador do StorageGRID usando o Gerenciador de Grade ou a API de gerenciamento. Contacte o administrador do StorageGRID se ocorrer um erro ao guardar o XML de configuração.
+
+. Verifique se o serviço de integração de pesquisa está configurado corretamente:
++
+.. Adicione um objeto ao bucket de origem que atenda aos requisitos para acionar uma notificação de metadados conforme especificado no XML de configuração.
++
+No exemplo mostrado anteriormente, todos os objetos adicionados ao bucket acionam uma notificação de metadados.
+
+.. Confirme se um documento JSON que contém metadados e tags do objeto foi adicionado ao índice de pesquisa especificado no endpoint.
+
+
+
+
+.Depois de terminar
+Conforme necessário, você pode desativar a integração de pesquisa para um bucket usando um dos seguintes métodos:
+
+* Selecione *STORAGE (S3)* > *Buckets* e desmarque a caixa de seleção *Enable search integration* (Ativar integração de pesquisa).
+* Se você estiver usando a API do S3 diretamente, use uma solicitação de notificação de metadados de DELETE Bucket. Consulte as instruções para a implementação de aplicativos cliente S3.
+
+
+.Informações relacionadas
+link:understanding-search-integration-service.html["Compreender o serviço de integração de pesquisa"]
+
+link:configuration-xml-for-search-configuration.html["Configuração XML para integração de pesquisa"]
+
+link:../s3/index.html["USE A API REST DO S3"]
+
+link:creating-platform-services-endpoint.html["Criar endpoint de serviços de plataforma"]

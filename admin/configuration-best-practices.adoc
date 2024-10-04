@@ -1,0 +1,23 @@
+---
+permalink: admin/configuration-best-practices.html 
+sidebar: sidebar 
+keywords: tsm configuration, tivoli storage manager, archive to tape 
+summary: Quando você está dimensionando e configurando seu servidor TSM, existem práticas recomendadas que você deve aplicar para otimizá-lo para trabalhar com o nó de Arquivo. 
+---
+= Práticas recomendadas de configuração
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando você está dimensionando e configurando seu servidor TSM, existem práticas recomendadas que você deve aplicar para otimizá-lo para trabalhar com o nó de Arquivo.
+
+Ao dimensionar e configurar o servidor TSM, você deve considerar os seguintes fatores:
+
+* Como o nó de arquivo não agrega objetos antes de salvá-los no servidor TSM, o banco de dados TSM deve ser dimensionado para conter referências a todos os objetos que serão gravados no nó de arquivo.
+* O software Archive Node não pode tolerar a latência envolvida na gravação de objetos diretamente na fita ou em outra Mídia removível. Portanto, o servidor TSM deve ser configurado com um pool de armazenamento de disco para o armazenamento inicial de dados salvos pelo nó de arquivo sempre que Mídia removível for usada.
+* Você deve configurar políticas de retenção de TSM para usar a retenção baseada em eventos. O nó de arquivo não suporta políticas de retenção de TSM baseadas na criação. Use as seguintes configurações recomendadas de retmin.0 e retver.0 na política de retenção (que indica que a retenção começa quando o nó de arquivamento aciona um evento de retenção e é mantido por 0 dias depois disso). No entanto, esses valores para retmin e retver são opcionais.
+
+
+O pool de discos deve ser configurado para migrar dados para o pool de fitas (ou seja, o pool de fitas deve ser o NXTSTGPOOL do pool de discos). O pool de fitas não deve ser configurado como um pool de cópias do pool de discos com gravação simultânea em ambos os pools (ou seja, o pool de fitas não pode ser um COPYSTGPOOL para o pool de discos). Para criar cópias off-line das fitas que contêm dados do Archive Node, configure o servidor TSM com um segundo pool de fitas que é um pool de cópias do pool de fitas usado para dados do Archive Node.

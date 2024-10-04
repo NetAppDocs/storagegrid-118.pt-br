@@ -1,0 +1,59 @@
+---
+permalink: admin/configuring-connections-to-tsm-middleware.html 
+sidebar: sidebar 
+keywords: archive node connection to tsm, tivoli storage manager 
+summary: 'Antes que o nó de arquivo possa se comunicar com o middleware Tivoli Storage Manager (TSM), você deve configurar várias configurações.' 
+---
+= Configurar conexões com middleware TSM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes que o Archive Node possa se comunicar com o middleware Tivoli Storage Manager (TSM), você deve configurar várias configurações.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Sobre esta tarefa
+Até que essas configurações sejam configuradas, o serviço ARC permanece em um estado de alarme principal, pois não é possível se comunicar com o Tivoli Storage Manager.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Target*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/configuring_tsm_middleware.gif[Conta TSM alvo]
+
+. Na lista suspensa *tipo de destino*, selecione *Tivoli Storage Manager (TSM)*.
+. Para o *Tivoli Storage Manager State*, selecione *Offline* para evitar recuperações do servidor de middleware TSM.
++
+Por padrão, o Tivoli Storage Manager State é definido como Online, o que significa que o Archive Node é capaz de recuperar dados de objetos do servidor middleware TSM.
+
+. Preencha as seguintes informações:
++
+** *IP do servidor ou Nome de host*: Especifique o endereço IP ou nome de domínio totalmente qualificado do servidor middleware TSM usado pelo serviço ARC. O endereço IP padrão é 127,0.0,1.
+** *Server Port*: Especifique o número da porta no servidor middleware TSM ao qual o serviço ARC se conetará. A predefinição é 1500.
+** *Nome do nó*: Especifique o nome do nó de arquivo. Você deve inserir o nome (usuário ARC) registrado no servidor de middleware TSM.
+** *Nome de usuário*: Especifique o nome de usuário que o serviço ARC usa para fazer login no servidor TSM. Introduza o nome de utilizador predefinido (ARC-user) ou o utilizador administrativo que especificou para o nó de arquivo.
+** *Senha*: Especifique a senha usada pelo serviço ARC para fazer login no servidor TSM.
+** *Classe de gerenciamento*: Especifique a classe de gerenciamento padrão a ser usada se uma classe de gerenciamento não for especificada quando o objeto estiver sendo salvo no sistema StorageGRID, ou a classe de gerenciamento especificada não estiver definida no servidor de middleware TSM.
+** *Número de sessões*: Especifique o número de unidades de fita no servidor middleware TSM que são dedicadas ao nó de arquivo. O nó de arquivo cria simultaneamente um máximo de uma sessão por ponto de montagem mais um pequeno número de sessões adicionais (menos de cinco).
++
+Tem de alterar este valor para ser o mesmo que o valor definido para MAXNUMMP (número máximo de pontos de montagem) quando o nó de arquivo foi registado ou atualizado. (No comando register, o valor predefinido de MAXNUMMP utilizado é 1, se nenhum valor estiver definido.)
+
++
+Você também deve alterar o valor de MAXSESSIONS para o servidor TSM para um número que seja pelo menos tão grande quanto o número de sessões definido para o serviço ARC. O valor padrão de MAXSESSIONS no servidor TSM é 25.
+
+** * Sessões de recuperação máxima*: Especifique o número máximo de sessões que o serviço ARC pode abrir para o servidor middleware TSM para operações de recuperação. Na maioria dos casos, o valor apropriado é o número de sessões menos sessões de armazenamento máximo. Se você precisar compartilhar uma unidade de fita para armazenamento e recuperação, especifique um valor igual ao número de sessões.
+** *Maximum Store Sessions*: Especifique o número máximo de sessões simultâneas que o serviço ARC pode abrir para o servidor middleware TSM para operações de arquivamento.
++
+Esse valor deve ser definido como um, exceto quando o sistema de armazenamento de arquivos de destino estiver cheio e somente recuperações podem ser executadas. Defina esse valor como zero para usar todas as sessões para recuperações.
+
+
+
+. Selecione *aplicar alterações*.
+

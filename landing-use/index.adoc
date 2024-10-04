@@ -1,0 +1,13 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+permalink: landing-use/index.html 
+summary: Após a conclusão da configuração inicial, as contas de locatário do StorageGRID podem criar buckets e usar aplicativos cliente S3 para obter, recuperar e excluir objetos. 
+---
+= Use locatários e clientes do StorageGRID
+:hardbreaks:
+:allow-uri-read: 
+:linkattrs: 
+:imagesdir: ./media/
+
+

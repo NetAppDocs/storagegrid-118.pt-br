@@ -1,0 +1,76 @@
+---
+permalink: audit/asce-archive-object-store-end.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, ASCE, Archive Object Store End 
+summary: Esta mensagem indica que a gravação de um bloco de conteúdo em um sistema de armazenamento de arquivos externo terminou. 
+---
+= ASCE: Fim do armazenamento de objetos de Arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta mensagem indica que a gravação de um bloco de conteúdo em um sistema de armazenamento de arquivos externo terminou.
+
+[cols="1a,1a,4a"]
+|===
+| Código | Campo | Descrição 
+
+
+ a| 
+CBID
+ a| 
+Identificador do bloco de conteúdo
+ a| 
+O identificador do bloco de conteúdo armazenado no sistema de armazenamento de arquivos externo.
+
+
+
+ a| 
+VLID
+ a| 
+Identificador de volume
+ a| 
+O identificador exclusivo do volume de arquivo no qual os dados do objeto são gravados.
+
+
+
+ a| 
+VREN
+ a| 
+Verificação ativada
+ a| 
+Indica se a verificação é realizada para blocos de conteúdo. Os valores atualmente definidos são:
+
+* VENA: A verificação está ativada
+* VDSA: A verificação está desativada
+
+
+
+
+ a| 
+MCLS
+ a| 
+Classe de Gestão
+ a| 
+Uma cadeia de carateres que identifica a classe de gerenciamento TSM à qual o bloco de conteúdo é atribuído, se aplicável.
+
+
+
+ a| 
+RSLT
+ a| 
+Resultado
+ a| 
+Indica o resultado do processo de arquivo. Os valores atualmente definidos são:
+
+* SUCS: Bem-sucedido (processo de arquivamento bem-sucedido)
+* OFFL: Falhou (o arquivamento está offline)
+* VRFL: Falhou (verificação de objeto falhou)
+* ARUN: Falhou (sistema de armazenamento de arquivamento externo indisponível)
+* GERR: Falhou (erro geral)
+
+
+|===
+Esta mensagem de auditoria significa que o bloco de conteúdo especificado foi gravado no sistema de armazenamento de arquivos externo. Se a gravação falhar, o resultado fornece informações básicas de solução de problemas sobre onde a falha ocorreu. Informações mais detalhadas sobre falhas de arquivo podem ser encontradas examinando os atributos do nó de arquivo no sistema StorageGRID.

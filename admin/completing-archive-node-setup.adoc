@@ -1,0 +1,20 @@
+---
+permalink: admin/completing-archive-node-setup.html 
+sidebar: sidebar 
+keywords: archive node setup 
+summary: O nó de arquivo não funciona depois de concluir o processo de instalação. Antes que o sistema StorageGRID possa salvar objetos no nó de arquivo TSM, você deve concluir a instalação e configuração do servidor TSM e configurar o nó de arquivo para se comunicar com o servidor TSM. 
+---
+= Conclua a configuração do nó de arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O nó de arquivo não funciona depois de concluir o processo de instalação. Antes que o sistema StorageGRID possa salvar objetos no nó de arquivo TSM, você deve concluir a instalação e configuração do servidor TSM e configurar o nó de arquivo para se comunicar com o servidor TSM.
+
+Consulte a seguinte documentação da IBM, conforme necessário, enquanto prepara o servidor TSM para integração com o nó de arquivo em um sistema StorageGRID:
+
+* http://www.ibm.com/support/docview.wss?rs=577&uid=ssg1S7002972["Guia de instalação e do usuário dos drivers de dispositivo de fita IBM"^]
+* http://www.ibm.com/support/docview.wss?rs=577&uid=ssg1S7003032["Referência de programação de drivers de dispositivo de fita IBM"^]
+

@@ -1,0 +1,64 @@
+---
+permalink: admin/creating-and-activating-domain-policy.html 
+sidebar: sidebar 
+keywords: domain policy for tsm, tivoli storage manager policy 
+summary: Você deve criar uma política de domínio e ativá-la para configurar o servidor TSM para salvar os dados enviados do nó de Arquivo. 
+---
+= Crie e ative a política de domínio
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve criar uma política de domínio e ativá-la para configurar o servidor TSM para salvar os dados enviados do nó de Arquivo.
+
+.Passos
+. Crie uma política de domínio.
++
+`copy domain standard tsm-domain`
+
+. Se você não estiver usando uma classe de gerenciamento existente, insira uma das seguintes opções:
++
+`define policyset tsm-domain standard`
+
++
+`define mgmtclass tsm-domain standard _default_`
+
++
+`_default_` é a classe de gerenciamento padrão para a implantação.
+
+. Crie um copygroup para o pool de armazenamento apropriado. Introduza (numa linha):
++
+`define copygroup tsm-domain standard _default_ type=archive destination=SGWSDiskPool retinit=event retmin=0 retver=0`
+
++
+`_default_` É a classe de gerenciamento padrão para o nó de arquivo. Os valores de `retinit`, `retmin` e `retver` foram escolhidos para refletir o comportamento de retenção atualmente utilizado pelo nó de arquivo
+
++
+
+NOTE: Não defina `retinit` para `retinit=create`. A configuração `retinit=create` impede que o nó de arquivamento exclua conteúdo, porque os eventos de retenção são usados para remover conteúdo do servidor TSM.
+
+. Atribua a classe de gerenciamento como padrão.
++
+`assign defmgmtclass _tsm-domain_ standard _default_`
+
+. Defina o novo conjunto de políticas como ativo.
++
+`activate policyset tsm-domain standard`
+
++
+Ignore o aviso "no backup copy group" (sem grupo de cópias de segurança) que aparece quando introduz o comando Activate (Ativar).
+
+. Registre um nó para usar o novo conjunto de políticas no servidor TSM. No servidor TSM, introduza (numa linha):
++
+`register node arc-user arc-password passexp=0 domain=tsm-domain MAXNUMMP=number-of-sessions`
+
++
+ARC-user e ARC-password são o mesmo nome de nó de cliente e palavra-passe definidos no nó de arquivo, e o valor de MAXNUMMP é definido para o número de unidades de fita reservadas para sessões de armazenamento de nó de arquivo.
+
++
+
+NOTE: Por padrão, o Registro de um nó cria uma ID de usuário administrativo com autoridade de proprietário do cliente, com a senha definida para o nó.
+
+

@@ -1,0 +1,39 @@
+---
+permalink: tenant/understanding-cloudmirror-replication-service.html 
+sidebar: sidebar 
+keywords: cloudmirror replication 
+summary: Você pode habilitar a replicação do CloudMirror para um bucket do S3 se quiser que o StorageGRID replique objetos especificados adicionados ao bucket a um ou mais buckets de destino. 
+---
+= Serviço de replicação do CloudMirror
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode habilitar a replicação do CloudMirror para um bucket do S3 se quiser que o StorageGRID replique objetos especificados adicionados ao bucket a um ou mais buckets de destino.
+
+A replicação do CloudMirror opera independentemente das políticas de ILM ativas da grade. O serviço CloudMirror replica objetos à medida que eles são armazenados no bucket de origem e os entrega ao bucket de destino o mais rápido possível. A entrega de objetos replicados é acionada quando a ingestão de objetos é bem-sucedida.
+
+
+NOTE: A replicação do CloudMirror tem semelhanças e diferenças importantes com o recurso de replicação entre grades. Para saber mais, link:../admin/grid-federation-compare-cgr-to-cloudmirror.html["Compare a replicação entre redes e a replicação do CloudMirror"]consulte .
+
+Se você habilitar a replicação do CloudMirror para um bucket existente, somente os novos objetos adicionados a esse bucket serão replicados. Quaisquer objetos existentes no bucket não são replicados. Para forçar a replicação de objetos existentes, você pode atualizar os metadados do objeto existente executando uma cópia de objeto.
+
+
+NOTE: Se você estiver usando a replicação do CloudMirror para copiar objetos para um destino do Amazon S3, saiba que o Amazon S3 limita o tamanho dos metadados definidos pelo usuário em cada cabeçalho de SOLICITAÇÃO PUT para 2 KB. Se um objeto tiver metadados definidos pelo usuário com mais de 2 KB, esse objeto não será replicado.
+
+No StorageGRID, é possível replicar os objetos em um único bucket em vários buckets do destino. Para fazer isso, especifique o destino para cada regra no XML de configuração de replicação. Não é possível replicar um objeto para mais de um bucket ao mesmo tempo.
+
+Além disso, você pode configurar a replicação do CloudMirror em buckets com controle de versão ou não versionados e especificar um bucket com controle de versão ou não versionado como destino. Você pode usar qualquer combinação de buckets versionados e não versionados. Por exemplo, você pode especificar um bucket versionado como o destino para um bucket de origem não versionado, ou vice-versa. Você também pode replicar entre buckets não versionados.
+
+O comportamento de exclusão para o serviço de replicação do CloudMirror é o mesmo que o comportamento de exclusão do serviço CRR (Cross Region Replication) fornecido pelo Amazon S3 -- excluir um objeto em um bucket de origem nunca exclui um objeto replicado no destino. Se os intervalos de origem e destino forem versionados, o marcador de exclusão será replicado. Se o intervalo de destino não tiver versão, a exclusão de um objeto no intervalo de origem não replica o marcador de exclusão para o intervalo de destino nem exclui o objeto de destino.
+
+À medida que os objetos são replicados para o intervalo de destino, o StorageGRID os marca como "réplicas". Um bucket do StorageGRID de destino não replicará objetos marcados como réplicas novamente, protegendo-o de loops de replicação acidentais. Essa marcação de réplica é interna ao StorageGRID e não impede que você aproveite o AWS CRR ao usar um bucket do Amazon S3 como destino.
+
+
+NOTE: O cabeçalho personalizado usado para marcar uma réplica é `x-ntap-sg-replica`. Esta marcação impede um espelho em cascata. O StorageGRID oferece suporte a um CloudMirror bidirecional entre duas grades.
+
+A singularidade e a ordem dos eventos no intervalo de destino não são garantidas. Mais de uma cópia idêntica de um objeto de origem pode ser entregue ao destino como resultado de operações tomadas para garantir o sucesso da entrega. Em casos raros, quando o mesmo objeto é atualizado simultaneamente de dois ou mais locais diferentes do StorageGRID, a ordenação de operações no intervalo de destino pode não corresponder à ordenação de eventos no intervalo de origem.
+
+A replicação do CloudMirror normalmente é configurada para usar um bucket externo do S3 como destino. No entanto, você também pode configurar a replicação para usar outra implantação do StorageGRID ou qualquer serviço compatível com S3.

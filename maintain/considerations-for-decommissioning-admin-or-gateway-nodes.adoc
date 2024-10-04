@@ -1,0 +1,64 @@
+---
+permalink: maintain/considerations-for-decommissioning-admin-or-gateway-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission admin node, gateway node, archive node 
+summary: Reveja as considerações sobre a desativação de um nó de administrador, nó de gateway ou nó de arquivo. 
+---
+= Considerações para desativação de nós de Admin, Gateway ou Archive
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Reveja as considerações sobre a desativação de um nó de administrador, nó de gateway ou nó de arquivo.
+
+
+
+== Considerações para Admin Node
+
+* Não é possível desativar o nó de administração principal.
+* Não é possível desativar um nó Admin se uma de suas interfaces de rede fizer parte de um grupo de alta disponibilidade (HA). Primeiro, é necessário remover as interfaces de rede do grupo HA. Consulte as instruções para link:../admin/managing-high-availability-groups.html["Gerenciamento de grupos de HA"].
+* Conforme necessário, você pode alterar com segurança as políticas de ILM ao desativar um nó de administrador.
+* Se você desativar um nó de administrador e o logon único (SSO) estiver ativado para seu sistema StorageGRID, lembre-se de remover a confiança de parte confiável do nó dos Serviços de Federação do ative Directory (AD FS).
+* Se utilizar link:../admin/grid-federation-overview.html["federação de grade"]o , certifique-se de que o endereço IP do nó que está a ser desativado não foi especificado para uma ligação de federação de grelha.
+* Ao desativar um nó Admin desconetado, você perderá os logs de auditoria desse nó; no entanto, esses logs também devem existir no nó Admin principal.
+
+
+
+
+== Considerações para o Gateway Node
+
+* Não é possível desativar um Gateway Node se uma de suas interfaces de rede fizer parte de um grupo de alta disponibilidade (HA). Primeiro, é necessário remover as interfaces de rede do grupo HA. Consulte as instruções para link:../admin/managing-high-availability-groups.html["Gerenciamento de grupos de HA"].
+* Conforme necessário, você pode alterar com segurança as políticas de ILM ao desativar um nó de gateway.
+* Se utilizar link:../admin/grid-federation-overview.html["federação de grade"]o , certifique-se de que o endereço IP do nó que está a ser desativado não foi especificado para uma ligação de federação de grelha.
+* Você pode desativar um Gateway Node com segurança enquanto ele estiver desconetado.
+
+
+
+
+== [[considerações-para-archive-node]]considerações para o Archive Node
+
+
+NOTE: O suporte para nós de arquivamento e a opção Cloud Tiering - Simple Storage Service (S3) foi obsoleto. O suporte ao Archive Node será removido completamente em uma versão futura.
+
+* Não é possível desativar um nó de arquivo se ele ainda estiver conetado à grade. Para remover um nó de arquivo, confirme se o nó não está mais sendo usado, os dados foram migrados para um local diferente e o nó está desligado. Em seguida, use o procedimento de desativação para nós desconetados.
+* Se o nó de arquivamento ainda estiver em uso, verifique se sua programação inclui tempo suficiente para mover quaisquer dados existentes para nós de storage ou um pool de storage de nuvem. Mover os dados de um nó de arquivo pode levar vários dias ou semanas.
+
+
+.Passos
+. Se você estiver usando um nó de arquivamento com a opção Cloud Tiering - Simple Storage Service (S3), link:../admin/migrating-objects-from-cloud-tiering-s3-to-cloud-storage-pool.html["Migre seus objetos para um Cloud Storage Pool"].
+. Confirme se o nó de arquivo não está mais sendo usado por nenhuma regra ILM nas políticas ILM ativas.
++
+.. Vá para a página *ILM* > *Storage Pools*.
+.. Na lista de pools de storage, selecione todos os pools de storage que contêm somente nós de arquivamento.
+.. Selecione a guia *ILM use*.
+.. Se alguma regra de ILM estiver listada, observe a coluna *usada na política ativa* para determinar se o pool de armazenamento do nó de arquivamento está sendo usado em uma política ativa.
+.. Se o pool de armazenamento estiver sendo usado, link:../ilm/creating-ilm-policy.html["Crie uma nova política ILM"] isso não usará mais o nó de arquivamento.
+.. Ative a nova política.
+.. Aguarde que todos os objetos sejam movidos do pool de armazenamento do nó de arquivo. Isso pode levar vários dias ou semanas.
+
+
+. Depois de ter certeza de que todos os objetos foram movidos do nó de arquivo, desligue o nó.
+. Execute o link:decommissioning-disconnected-grid-nodes.html["procedimento de desativação para nós desligados"].
+

@@ -1,0 +1,42 @@
+---
+permalink: maintain/replacing-archive-node.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, archive node 
+summary: Para recuperar um nó de arquivo, você deve primeiro substituir o nó. 
+---
+= Substitua o nó de arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para recuperar um nó de arquivo, você deve primeiro substituir o nó.
+
+Você deve selecionar o procedimento de substituição do nó para sua plataforma. As etapas para substituir um nó são as mesmas para todos os tipos de nós de grade.
+
+[cols="1a,2a"]
+|===
+| Plataforma | Procedimento 
+
+
+ a| 
+VMware
+ a| 
+link:all-node-types-replacing-vmware-node.html["Substitua um nó VMware"]
+
+
+
+ a| 
+Linux
+ a| 
+link:all-node-types-replacing-linux-node.html["Substitua um nó Linux"]
+
+
+
+ a| 
+OpenStack
+ a| 
+Os arquivos e scripts de disco de máquina virtual fornecidos pela NetApp para OpenStack não são mais compatíveis com operações de recuperação. Se você precisar recuperar um nó em execução em uma implantação OpenStack, baixe os arquivos para seu sistema operacional Linux. Em seguida, siga o procedimento para link:all-node-types-replacing-linux-node.html["Substituindo um nó Linux"].
+
+|===

@@ -1,0 +1,115 @@
+---
+permalink: tenant/what-platform-services-are.html 
+sidebar: sidebar 
+keywords: platform services 
+summary: Os serviços de plataforma StorageGRID ajudam você a implementar uma estratégia de nuvem híbrida permitindo que você envie notificações de eventos e cópias de objetos S3 e metadados de objetos para destinos externos. 
+---
+= Gerenciar serviços de plataforma: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os serviços de plataforma StorageGRID ajudam você a implementar uma estratégia de nuvem híbrida permitindo que você envie notificações de eventos e cópias de objetos S3 e metadados de objetos para destinos externos.
+
+Se o uso de serviços de plataforma for permitido para sua conta de locatário, você poderá configurar os seguintes serviços para qualquer bucket do S3:
+
+Replicação do CloudMirror:: link:understanding-cloudmirror-replication-service.html["Serviço de replicação do StorageGRID CloudMirror"]Use para espelhar objetos específicos de um bucket do StorageGRID para um destino externo especificado.
++
+--
+Por exemplo, você pode usar a replicação do CloudMirror para espelhar Registros específicos de clientes no Amazon S3 e aproveitar os serviços da AWS para realizar análises nos seus dados.
+
+
+NOTE: A replicação do CloudMirror não é suportada se o bucket de origem tiver o S3 Object Lock ativado.
+
+--
+Notificações:: Use link:understanding-notifications-for-buckets.html["notificações de eventos por bucket"] para enviar notificações sobre ações específicas executadas em objetos para um Amazon Simple Notification Service (Amazon SNS) externo especificado.
++
+--
+Por exemplo, você pode configurar alertas para serem enviados aos administradores sobre cada objeto adicionado a um bucket, onde os objetos representam arquivos de log associados a um evento crítico do sistema.
+
+
+NOTE: Embora a notificação de evento possa ser configurada em um bucket com o bloqueio de objeto S3 ativado, os metadados do bloqueio de objeto S3 (incluindo o status reter até a data e retenção legal) dos objetos não serão incluídos nas mensagens de notificação.
+
+--
+Serviço de integração de pesquisa:: Use o link:understanding-search-integration-service.html["serviço de integração de pesquisa"] para enviar metadados de objetos S3 para um índice Elasticsearch especificado, onde os metadados podem ser pesquisados ou analisados usando o serviço externo.
++
+--
+Por exemplo, você pode configurar seus buckets para enviar metadados de objeto S3 para um serviço Elasticsearch remoto. Você pode usar o Elasticsearch para realizar pesquisas entre buckets e realizar análises sofisticadas de padrões presentes nos metadados do objeto.
+
+
+NOTE: Embora a integração do Elasticsearch possa ser configurada em um bucket com o bloqueio de objeto S3 ativado, os metadados do bloqueio de objeto S3 (incluindo o status reter até a data e retenção legal) dos objetos não serão incluídos nas mensagens de notificação.
+
+--
+
+
+Como o local de destino para serviços de plataforma geralmente é externo à implantação do StorageGRID, os serviços de plataforma oferecem a você o poder e a flexibilidade decorrentes do uso de recursos de storage externos, serviços de notificação e serviços de pesquisa ou análise para seus dados.
+
+Qualquer combinação de serviços de plataforma pode ser configurada para um único bucket do S3. Por exemplo, você pode configurar o serviço CloudMirror e as notificações em um bucket do StorageGRID S3 para que você possa espelhar objetos específicos para o Amazon Simple Storage Service, enquanto envia uma notificação sobre cada objeto a um aplicativo de monitoramento de terceiros para ajudá-lo a controlar suas despesas da AWS.
+
+
+TIP: O uso de serviços de plataforma deve ser habilitado para cada conta de locatário por um administrador do StorageGRID usando o Gerenciador de Grade ou a API de Gerenciamento de Grade.
+
+
+
+== Como os serviços de plataforma são configurados
+
+Os serviços de plataforma comunicam-se com endpoints externos que você configura usando o link:configuring-platform-services-endpoints.html["Gerente do locatário"] ou o link:understanding-tenant-management-api.html["API de gerenciamento do locatário"]. Cada endpoint representa um destino externo, como um bucket do StorageGRID S3, um bucket do Amazon Web Services, um tópico do Amazon SNS ou um cluster do Elasticsearch hospedado localmente, na AWS ou em qualquer outro lugar.
+
+Depois de criar um endpoint externo, você pode habilitar um serviço de plataforma para um bucket adicionando a configuração XML ao bucket. A configuração XML identifica os objetos nos quais o bucket deve agir, a ação que o bucket deve realizar e o ponto final que o bucket deve usar para o serviço.
+
+Você deve adicionar configurações XML separadas para cada serviço de plataforma que você deseja configurar. Por exemplo:
+
+* Se você quiser que todos os objetos cujas chaves comecem por `/images` ser replicados em um bucket do Amazon S3, adicione uma configuração de replicação ao bucket de origem.
+* Se você também quiser enviar notificações quando esses objetos estiverem armazenados no bucket, adicione uma configuração de notificações.
+* Finalmente, se você quiser indexar os metadados para esses objetos, adicione a configuração de notificação de metadados usada para implementar a integração de pesquisa.
+
+
+O formato para a configuração XML é regido pelas S3 REST APIs usadas para implementar serviços de plataforma StorageGRID:
+
+[cols="1a,2a,1a"]
+|===
+| Serviço de plataforma | S3 API REST | Consulte 
+
+
+ a| 
+Replicação do CloudMirror
+ a| 
+* GetBucketReplication
+* PutBucketReplication
+
+ a| 
+* link:configuring-cloudmirror-replication.html["Replicação do CloudMirror"]
+* link:../s3/operations-on-buckets.htmll["Operações em baldes"]
+
+
+
+
+ a| 
+Notificações
+ a| 
+* GetBucketNotificationConfiguration
+* PutBucketNotificationConfiguration
+
+ a| 
+* link:configuring-event-notifications.html["Notificações"]
+* link:../s3/s3/operations-on-buckets.html["Operações em baldes"]
+
+
+
+
+ a| 
+Integração de pesquisa
+ a| 
+* OBTER configuração de notificação de metadados do bucket
+* COLOQUE a configuração de notificação de metadados do bucket
+
+ a| 
+* link:using-search-integration-service.html["Integração de pesquisa"]
+* link:../s3/custom-operations-on-buckets.html["Operações personalizadas do StorageGRID"]
+
+
+|===
+.Informações relacionadas
+link:considerations-for-platform-services.html["Considerações para serviços de plataforma"]

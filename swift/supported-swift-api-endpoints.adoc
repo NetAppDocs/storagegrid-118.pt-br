@@ -1,0 +1,107 @@
+---
+permalink: swift/supported-swift-api-endpoints.html 
+sidebar: sidebar 
+keywords: swift api endpoint support 
+summary: 'O StorageGRID oferece suporte aos seguintes endpoints da API Swift: O URL de informações, o URL de autenticação e o URL de armazenamento.' 
+---
+= Endpoints de API Swift compatíveis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O StorageGRID oferece suporte aos seguintes endpoints da API Swift: O URL de informações, o URL de autenticação e o URL de armazenamento.
+
+
+
+== URL de informações
+
+Você pode determinar os recursos e limitações da implementação do StorageGRID Swift emitindo uma solicitação GET para o URL base do Swift com o caminho /info.
+
+`https://_FQDN_ | _Node IP:Swift Port_/info/`
+
+No pedido:
+
+* `_FQDN_` é o nome de domínio totalmente qualificado.
+* `_Node IP_` É o endereço IP do nó de armazenamento ou do nó de gateway na rede StorageGRID.
+* `_Swift Port_` É o número de porta usado para conexões Swift API no nó de armazenamento ou nó de gateway.
+
+
+Por exemplo, o seguinte URL de informações solicitaria informações de um nó de armazenamento com o endereço IP de 10.99.106.103 e usando a porta 18083.
+
+`\https://10.99.106.103:18083/info/`
+
+A resposta inclui os recursos da implementação Swift como um dicionário JSON. Uma ferramenta cliente pode analisar a resposta JSON para determinar os recursos da implementação e usá-los como restrições para operações de armazenamento subsequentes.
+
+A implementação do StorageGRID do Swift permite o acesso não autenticado ao URL de informações.
+
+
+
+== URL de autenticação
+
+Um cliente pode usar o URL de autenticação Swift para autenticar como usuário de conta de locatário.
+
+`https://_FQDN_ | _Node IP:Swift Port_/auth/v1.0/`
+
+Você deve fornecer o ID da conta do locatário, o nome de usuário e a senha como parâmetros nos `X-Auth-User` cabeçalhos e `X-Auth-Key` da solicitação, da seguinte forma:
+
+`X-Auth-User: _Tenant_Account_ID:Username_`
+
+`X-Auth-Key: _Password_`
+
+Nos cabeçalhos de solicitação:
+
+* `_Tenant_Account_ID_` É o ID de conta atribuído pelo StorageGRID quando o locatário Swift foi criado. Esse é o mesmo ID de conta de locatário usado na página de login do Gerenciador do Locatário.
+* `_Username_` É o nome de um usuário do locatário que foi criado no Gerenciador do Locatário. Esse usuário deve pertencer a um grupo que tenha a permissão Swift Administrator. O usuário raiz do locatário não pode ser configurado para usar a API REST do Swift.
++
+Se a Federação de identidade estiver ativada para a conta de locatário, forneça o nome de usuário e a senha do usuário federado do servidor LDAP. Em alternativa, forneça o nome de domínio do utilizador LDAP. Por exemplo:
+
++
+`X-Auth-User: _Tenant_Account_ID:Username@Domain_Name_`
+
+* `_Password_` é a senha para o usuário do locatário. As senhas de usuário são criadas e gerenciadas no Gerenciador do locatário.
+
+
+A resposta a uma solicitação de autenticação bem-sucedida retorna um URL de armazenamento e um token de autenticação, como segue:
+
+`X-Storage-Url: https://_FQDN_ | _Node_IP:Swift_Port_/v1/_Tenant_Account_ID_`
+
+`X-Auth-Token: _token_`
+
+`X-Storage-Token: _token_`
+
+Por padrão, o token é válido por 24 horas a partir do tempo de geração.
+
+Os tokens são gerados para uma conta de locatário específica. Um token válido para uma conta não autoriza um usuário a acessar outra conta.
+
+
+
+== URL de armazenamento
+
+Um aplicativo cliente pode emitir chamadas de API REST Swift para executar operações de conta, contentor e objeto com suporte em um nó de gateway ou nó de storage. As solicitações de armazenamento são endereçadas ao URL de armazenamento retornado na resposta de autenticação. A solicitação também deve incluir o cabeçalho X-Auth-Token e o valor retornado da solicitação de autenticação.
+
+`\https://FQDN | _IP:Swift_Port_/v1/_Tenant_Account_ID_`
+
+`[_/container_][_/object_]`
+
+`X-Auth-Token: _token_`
+
+Alguns cabeçalhos de resposta de armazenamento que contêm estatísticas de uso podem não refletir números precisos para objetos modificados recentemente. Pode levar alguns minutos para que números precisos apareçam nesses cabeçalhos.
+
+Os cabeçalhos de resposta a seguir para operações de conta e contentor são exemplos daqueles que contêm estatísticas de uso:
+
+* `X-Account-Bytes-Used`
+* `X-Account-Object-Count`
+* `X-Container-Bytes-Used`
+* `X-Container-Object-Count`
+
+
+.Informações relacionadas
+link:configuring-tenant-accounts-and-connections.html["Configurar contas de inquilino e conexões"]
+
+link:account-operations.html["Operações de conta"]
+
+link:container-operations.html["Operações de contêiner"]
+
+link:object-operations.html["Operações de objetos"]

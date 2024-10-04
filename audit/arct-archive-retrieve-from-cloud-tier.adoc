@@ -1,0 +1,64 @@
+---
+permalink: audit/arct-archive-retrieve-from-cloud-tier.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, ARCT, Archive Retrieve from Cloud-Tier 
+summary: Essa mensagem é gerada quando os dados de objetos arquivados são recuperados de um sistema de armazenamento de arquivamento externo, que se coneta ao StorageGRID por meio da API S3. 
+---
+= ARCT: Recuperação de arquivos do Cloud-Tier
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Essa mensagem é gerada quando os dados de objetos arquivados são recuperados de um sistema de armazenamento de arquivamento externo, que se coneta ao StorageGRID por meio da API S3.
+
+[cols="1a,1a,4a"]
+|===
+| Código | Campo | Descrição 
+
+
+ a| 
+CBID
+ a| 
+ID do bloco de conteúdo
+ a| 
+O identificador exclusivo para o bloco de conteúdo que foi recuperado.
+
+
+
+ a| 
+CSIZ
+ a| 
+Tamanho do conteúdo
+ a| 
+O tamanho do objeto em bytes. O valor só é preciso para recuperações bem-sucedidas.
+
+
+
+ a| 
+RSLT
+ a| 
+Código do resultado
+ a| 
+Retorna bem-sucedido (SUCS) ou o erro relatado pelo back-end.
+
+
+
+ a| 
+SUID
+ a| 
+Identificador exclusivo de armazenamento
+ a| 
+Identificador único (UUID) do sistema de armazenamento de arquivos externo.
+
+
+
+ a| 
+TEMPO
+ a| 
+Tempo
+ a| 
+Tempo total de processamento da solicitação em microssegundos.
+
+|===

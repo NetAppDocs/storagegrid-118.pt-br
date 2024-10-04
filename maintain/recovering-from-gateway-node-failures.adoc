@@ -1,0 +1,16 @@
+---
+permalink: maintain/recovering-from-gateway-node-failures.html 
+sidebar: sidebar 
+keywords: recover, gateway node failure, workflow 
+summary: Você deve concluir uma sequência de tarefas na ordem exata para recuperar de uma falha do Gateway Node. 
+---
+= Recuperar de falhas do Gateway Node: Fluxo de trabalho
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve concluir uma sequência de tarefas na ordem exata para recuperar de uma falha do Gateway Node.
+
+image::../media/overview_api_gateway_node_recovery.png[Visão geral do fluxograma da recuperação do Gateway Node]

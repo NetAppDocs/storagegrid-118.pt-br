@@ -1,0 +1,40 @@
+---
+permalink: ilm/workflow-for-s3-object-lock.html 
+sidebar: sidebar 
+keywords: object lock workflow 
+summary: Como administrador de grade, você deve coordenar estreitamente com os usuários do locatário para garantir que os objetos estejam protegidos de uma maneira que atenda aos requisitos de retenção. 
+---
+= Fluxo de trabalho para S3 Object Lock
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como administrador de grade, você deve coordenar estreitamente com os usuários do locatário para garantir que os objetos estejam protegidos de uma maneira que atenda aos requisitos de retenção.
+
+O diagrama de fluxo de trabalho mostra as etapas de alto nível para usar o bloqueio de objetos S3D. Estas etapas são executadas pelo administrador da grade e pelos usuários do locatário.
+
+image::../media/s3_object_lock_workflow_gm.png[S3 fluxo de trabalho de bloqueio de objetos para o Gerenciador de Grade]
+
+
+
+== Tarefas de administrador de grade
+
+Como mostra o diagrama de fluxo de trabalho, um administrador de grade deve executar duas tarefas de alto nível antes que os usuários de S3 locatários possam usar o bloqueio de objeto S3:
+
+. Crie pelo menos uma regra ILM compatível e torne essa regra a regra padrão em uma política ILM ativa.
+. Ative a configuração global de bloqueio de objetos S3D para todo o sistema StorageGRID.
+
+
+
+
+== Tarefas do usuário do locatário
+
+Depois que a configuração global S3 Object Lock for ativada, os locatários podem executar estas tarefas:
+
+. Crie buckets que tenham o bloqueio de objeto S3 ativado.
+. Opcionalmente, especifique as configurações de retenção padrão para o bucket. Todas as configurações padrão de bucket são aplicadas apenas a novos objetos que não têm suas próprias configurações de retenção.
+. Adicione objetos a esses buckets e, opcionalmente, especifique períodos de retenção no nível do objeto e configurações de retenção legal.
+. Conforme necessário, atualize a retenção padrão para o bucket ou atualize o período de retenção ou a configuração de retenção legal para um objeto individual.
+

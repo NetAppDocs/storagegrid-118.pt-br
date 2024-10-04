@@ -1,0 +1,86 @@
+---
+permalink: swift/configuring-tenant-accounts-and-connections.html 
+sidebar: sidebar 
+keywords: swift test connection, cli, python-swiftclient 
+summary: Você pode usar o Swift CLI para testar sua conexão com o sistema StorageGRID e verificar se você pode ler e escrever objetos. 
+---
+= Teste a configuração da API REST do Swift
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar o Swift CLI para testar sua conexão com o sistema StorageGRID e verificar se você pode ler e escrever objetos.
+
+.Antes de começar
+* Você baixou e instalou o cliente da linha de comando Swift: https://platform.swiftstack.com/docs/integration/python-swiftclient.html["SwiftStack: python-swiftclient"^]
+* Opcionalmente, você link:../admin/configuring-load-balancer-endpoints.html["criou um ponto de extremidade do balanceador de carga"]tem . Caso contrário, você sabe o endereço IP do nó de armazenamento ao qual deseja se conetar e o número da porta a ser usado. link:../admin/summary-ip-addresses-and-ports-for-client-connections.html["Endereços IP e portas para conexões de clientes"]Consulte .
+* Você link:../admin/creating-tenant-account.html["Criou uma conta de locatário Swift"]tem .
+* Você entrou na conta de locatário e criou pelo menos um grupo e usuário. link:../tenant/creating-groups-for-swift-tenant.html["Crie grupos para um locatário Swift"]Consulte .
++
+
+NOTE: Os usuários de locatário Swift devem ter a permissão do grupo Administrador para se autenticar na API REST do Swift.
+
+
+
+.Sobre esta tarefa
+Se você não tiver configurado a segurança, você deve adicionar o `--insecure` sinalizador a cada um desses comandos.
+
+.Passos
+. Consulte o URL de informações para sua implantação do StorageGRID Swift:
++
+[listing]
+----
+swift
+-U <Tenant_Account_ID:Account_User_Name>
+-K <User_Password>
+-A https://<FQDN | IP>:<Port>/info
+capabilities
+----
++
+Isso é suficiente para testar se sua implantação do Swift está funcional. Para testar ainda mais a configuração da conta armazenando um objeto, continue com as etapas adicionais.
+
+. Coloque um objeto no recipiente:
++
+[listing]
+----
+touch test_object
+swift
+-U <Tenant_Account_ID:Account_User_Name>
+-K <User_Password>
+-A https://<FQDN | IP>:<Port>/auth/v1.0
+upload test_container test_object
+--object-name test_object
+----
+. Obtenha o contentor para verificar o objeto:
++
+[listing]
+----
+swift
+-U <Tenant_Account_ID:Account_User_Name>
+-K <User_Password>
+-A https://<FQDN | IP>:<Port>/auth/v1.0
+list test_container
+----
+. Eliminar o objeto:
++
+[listing]
+----
+swift
+-U <Tenant_Account_ID:Account_User_Name>
+-K <User_Password>
+-A https://<FQDN | IP>:<Port>/auth/v1.0
+delete test_container test_object
+----
+. Eliminar o recipiente:
++
+[listing]
+----
+swift
+-U `<_Tenant_Account_ID:Account_User_Name_>`
+-K `<_User_Password_>`
+-A `\https://<_FQDN_ | _IP_>:<_Port_>/auth/v1.0'
+delete test_container
+----
+

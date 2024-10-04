@@ -1,0 +1,113 @@
+---
+permalink: tenant/viewing-s3-bucket-details.html 
+sidebar: sidebar 
+keywords: how to view bucket details 
+summary: Você pode visualizar os buckets em sua conta de locatário. 
+---
+= Veja os detalhes do balde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode visualizar os buckets em sua conta de locatário.
+
+.Antes de começar
+* Você está conetado ao Gerenciador do Locatário usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você pertence a um grupo de usuários que tem o link:tenant-management-permissions.html["Acesso root, Gerenciar todos os buckets ou permissão Ver todos os buckets"]. Essas permissões substituem as configurações de permissão nas políticas de grupo ou bucket.
+
+
+.Passos
+. Selecione *View buckets* no painel ou selecione *STORAGE (S3)* > *Buckets*.
++
+A página baldes é exibida.
+
+. Reveja as informações de resumo de cada balde.
++
+Conforme necessário, você pode classificar as informações por qualquer coluna, ou pode encaminhar e voltar a página através da lista.
+
++
+
+NOTE: Os valores contagem de objetos e espaço utilizados apresentados são estimativas. Essas estimativas são afetadas pelo timing de inests, conetividade de rede e status de nó. Se os buckets tiverem o controle de versão habilitado, as versões de objetos excluídos serão incluídas na contagem de objetos.
+
++
+[cols="1a,3a"]
+|===
+| Coluna | Descrição 
+
+
+ a| 
+Nome
+ a| 
+O nome exclusivo do bucket, que não pode ser alterado.
+
+
+
+ a| 
+Recursos ativados
+ a| 
+A lista de recursos que estão ativados para o bucket.
+
+
+
+ a| 
+S3 bloqueio de objetos
+ a| 
+Se o bloqueio de objeto S3 está ativado para o balde.
+
+Esta coluna só aparece se o bloqueio de objeto S3 estiver ativado para a grade. Esta coluna também mostra informações para quaisquer buckets em conformidade com o legado.
+
+
+
+ a| 
+Região
+ a| 
+A região do balde, que não pode ser alterada.
+
+
+
+ a| 
+Contagem de objetos
+ a| 
+O número de objetos neste intervalo. Quando objetos são adicionados ou excluídos, esse valor pode não ser atualizado imediatamente. Se os buckets tiverem o controle de versão ativado, versões de objetos não atuais serão incluídas neste valor.
+
+
+
+ a| 
+Espaço utilizado
+ a| 
+O tamanho lógico de todos os objetos no intervalo. O tamanho lógico não inclui o espaço real necessário para cópias replicadas ou codificadas para apagamento ou metadados de objetos.
+
+
+
+ a| 
+Data de criação
+ a| 
+A data e a hora em que o intervalo foi criado.
+
+|===
+. Para ver detalhes de um intervalo específico, selecione o nome do intervalo na tabela.
++
+É apresentada a página de detalhes do balde. Nesta página, você pode executar as seguintes tarefas se tiver as permissões necessárias:
+
++
+** Configurar e gerenciar opções de bucket:
++
+*** link:ilm-policy-tags.html["Tags de política ILM"]
+*** link:manage-bucket-consistency.html["Gerenciar a consistência do balde"]
+*** link:enabling-or-disabling-last-access-time-updates.html["Últimas atualizações de tempo de acesso"]
+*** link:changing-bucket-versioning.html["Controle de versão de objetos"]
+*** link:using-s3-object-lock.html["S3 bloqueio de objetos"]
+*** link:update-default-retention-settings.html["Retenção padrão do balde"]
+
+
+** Configure o acesso ao balde, como por exemplo link:configuring-cross-origin-resource-sharing-cors.html["Compartilhamento de recursos entre origens (CORS)"]
+** link:what-platform-services-are.html["Gerenciar serviços de plataforma"] (Se permitido para o locatário), incluindo replicação do CloudMirror, notificações de eventos e integração de pesquisa
+** Habilite e link:grid-federation-manage-cross-grid-replication.html["gerenciar a replicação entre grades"](se permitido para o locatário) a replicar objetos ingeridos nesse bucket para outro sistema StorageGRID
+** Aceda link:use-s3-console.html["S3 Console"]ao para gerir os objetos no balde
+** link:deleting-s3-bucket-objects.html["Exclua todos os objetos em um bucket"]
+** link:deleting-s3-bucket.html["Eliminar um balde"] isso já está vazio
+
+
+

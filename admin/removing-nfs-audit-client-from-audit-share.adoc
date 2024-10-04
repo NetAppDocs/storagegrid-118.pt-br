@@ -1,0 +1,82 @@
+---
+permalink: admin/removing-nfs-audit-client-from-audit-share.html 
+sidebar: sidebar 
+keywords: nfs audit client, remove audit client 
+summary: Os clientes de auditoria NFS têm acesso a um compartilhamento de auditoria com base em seu endereço IP. Você pode remover um cliente de auditoria existente removendo seu endereço IP. 
+---
+= Remover um cliente de auditoria NFS do compartilhamento de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os clientes de auditoria NFS têm acesso a um compartilhamento de auditoria com base em seu endereço IP. Você pode remover um cliente de auditoria existente removendo seu endereço IP.
+
+.Antes de começar
+* Você tem o `Passwords.txt` arquivo com a senha da conta root/admin.
+* Você tem o `Configuration.txt` arquivo (disponível no Pacote de recuperação).
+
+
+.Sobre esta tarefa
+Não é possível remover o último endereço IP permitido para acessar o compartilhamento de auditoria.
+
+.Passos
+. Faça login no nó de administração principal:
++
+.. Introduza o seguinte comando: `ssh admin@_primary_Admin_Node_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
+
+
+
+. Inicie o utilitário de configuração NFS: `config_nfs.rb`
++
+[listing]
+----
+
+-----------------------------------------------------------------
+| Shares               | Clients              | Config          |
+-----------------------------------------------------------------
+| add-audit-share      | add-ip-to-share      | validate-config |
+| enable-disable-share | remove-ip-from-share | refresh-config  |
+|                      |                      | help            |
+|                      |                      | exit            |
+-----------------------------------------------------------------
+----
+. Remova o endereço IP do compartilhamento de auditoria: `remove-ip-from-share`
++
+Uma lista numerada de compartilhamentos de auditoria configurados no servidor é exibida. O compartilhamento de auditoria é listado como: `/var/local/log`
+
+. Introduza o número correspondente à partilha de auditoria: `_audit_share_number_`
++
+É apresentada uma lista numerada de endereços IP permitidos para aceder à partilha de auditoria.
+
+. Introduza o número correspondente ao endereço IP que pretende remover.
++
+O compartilhamento de auditoria é atualizado e o acesso não é mais permitido a partir de qualquer cliente de auditoria com este endereço IP.
+
+. Quando solicitado, pressione *Enter*.
++
+O utilitário de configuração NFS é exibido.
+
+. Feche o utilitário de configuração NFS: `exit`
+. Se a implantação do StorageGRID for uma implantação de vários locais de data center com nós de administração adicionais nos outros sites, desative esses compartilhamentos de auditoria conforme necessário:
++
+.. Faça login remotamente no Admin Node de cada site:
++
+... Introduza o seguinte comando: `ssh admin@_grid_node_IP_`
+... Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+... Digite o seguinte comando para mudar para root: `su -`
+... Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+
+
+.. Repita estas etapas para configurar os compartilhamentos de auditoria para cada nó Admin adicional.
+.. Feche o login remoto do shell seguro para o Admin Node remoto: `exit`
+
+
+. Faça logout do shell de comando: `exit`
+

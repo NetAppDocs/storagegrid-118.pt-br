@@ -1,0 +1,42 @@
+---
+permalink: maintain/troubleshooting-node-decommissioning.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, decommission, troubleshoot 
+summary: Se o procedimento de desativação do nó parar por causa de um erro, você pode executar etapas específicas para solucionar o problema. 
+---
+= Solucionar problemas de desativação do nó
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se o procedimento de desativação do nó parar por causa de um erro, você pode executar etapas específicas para solucionar o problema.
+
+.Antes de começar
+Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+
+.Sobre esta tarefa
+Se você desligar o nó da grade sendo desativado, a tarefa será interrompida até que o nó da grade seja reiniciado. O nó da grade deve estar online.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Na árvore Grid Topology, expanda cada entrada Storage Node e verifique se os serviços DDS e LDR estão ambos online.
++
+Para realizar a desativação do nó de storage, todos os nós e todos os serviços precisam estar íntegros no início de uma desativação do nó/local on-line.
+
+. Para visualizar as tarefas de grelha ativas, selecione *nó de administração principal* > *CMN* > *tarefas de grelha* > *Visão geral*.
+. Verifique o estado da tarefa de desativação da grelha.
++
+.. Se o status da tarefa de grade de desativação indicar um problema ao salvar pacotes de tarefas de grade, selecione *nó Admin primário* > *CMN* > *Eventos* > *Visão geral*.
+.. Verifique o número de relés de auditoria disponíveis.
++
+Se o atributo Available Audit Relay for um ou mais, o serviço CMN estará conetado a pelo menos um serviço ADC. Os serviços ADC atuam como relés de Auditoria.
+
++
+O serviço CMN deve estar conetado a pelo menos um serviço ADC e a maioria (50% mais um) dos serviços ADC do sistema StorageGRID deve estar disponível para que uma tarefa de grade passe de um estágio de desativação para outro e termine.
+
+.. Se o serviço CMN não estiver conetado a serviços ADC suficientes, verifique se os nós de storage estão online e verifique a conetividade de rede entre o nó de administração principal e os nós de storage.
+
+
+

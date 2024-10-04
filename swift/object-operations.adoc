@@ -1,0 +1,211 @@
+---
+permalink: swift/object-operations.html 
+sidebar: sidebar 
+keywords: swift object operations 
+summary: As seguintes operações da API Swift são executadas em objetos. 
+---
+= Operações de objetos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As seguintes operações da API Swift são executadas em objetos. Essas operações podem ser rastreadas no link:monitoring-and-auditing-operations.html["Log de auditoria do StorageGRID"].
+
+
+
+== ELIMINAR objeto
+
+Esta operação exclui o conteúdo e os metadados de um objeto do sistema StorageGRID.
+
+São necessários os seguintes parâmetros de pedido:
+
+* `Account`
+* `Container`
+* `Object`
+
+
+É necessário o seguinte cabeçalho de solicitação:
+
+* `X-Auth-Token`
+
+
+Uma execução bem-sucedida retorna os seguintes cabeçalhos de resposta com uma `HTTP/1.1 204 No Content` resposta:
+
+* `Content-Length`
+* `Content-Type`
+* `Date`
+* `X-Trans-Id`
+
+
+Ao processar uma solicitação DE EXCLUSÃO de objetos, o StorageGRID tenta remover imediatamente todas as cópias do objeto de todos os locais armazenados. Se for bem-sucedido, o StorageGRID retornará uma resposta ao cliente imediatamente. Se todas as cópias não puderem ser removidas dentro de 30 segundos (por exemplo, porque um local está temporariamente indisponível), o StorageGRID coloca as cópias em fila para remoção e, em seguida, indica sucesso para o cliente.
+
+Para obter mais informações, link:../ilm/how-objects-are-deleted.html["Como os objetos são excluídos"]consulte .
+
+
+
+== OBTER objeto
+
+Esta operação recupera o conteúdo do objeto e obtém os metadados do objeto de um sistema StorageGRID.
+
+São necessários os seguintes parâmetros de pedido:
+
+* `Account`
+* `Container`
+* `Object`
+
+
+É necessário o seguinte cabeçalho de solicitação:
+
+* `X-Auth-Token`
+
+
+Os seguintes cabeçalhos de solicitação são opcionais:
+
+* `Accept-Encoding`
+* `If-Match`
+* `If-Modified-Since`
+* `If-None-Match`
+* `If-Unmodified-Since`
+* `Range`
+
+
+Uma execução bem-sucedida retorna os seguintes cabeçalhos com `HTTP/1.1 200 OK` uma resposta:
+
+* `Accept-Ranges`
+*  `Content-Disposition`, retornada somente se `Content-Disposition` os metadados tiverem sido definidos
+*  `Content-Encoding`, retornada somente se `Content-Encoding` os metadados tiverem sido definidos
+* `Content-Length`
+* `Content-Type`
+* `Date`
+* `ETag`
+* `Last-Modified`
+* `X-Timestamp`
+* `X-Trans-Id`
+
+
+
+
+== Objeto PRINCIPAL
+
+Esta operação recupera metadados e propriedades de um objeto ingerido a partir de um sistema StorageGRID.
+
+São necessários os seguintes parâmetros de pedido:
+
+* `Account`
+* `Container`
+* `Object`
+
+
+É necessário o seguinte cabeçalho de solicitação:
+
+* `X-Auth-Token`
+
+
+Uma execução bem-sucedida retorna os seguintes cabeçalhos com uma resposta "HTTP/1,1 200 OK":
+
+* `Accept-Ranges`
+*  `Content-Disposition`, retornada somente se `Content-Disposition` os metadados tiverem sido definidos
+*  `Content-Encoding`, retornada somente se `Content-Encoding` os metadados tiverem sido definidos
+* `Content-Length`
+* `Content-Type`
+* `Date`
+* `ETag`
+* `Last-Modified`
+* `X-Timestamp`
+* `X-Trans-Id`
+
+
+
+
+== COLOQUE o objeto
+
+Essa operação cria um novo objeto com dados e metadados ou substitui um objeto existente por dados e metadados em um sistema StorageGRID.
+
+O StorageGRID suporta objetos de até 5 TIB (5.497.558.138.880 bytes) de tamanho.
+
+
+NOTE: As solicitações de cliente conflitantes, como dois clientes escrevendo para a mesma chave, são resolvidas com base em "vitórias mais recentes". O tempo para a avaliação "últimos ganhos" é baseado em quando o sistema StorageGRID completa uma determinada solicitação, e não em quando clientes Swift iniciam uma operação.
+
+São necessários os seguintes parâmetros de pedido:
+
+* `Account`
+* `Container`
+* `Object`
+
+
+É necessário o seguinte cabeçalho de solicitação:
+
+* `X-Auth-Token`
+
+
+Os seguintes cabeçalhos de solicitação são opcionais:
+
+* `Content-Disposition`
+* `Content-Encoding`
++
+Não use em pedaços `Content-Encoding` se a regra ILM que se aplica a um objeto filtra objetos com base no tamanho e usa o posicionamento síncrono na ingestão (as opções balanceadas ou rigorosas para o comportamento de ingestão).
+
+* `Transfer-Encoding`
++
+Não use compactado ou dividido `Transfer-Encoding` se a regra ILM que se aplica a um objeto filtra objetos com base no tamanho e usa o posicionamento síncrono na ingestão (as opções balanceadas ou rigorosas para o comportamento de ingestão).
+
+* `Content-Length`
++
+Se uma regra de ILM filtrar objetos por tamanho e usar o posicionamento síncrono na ingestão, você deverá especificar `Content-Length`.
+
++
+
+NOTE: Se você não seguir estas diretrizes para `Content-Encoding`, `Transfer-Encoding` e `Content-Length`, o StorageGRID deve salvar o objeto antes que ele possa determinar o tamanho do objeto e aplicar a regra ILM. Em outras palavras, o StorageGRID deve criar cópias provisórias de um objeto na ingestão. Ou seja, o StorageGRID deve usar a opção de confirmação dupla para o comportamento de ingestão.
+
++
+Para obter mais informações sobre o posicionamento síncrono e as regras de ILM, link:../ilm/data-protection-options-for-ingest.html["Opções de proteção de dados para ingestão"]consulte .
+
+* `Content-Type`
+* `ETag`
+* `X-Object-Meta-<name\>` (metadados relacionados a objetos)
++
+Se você quiser usar a opção *tempo de criação definido pelo usuário* como tempo de referência para uma regra ILM, você deve armazenar o valor em um cabeçalho definido pelo usuário chamado `X-Object-Meta-Creation-Time`. Por exemplo:
+
++
+[listing]
+----
+X-Object-Meta-Creation-Time: 1443399726
+----
++
+Este campo é avaliado em segundos desde 1 de janeiro de 1970.
+
+* `X-Storage-Class: reduced_redundancy`
++
+Esse cabeçalho afeta quantas cópias de objeto criadas pelo StorageGRID se a regra ILM que corresponde a um objeto ingerido especificar um comportamento de ingestão de confirmação dupla ou equilibrada.
+
++
+** *Commit duplo*: Se a regra ILM especificar a opção de commit duplo para o comportamento de ingestão, o StorageGRID cria uma única cópia provisória à medida que o objeto é ingerido (commit único).
+** *Balanced*: Se a regra ILM especificar a opção Balanced, o StorageGRID fará uma única cópia provisória somente se o sistema não puder fazer imediatamente todas as cópias especificadas na regra. Se o StorageGRID puder executar o posicionamento síncrono, este cabeçalho não terá efeito.
++
+O `reduced_redundancy` cabeçalho é melhor usado quando a regra ILM que corresponde ao objeto cria uma única cópia replicada. Neste caso, o uso `reduced_redundancy` elimina a criação e exclusão desnecessárias de uma cópia de objeto extra para cada operação de ingestão.
+
++
+O uso do `reduced_redundancy` cabeçalho não é recomendado em outras circunstâncias porque aumenta o risco de perda de dados de objetos durante a ingestão. Por exemplo, você pode perder dados se a única cópia for inicialmente armazenada em um nó de armazenamento que falha antes que a avaliação ILM possa ocorrer.
+
++
+
+CAUTION: Ter apenas uma cópia replicada para qualquer período de tempo coloca os dados em risco de perda permanente. Se houver apenas uma cópia replicada de um objeto, esse objeto será perdido se um nó de armazenamento falhar ou tiver um erro significativo. Você também perde temporariamente o acesso ao objeto durante procedimentos de manutenção, como atualizações.
+
+
+
++
+Observe que especificar `reduced_redundancy` apenas afeta quantas cópias são criadas quando um objeto é ingerido pela primeira vez. Ele não afeta quantas cópias do objeto são feitas quando o objeto é avaliado pelas políticas ativas de ILM e não faz com que os dados sejam armazenados em níveis mais baixos de redundância no sistema StorageGRID.
+
+
+
+Uma execução bem-sucedida retorna os seguintes cabeçalhos com uma resposta "HTTP/1,1 201 criado":
+
+* `Content-Length`
+* `Content-Type`
+* `Date`
+* `ETag`
+* `Last-Modified`
+* `X-Trans-Id`
+

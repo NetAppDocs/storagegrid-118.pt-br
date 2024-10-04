@@ -1,0 +1,40 @@
+---
+permalink: admin/modifying-connection-settings-for-s3-api.html 
+sidebar: sidebar 
+keywords: archive node, cloud tiering 
+summary: Depois que o nó de arquivo é configurado para se conetar a um sistema de armazenamento de arquivos externo através da API S3, você pode modificar algumas configurações caso a conexão seja alterada. 
+---
+= Modifique as configurações de conexão para a API S3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depois que o nó de arquivo é configurado para se conetar a um sistema de armazenamento de arquivos externo através da API S3, você pode modificar algumas configurações caso a conexão seja alterada.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Sobre esta tarefa
+Se você alterar a conta do Cloud Tiering (S3), deverá garantir que as credenciais de acesso do usuário tenham acesso de leitura/gravação ao bucket, incluindo todos os objetos que foram ingeridos anteriormente pelo Archive Node ao bucket.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Target*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/archive_node_s3_middleware.gif[Modifique a página Configuração de um nó de arquivo]
+
+. Modifique as informações da conta, conforme necessário.
++
+Se você alterar a classe de armazenamento, os novos dados de objeto serão armazenados com a nova classe de armazenamento. O objeto existente continua a ser armazenado sob o conjunto de classes de armazenamento quando ingerido.
+
++
+
+NOTE: Nome do bucket, região e ponto final, use valores da AWS e não pode ser alterado.
+
+. Selecione *aplicar alterações*.
+

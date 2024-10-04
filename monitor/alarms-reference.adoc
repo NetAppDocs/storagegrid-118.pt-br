@@ -1,0 +1,1511 @@
+---
+permalink: monitor/alarms-reference.html 
+sidebar: sidebar 
+keywords: alarms, alarms reference 
+summary: A tabela a seguir lista todos os alarmes padrão herdados. Se um alarme for acionado, você pode procurar o código de alarme nesta tabela para encontrar as ações recomendadas. 
+---
+= Referência de alarmes (sistema legado)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A tabela a seguir lista todos os alarmes padrão herdados. Se um alarme for acionado, você pode procurar o código de alarme nesta tabela para encontrar as ações recomendadas.
+
+
+NOTE: Embora o sistema de alarme antigo continue a ser suportado, o sistema de alerta oferece benefícios significativos e é mais fácil de usar.
+
+[cols="1a,1a,1a,3a"]
+|===
+| Código | Nome | Serviço | Ação recomendada 
+
+
+ a| 
+ABRL
+ a| 
+Relés Atributo disponíveis
+ a| 
+BADC, BAMS, BARC, BCLB, BCMN, BLDR, BNMS, BSSM, BDDS
+ a| 
+Restaure a conetividade a um serviço (um serviço ADC) executando um serviço de relé de atributos o mais rápido possível. Se não houver relés de atributos conetados, o nó de grade não poderá relatar valores de atributo ao serviço NMS. Assim, o serviço NMS não pode mais monitorar o status do serviço ou atualizar atributos para o serviço.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+ACMS
+ a| 
+Serviços de metadados disponíveis
+ a| 
+BARC, BLDR, BCMN
+ a| 
+Um alarme é acionado quando um serviço LDR ou ARC perde a ligação a um serviço DDS. Se isso ocorrer, as transações de ingestão ou recuperação não podem ser processadas. Se a indisponibilidade dos serviços DDS for apenas um breve problema transitório, as transações podem ser atrasadas.
+
+Verifique e restaure as ligações a um serviço DDS para apagar este alarme e devolver o serviço à funcionalidade completa.
+
+
+
+ a| 
+ATUA
+ a| 
+Status de serviço do Cloud Tiering
+ a| 
+ARCO
+ a| 
+Disponível apenas para nós de arquivamento com um tipo de destino de disposição em camadas na nuvem - Simple Storage Service (S3).
+
+Se o atributo ACTS para o nó de arquivo estiver definido como somente leitura ativado ou leitura-escrita Desativado, você deverá definir o atributo como leitura-escrita habilitado.
+
+Se um alarme principal for acionado devido a uma falha de autenticação, verifique as credenciais associadas ao intervalo de destino e atualize os valores, se necessário.
+
+Se um alarme principal for acionado devido a qualquer outro motivo, contacte o suporte técnico.
+
+
+
+ a| 
+ADCA
+ a| 
+Estado ADC
+ a| 
+ADC
+ a| 
+Se um alarme for acionado, selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ADC* > *Overview* > *Main* e *ADC* > *Alarmes* > *Main* para determinar a causa do alarme.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+ADCE
+ a| 
+Estado ADC
+ a| 
+ADC
+ a| 
+Se o valor do Estado ADC for Standby, continue monitorando o serviço e, se o problema persistir, entre em Contato com o suporte técnico.
+
+Se o valor de ADC State for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AITE
+ a| 
+Recuperar Estado
+ a| 
+BARC
+ a| 
+Disponível apenas para nós de arquivo com um tipo de destino do Tivoli Storage Manager (TSM).
+
+Se o valor de Retrieve State estiver aguardando o Target, verifique o servidor de middleware TSM e certifique-se de que ele está funcionando corretamente. Se o nó de arquivo tiver sido adicionado ao sistema StorageGRID, certifique-se de que a ligação do nó de arquivo ao sistema de armazenamento de arquivos externo visado está configurada corretamente.
+
+Se o valor do Estado de recuperação de Arquivo for Offline, tente atualizar o estado para Online. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ARC* > *Retrieve* > *Configuration* > *Main*, selecione *Archive Retrieve State* > *Online* e clique em *Apply Changes*.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AITU
+ a| 
+Recuperar Estado
+ a| 
+BARC
+ a| 
+Se o valor de Retrieve Status for Target Error, verifique se há erros no sistema de armazenamento de arquivos externo de destino.
+
+Se o valor de Archive Retrieve Status (Estado de recuperação de arquivo) for Session Lost (perda de sessão), verifique o sistema de armazenamento de arquivo externo alvo para garantir que está online e a funcionar corretamente. Verifique a conexão de rede com o destino.
+
+Se o valor do Estado de recuperação de Arquivo for erro desconhecido, contacte o suporte técnico.
+
+
+
+ a| 
+ALIS
+ a| 
+Sessões Atributo inbound
+ a| 
+ADC
+ a| 
+Se o número de sessões de atributo de entrada em um relay de atributo crescer muito grande, pode ser uma indicação de que o sistema StorageGRID ficou desequilibrado. Em condições normais, as sessões de atributos devem ser distribuídas uniformemente entre os serviços ADC. Um desequilíbrio pode levar a problemas de desempenho.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+ALOS
+ a| 
+Sessões de Atributo de saída
+ a| 
+ADC
+ a| 
+O serviço ADC tem um alto número de sessões de atributos e está se tornando sobrecarregado. Se este alarme for acionado, contacte a assistência técnica.
+
+
+
+ a| 
+ALUR
+ a| 
+Repositórios Atributo inalcançáveis
+ a| 
+ADC
+ a| 
+Verifique a conetividade de rede com o serviço NMS para garantir que o serviço possa entrar em Contato com o repositório de atributos.
+
+Se este alarme for acionado e a conetividade de rede estiver boa, contacte o suporte técnico.
+
+
+
+ a| 
+AMQS
+ a| 
+Mensagens de auditoria enfileiradas
+ a| 
+BADC, BAMS, BARC, BCLB, BCMN, BLDR, BNMS, BDDS
+ a| 
+Se as mensagens de auditoria não puderem ser encaminhadas imediatamente para um reencaminhamento ou repositório de auditoria, as mensagens serão armazenadas em uma fila de discos. Se a fila de discos ficar cheia, podem ocorrer interrupções.
+
+Para permitir que você responda a tempo para evitar uma interrupção, os alarmes AMQS são acionados quando o número de mensagens na fila de discos atinge os seguintes limites:
+
+* Aviso: Mais de 100.000 mensagens
+* Menor: Pelo menos 500.000 mensagens
+* Maior: Pelo menos 2.000.000 mensagens
+* Crítico: Pelo menos 5.000.000 mensagens
+
+
+Se um alarme AMQS for acionado, verifique a carga no sistema - se houver um número significativo de transações, o alarme deve resolver-se ao longo do tempo. Neste caso, pode ignorar o alarme.
+
+Se o alarme persistir e aumentar a gravidade, visualize um gráfico do tamanho da fila. Se o número estiver aumentando constantemente ao longo de horas ou dias, a carga de auditoria provavelmente excedeu a capacidade de auditoria do sistema. Reduza a taxa de operação do cliente ou diminua o número de mensagens de auditoria registradas alterando o nível de auditoria para erro ou Desativado. link:../monitor/configure-audit-messages.html["Configurar mensagens de auditoria e destinos de log"]Consulte .
+
+
+
+ a| 
+AOTE
+ a| 
+Estado da loja
+ a| 
+BARC
+ a| 
+Disponível apenas para nós de arquivo com um tipo de destino do Tivoli Storage Manager (TSM).
+
+Se o valor do Estado de armazenamento estiver a aguardar o destino, verifique o sistema de armazenamento de arquivos externo e certifique-se de que está a funcionar corretamente. Se o nó de arquivo tiver sido adicionado ao sistema StorageGRID, certifique-se de que a ligação do nó de arquivo ao sistema de armazenamento de arquivos externo visado está configurada corretamente.
+
+Se o valor de Estado da loja estiver offline, verifique o valor de Estado da loja. Corrija quaisquer problemas antes de mover o estado da loja de volta para Online.
+
+
+
+ a| 
+AOTU
+ a| 
+Estado da loja
+ a| 
+BARC
+ a| 
+Se o valor de Status da Loja for sessão perdida, verifique se o sistema de armazenamento de arquivos externo está conetado e on-line.
+
+Se o valor de Target Error (erro de destino), verifique se há erros no sistema de armazenamento de arquivos externo.
+
+Se o valor do Status da Loja for erro desconhecido, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+APMS
+ a| 
+Conetividade Multipath de armazenamento
+ a| 
+SSM
+ a| 
+Se o alarme de estado de multipath aparecer como "degradado" (selecione *SUPPORT* > *Tools* > *Grid topology*, selecione *_site_* > *_grid node_* > *SSM* > *Events*), faça o seguinte:
+
+. Conete ou substitua o cabo que não exibe nenhuma luz indicadora.
+. Aguarde de um a cinco minutos.
++
+Não desligue o outro cabo até, pelo menos, cinco minutos depois de ligar o primeiro. Desconetar muito cedo pode fazer com que o volume raiz se torne somente leitura, o que requer que o hardware seja reiniciado.
+
+. Retorne à página *SSM* > *recursos* e verifique se o status do Multipath "degradado" foi alterado para "nominal" na seção hardware de armazenamento.
+
+
+
+
+ a| 
+ARCE
+ a| 
+ESTADO do ARCO
+ a| 
+ARCO
+ a| 
+O serviço ARC tem um estado de espera até que todos os componentes ARC (replicação, armazenamento, recuperação, destino) tenham iniciado. Ele então faz a transição para Online.
+
+Se o valor do estado ARC não passar de Standby para Online, verifique o estado dos componentes ARC.
+
+Se o valor de ARC State for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AROQ
+ a| 
+Objetos em fila de espera
+ a| 
+ARCO
+ a| 
+Este alarme pode ser acionado se o dispositivo de armazenamento amovível estiver a funcionar lentamente devido a problemas com o sistema de armazenamento de arquivos externo visado ou se encontrar vários erros de leitura. Verifique se há erros no sistema de armazenamento de arquivos externo e verifique se ele está funcionando corretamente.
+
+Em alguns casos, esse erro pode ocorrer como resultado de uma alta taxa de solicitações de dados. Monitore o número de objetos enfileirados à medida que a atividade do sistema diminui.
+
+
+
+ a| 
+ARRF
+ a| 
+Falhas de solicitação
+ a| 
+ARCO
+ a| 
+Se uma recuperação do sistema de armazenamento de arquivos externo visado falhar, o nó de arquivo tentará novamente a recuperação, pois a falha pode ser devido a um problema transitório. No entanto, se os dados do objeto estiverem corrompidos ou tiverem sido marcados como estando permanentemente indisponíveis, a recuperação não falhará. Em vez disso, o nó de arquivo tenta continuamente a recuperação e o valor para falhas de solicitação continua a aumentar.
+
+Este alarme pode indicar que o suporte de armazenamento que contém os dados solicitados está corrompido. Verifique o sistema de armazenamento de arquivos externo para diagnosticar ainda mais o problema.
+
+Se você determinar que os dados do objeto não estão mais no arquivo, o objeto terá que ser removido do sistema StorageGRID. Para obter mais informações, entre em Contato com o suporte técnico.
+
+Assim que o problema que acionou este alarme for resolvido, reponha a contagem de avarias. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ARC* > *Retrieve* > *Configuration* > *Main*, selecione *Reset Request Failure Count* e clique em *Apply Changes*.
+
+
+
+ a| 
+ARRV
+ a| 
+Falhas de verificação
+ a| 
+ARCO
+ a| 
+Para diagnosticar e corrigir esse problema, entre em Contato com o suporte técnico.
+
+Depois de resolver o problema que acionou este alarme, reponha a contagem de avarias. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ARC* > *Retrieve* > *Configuration* > *Main*, selecione *Reset Verification Failure Count* e clique em *Apply Changes*.
+
+
+
+ a| 
+ARVF
+ a| 
+Falhas de armazenamento
+ a| 
+ARCO
+ a| 
+Este alarme pode ocorrer como resultado de erros com o sistema de armazenamento de arquivos externo visado. Verifique se há erros no sistema de armazenamento de arquivos externo e verifique se ele está funcionando corretamente.
+
+Assim que o problema que acionou este alarme for resolvido, reponha a contagem de avarias. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ARC* > *Retrieve* > *Configuration* > *Main*, selecione *Reset Store Failure Count* e clique em *Apply Changes*.
+
+
+
+ a| 
+ASXP
+ a| 
+Compartilhamentos de auditoria
+ a| 
+AMS
+ a| 
+Um alarme é acionado se o valor de compartilhamentos de auditoria for desconhecido. Este alarme pode indicar um problema com a instalação ou configuração do nó Admin.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AUMA
+ a| 
+Estado AMS
+ a| 
+AMS
+ a| 
+Se o valor do Status AMS for DB Connectivity Error (erro de conetividade de banco de dados), reinicie o nó da grade.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AUME
+ a| 
+Estado AMS
+ a| 
+AMS
+ a| 
+Se o valor do estado AMS for em espera, continue a monitorizar o sistema StorageGRID. Se o problema persistir, entre em Contato com o suporte técnico.
+
+Se o valor do Estado AMS for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+AUXS
+ a| 
+Estado exportação Auditoria
+ a| 
+AMS
+ a| 
+Se um alarme for acionado, corrija o problema subjacente e reinicie o serviço AMS.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+BADD
+ a| 
+Falha na contagem de unidades do controlador de armazenamento
+ a| 
+SSM
+ a| 
+Este alarme é acionado quando uma ou mais unidades de um dispositivo StorageGRID falharam ou não são ideais. Substitua as unidades conforme necessário.
+
+
+
+ a| 
+BASF
+ a| 
+Identificadores de Objeto disponíveis
+ a| 
+CMN
+ a| 
+Quando um sistema StorageGRID é provisionado, o serviço CMN recebe um número fixo de identificadores de objeto. Este alarme é acionado quando o sistema StorageGRID começa a esgotar o seu fornecimento de identificadores de objetos.
+
+Para alocar mais identificadores, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+GRAVES
+ a| 
+Estado Alocação bloco Identificador
+ a| 
+CMN
+ a| 
+Por padrão, um alarme é acionado quando os identificadores de objeto não podem ser alocados porque o quórum de ADC não pode ser alcançado.
+
+A alocação de bloco de identificador no serviço CMN requer um quorum (50% mais 1) dos serviços ADC para estar on-line e conetado. Se o quórum não estiver disponível, o serviço CMN não poderá alocar novos blocos de identificador até que o quórum ADC seja restabelecido. Se o quórum de ADC for perdido, geralmente não há impactos imediato no sistema StorageGRID (os clientes ainda podem ingerir e recuperar conteúdo), já que aproximadamente um mês de fornecimento de identificadores são armazenados em cache em outro lugar na grade; no entanto, se a condição continuar, o sistema StorageGRID perderá a capacidade de ingerir novo conteúdo.
+
+Se um alarme for acionado, investigue o motivo da perda do quórum de ADC (por exemplo, pode ser uma falha de rede ou nó de armazenamento) e tome medidas corretivas.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+BRDT
+ a| 
+Temperatura do chassi do controlador de computação
+ a| 
+SSM
+ a| 
+Um alarme é acionado se a temperatura do controlador de computação em um dispositivo StorageGRID exceder um limite nominal.
+
+Verifique os componentes do hardware e problemas ambientais quanto a condições de sobreaquecimento. Se necessário, substituir o órgão.
+
+
+
+ a| 
+BTOF
+ a| 
+Desvio
+ a| 
+BADC, BLDR, BNMS, BAMS, BCLB, BCMN, BARC
+ a| 
+Um alarme é acionado se o tempo de serviço (segundos) diferir significativamente do tempo do sistema operacional. Em condições normais, o serviço deve ressincronizar-se. Se o tempo de serviço se afastar demasiado do tempo do sistema operativo, as operações do sistema podem ser afetadas. Confirme se a fonte de hora do sistema StorageGRID está correta.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+BTSE
+ a| 
+Estado do relógio
+ a| 
+BADC, BLDR, BNMS, BAMS, BCLB, BCMN, BARC
+ a| 
+Um alarme é acionado se a hora do serviço não for sincronizada com a hora rastreada pelo sistema operacional. Em condições normais, o serviço deve ressincronizar-se. Se o tempo se desviar muito longe do tempo do sistema operacional, as operações do sistema podem ser afetadas. Confirme se a fonte de hora do sistema StorageGRID está correta.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+CAHP
+ a| 
+Porcentagem de uso do Java Heap
+ a| 
+DDS
+ a| 
+Um alarme é acionado se o Java não conseguir executar a coleta de lixo a uma taxa que permita espaço de heap suficiente para o sistema funcionar corretamente. Um alarme pode indicar uma carga de trabalho do usuário que excede os recursos disponíveis no sistema para o armazenamento de metadados DDS. Verifique a atividade do ILM no painel ou selecione *SUPPORT* > *Tools* > *Grid topology* e, em seguida, selecione *_site_* > *_grid node_* > *DDS* > *Resources* > *Overview* > *Main*.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+CASA
+ a| 
+Estado do armazenamento de dados
+ a| 
+DDS
+ a| 
+Um alarme é acionado se o armazenamento de metadados do Cassandra ficar indisponível.
+
+Verifique o status de Cassandra:
+
+. No nó de armazenamento, faça login como administrador e `su` faça root usando a senha listada no arquivo Passwords.txt.
+. Introduza: `service cassandra status`
+. Se o Cassandra não estiver em execução, reinicie-o: `service cassandra restart`
+
+
+Esse alarme também pode indicar que o armazenamento de metadados (banco de dados Cassandra) para um nó de armazenamento requer reconstrução.
+
+Consulte informações sobre como solucionar problemas do alarme Serviços: Status - Cassandra (SVST) no link:../troubleshoot/troubleshooting-metadata-issues.html["Solucionar problemas de metadados"].
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+CASO
+ a| 
+Estado do armazenamento de dados
+ a| 
+DDS
+ a| 
+Este alarme é acionado durante a instalação ou expansão para indicar que um novo armazenamento de dados está a aderir à grelha.
+
+
+
+ a| 
+CCNA
+ a| 
+Hardware de computação
+ a| 
+SSM
+ a| 
+Esse alarme é acionado se o status do hardware do controlador de computação em um dispositivo StorageGRID precisar de atenção.
+
+
+
+ a| 
+CDLP
+ a| 
+Espaço usado (porcentagem)
+ a| 
+DDS
+ a| 
+Este alarme é acionado quando o espaço efetivo de metadados (CEMS) atinge 70% cheio (alarme menor), 90% cheio (alarme principal) e 100% cheio (alarme crítico).
+
+Se este alarme atingir o limite de 90%, é apresentado um aviso no painel de instrumentos do Gestor de grelhas. Você deve executar um procedimento de expansão para adicionar novos nós de storage o mais rápido possível. link:../expand/index.html["Expanda uma grade"]Consulte .
+
+Se esse alarme atingir o limite de 100%, você deve parar de ingerir objetos e adicionar nós de storage imediatamente. O Cassandra requer uma certa quantidade de espaço para realizar operações essenciais, como compactação e reparo. Essas operações serão impactadas se os metadados de objetos usarem mais de 100% do espaço permitido. Resultados indesejáveis podem ocorrer.
+
+*Nota*: Entre em Contato com o suporte técnico se você não conseguir adicionar nós de storage.
+
+Após a adição de novos nós de storage, o sistema reequilibra automaticamente os metadados de objetos em todos os nós de storage e o alarme é apagado.
+
+Consulte também informações sobre como solucionar problemas do alerta de armazenamento de metadados baixos no link:../troubleshoot/troubleshooting-metadata-issues.html["Solucionar problemas de metadados"].
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+CMNA
+ a| 
+Estado CMN
+ a| 
+CMN
+ a| 
+Se o valor do Status do CMN for erro, selecione *SUPPORT* > *Tools* > *Grid topoly* e, em seguida, selecione *_site_* > *_grid node_* > *CMN* > *Overview* > *Main* e *CMN* > *Alarmes* > *Main* para determinar a causa do erro e solucionar o problema.
+
+Um alarme é acionado e o valor de Status do CMN é no Online CMN durante uma atualização de hardware do nó Admin primário quando as CMNs são comutadas (o valor do estado antigo do CMN é Standby e o novo é Online).
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+CPRC
+ a| 
+Capacidade restante
+ a| 
+NMS
+ a| 
+Um alarme é acionado se a capacidade restante (número de conexões disponíveis que podem ser abertas para o banco de dados NMS) ficar abaixo da gravidade do alarme configurada.
+
+Se um alarme for acionado, contacte a assistência técnica.
+
+
+
+ a| 
+CPSA
+ a| 
+Fonte de Alimentação A do controlador de computação
+ a| 
+SSM
+ a| 
+Um alarme é acionado se houver um problema com a fonte de Alimentação A no controlador de computação para um dispositivo StorageGRID.
+
+Se necessário, substituir o órgão.
+
+
+
+ a| 
+CPSB
+ a| 
+Fonte de alimentação B do controlador de computação
+ a| 
+SSM
+ a| 
+Um alarme é acionado se houver um problema com a fonte de alimentação B no controlador de computação para um dispositivo StorageGRID.
+
+Se necessário, substituir o órgão.
+
+
+
+ a| 
+CPUT
+ a| 
+Temperatura da CPU do controlador de computação
+ a| 
+SSM
+ a| 
+Um alarme é acionado se a temperatura da CPU no controlador de computação em um dispositivo StorageGRID exceder um limite nominal.
+
+Se o nó de armazenamento for um dispositivo StorageGRID, o sistema StorageGRID indica que o controlador precisa de atenção.
+
+Verifique os componentes de hardware e problemas de ambiente quanto a condições de sobreaquecimento. Se necessário, substituir o órgão.
+
+
+
+ a| 
+DNST
+ a| 
+Estado DNS
+ a| 
+SSM
+ a| 
+Após a conclusão da instalação, um alarme DNST é acionado no serviço SSM. Depois que o DNS é configurado e as novas informações do servidor atingem todos os nós da grade, o alarme é cancelado.
+
+
+
+ a| 
+ECCD
+ a| 
+Fragmentos corrompidos detetados
+ a| 
+LDR
+ a| 
+Um alarme é acionado quando o processo de verificação em segundo plano deteta um fragmento corrompido codificado de apagamento. Se um fragmento corrompido for detetado, uma tentativa é feita para reconstruir o fragmento. Redefina os fragmentos corrompidos detetados e copie os atributos perdidos para zero e monitorize-os para ver se as contagens aumentam novamente. Se as contagens aumentarem, pode haver um problema com o armazenamento subjacente do nó de armazenamento. Uma cópia de dados de objeto codificados por apagamento não é considerada ausente até que o número de fragmentos perdidos ou corrompidos viole a tolerância de falhas do código de apagamento; portanto, é possível ter um fragmento corrompido e ainda ser capaz de recuperar o objeto.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+ECST
+ a| 
+Estado de verificação
+ a| 
+LDR
+ a| 
+Este alarme indica o estado atual do processo de verificação em segundo plano para dados de objetos codificados por apagamento neste nó de armazenamento.
+
+Um alarme principal é acionado se houver um erro no processo de verificação em segundo plano.
+
+
+
+ a| 
+FOPN
+ a| 
+Abra descritores de arquivo
+ a| 
+BADC, BAMS, BARC, BCLB, BCMN, BLDR, BNMS, BSSM, BDDS
+ a| 
+FOPN pode tornar-se grande durante a atividade de pico. Se não diminuir durante períodos de atividade lenta, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+HSTE
+ a| 
+Estado HTTP
+ a| 
+ERRO
+ a| 
+Consulte ações recomendadas para HSTU.
+
+
+
+ a| 
+HSTU
+ a| 
+Estado HTTP
+ a| 
+ERRO
+ a| 
+HSTE e HSTU estão relacionados a HTTP para todo o tráfego LDR, incluindo S3, Swift, e outro tráfego StorageGRID interno. Um alarme indica que ocorreu uma das seguintes situações:
+
+* O HTTP foi colocado offline manualmente.
+* O atributo Auto-Start HTTP foi desativado.
+* O serviço LDR está a encerrar.
+
+
+O atributo Auto-Start HTTP é ativado por padrão. Se essa configuração for alterada, o HTTP poderá permanecer offline após uma reinicialização.
+
+Se necessário, aguarde que o serviço LDR seja reiniciado.
+
+Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_Storage Node_* > *LDR* > *Configuration*. Se o HTTP estiver offline, coloque-o online. Verifique se o atributo Auto-Start HTTP está ativado.
+
+Se o HTTP permanecer offline, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+HTAS
+ a| 
+Auto-Iniciar HTTP
+ a| 
+LDR
+ a| 
+Especifica se os serviços HTTP devem ser iniciados automaticamente na inicialização. Esta é uma opção de configuração especificada pelo usuário.
+
+
+
+ a| 
+IRSU
+ a| 
+Estado de replicação de entrada
+ a| 
+BLDR, BARC
+ a| 
+Um alarme indica que a replicação de entrada foi desativada. Confirme as configurações: Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Replication* > *Configuration* > *Main*.
+
+
+
+ a| 
+LATA
+ a| 
+Latência média
+ a| 
+NMS
+ a| 
+Verifique se há problemas de conetividade.
+
+Verifique a atividade do sistema para confirmar que existe um aumento na atividade do sistema. Um aumento na atividade do sistema resultará em um aumento para atribuir a atividade de dados. Essa atividade aumentada resultará em um atraso no processamento de dados de atributos. Esta pode ser uma atividade normal do sistema e irá diminuir.
+
+Verifique se existem vários alarmes. Um aumento nos tempos médios de latência pode ser indicado por um número excessivo de alarmes acionados.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+LDRE
+ a| 
+Estado LDR
+ a| 
+LDR
+ a| 
+Se o valor do Estado LDR for Standby (em espera), continue a monitorizar a situação e, se o problema persistir, contacte o suporte técnico.
+
+Se o valor de LDR State for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+PERDIDO
+ a| 
+Objetos perdidos
+ a| 
+DDS, LDR
+ a| 
+Acionado quando o sistema StorageGRID não consegue recuperar uma cópia do objeto solicitado de qualquer lugar do sistema. Antes de um alarme PERDIDO (objetos perdidos) ser acionado, o sistema tenta recuperar e substituir um objeto em falta de outro local do sistema.
+
+Objetos perdidos representam uma perda de dados. O atributo objetos perdidos é incrementado sempre que o número de locais para um objeto cai para zero sem o serviço DDS propositadamente purgando o conteúdo para satisfazer a política ILM.
+
+Investigue imediatamente os alarmes PERDIDOS (LOST Object). Se o problema persistir, entre em Contato com o suporte técnico.
+
+link:../troubleshoot/troubleshooting-lost-and-missing-object-data.html["Solucionar problemas de dados de objetos perdidos e ausentes"]
+
+
+
+ a| 
+MCEP
+ a| 
+Validade do certificado de Interface de Gestão
+ a| 
+CMN
+ a| 
+Acionado quando o certificado usado para acessar a interface de gerenciamento está prestes a expirar.
+
+. No Gerenciador de Grade, selecione *CONFIGURATION* > *Security* > *Certificates*.
+. Na guia *Global*, selecione *certificado de interface de gerenciamento*.
+. link:../admin/configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#add-a-custom-management-interface-certificate["Carregue um novo certificado de interface de gerenciamento."]
+
+
+
+
+ a| 
+MINQ
+ a| 
+Notificações de e-mail na fila
+ a| 
+NMS
+ a| 
+Verifique as conexões de rede dos servidores que hospedam o serviço NMS e o servidor de e-mail externo. Confirme também se a configuração do servidor de e-mail está correta.
+
+link:managing-alarms.html["Configurar as definições do servidor de correio eletrónico para alarmes (sistema legado)"]
+
+
+
+ a| 
+MIN
+ a| 
+Estado das notificações por e-mail
+ a| 
+BNMS
+ a| 
+Um alarme menor é acionado se o serviço NMS não conseguir se conetar ao servidor de e-mail. Verifique as conexões de rede dos servidores que hospedam o serviço NMS e o servidor de e-mail externo. Confirme também se a configuração do servidor de e-mail está correta.
+
+link:managing-alarms.html["Configurar as definições do servidor de correio eletrónico para alarmes (sistema legado)"]
+
+
+
+ a| 
+SAUDADES
+ a| 
+Estado do motor da interface NMS
+ a| 
+BNMS
+ a| 
+Um alarme é acionado se o mecanismo de interface NMS no Admin Node que reúne e gera conteúdo da interface for desconetado do sistema. Verifique o Gerenciador do servidor para determinar se o aplicativo individual do servidor está inativo.
+
+
+
+ a| 
+NANG
+ a| 
+Configuração de negociação automática de rede
+ a| 
+SSM
+ a| 
+Verifique a configuração do adaptador de rede. A configuração deve corresponder às preferências dos roteadores e switches de rede.
+
+Uma definição incorreta pode ter um impactos grave no desempenho do sistema.
+
+
+
+ a| 
+NDUP
+ a| 
+Configuração Duplex de rede
+ a| 
+SSM
+ a| 
+Verifique a configuração do adaptador de rede. A configuração deve corresponder às preferências dos roteadores e switches de rede.
+
+Uma definição incorreta pode ter um impactos grave no desempenho do sistema.
+
+
+
+ a| 
+NLNK
+ a| 
+Detecção de ligação de rede
+ a| 
+SSM
+ a| 
+Verifique as conexões do cabo de rede na porta e no switch.
+
+Verifique as configurações do roteador, do switch e do adaptador de rede.
+
+Reinicie o servidor.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+NRER
+ a| 
+Receber erros
+ a| 
+SSM
+ a| 
+As seguintes causas podem ser os alarmes NRER:
+
+* Correção de erro de avanço (FEC) não corresponde
+* Incompatibilidade da MTU da porta do switch e da NIC
+* Altas taxas de erro de link
+* Buffer de anel NIC excedido
+
+
+Consulte as informações sobre como solucionar problemas do alarme Network Receive Error (NRER) em link:../troubleshoot/troubleshooting-network-hardware-and-platform-issues.html["Solucionar problemas de rede, hardware e plataforma"].
+
+
+
+ a| 
+NRLY
+ a| 
+Relés de auditoria disponíveis
+ a| 
+BADC, BARC, BCLB, BCMN, BLDR, BNMS, BDDS
+ a| 
+Se os relés de auditoria não estiverem conetados aos serviços ADC, os eventos de auditoria não poderão ser relatados. Eles estão em fila de espera e indisponíveis para os usuários até que a conexão seja restaurada.
+
+Restaure a conetividade a um serviço ADC o mais rápido possível.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+NSCA
+ a| 
+Estado NMS
+ a| 
+NMS
+ a| 
+Se o valor de Status do NMS for DB Connectivity Error (erro de conetividade de banco de dados), reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+NSCE
+ a| 
+Estado NMS
+ a| 
+NMS
+ a| 
+Se o valor do estado NMS for Standby (espera), continue a monitorização e, se o problema persistir, contacte o suporte técnico.
+
+Se o valor de Estado NMS for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+VELOCIDADE MÁXIMA
+ a| 
+Velocidade
+ a| 
+SSM
+ a| 
+Isso pode ser causado por problemas de conetividade de rede ou compatibilidade de driver. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+NTBR
+ a| 
+Livre Tablespace
+ a| 
+NMS
+ a| 
+Se um alarme for acionado, verifique a rapidez com que a utilização da base de dados foi alterada. Uma queda súbita (ao contrário de uma mudança gradual ao longo do tempo) indica uma condição de erro. Se o problema persistir, entre em Contato com o suporte técnico.
+
+Ajustar o limite de alarme permite que você gerencie proativamente quando o armazenamento adicional precisa ser alocado.
+
+Se o espaço disponível atingir um limite baixo (consulte o limiar de alarme), contacte o suporte técnico para alterar a alocação da base de dados.
+
+
+
+ a| 
+NTER
+ a| 
+Transmitir erros
+ a| 
+SSM
+ a| 
+Esses erros podem ser apagados sem serem reiniciados manualmente. Se eles não limparem, verifique o hardware de rede. Verifique se o hardware e o driver do adaptador estão corretamente instalados e configurados para funcionar com seus roteadores e switches de rede.
+
+Quando o problema subjacente for resolvido, reinicie o contador. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *SSM* > *Resources* > *Configuration* > *Main*, selecione *Reset Transmit Error Count* e clique em *Apply Changes*.
+
+
+
+ a| 
+NTFQ
+ a| 
+Desvio de frequência NTP
+ a| 
+SSM
+ a| 
+Se o desvio de frequência exceder o limite configurado, é provável que haja um problema de hardware com o relógio local. Se o problema persistir, contacte o suporte técnico para agendar uma substituição.
+
+
+
+ a| 
+NTLK
+ a| 
+Bloqueio NTP
+ a| 
+SSM
+ a| 
+Se o daemon NTP não estiver bloqueado para uma fonte de tempo externa, verifique a conetividade de rede com as fontes de tempo externas designadas, sua disponibilidade e sua estabilidade.
+
+
+
+ a| 
+NTOF
+ a| 
+Desvio horário NTP
+ a| 
+SSM
+ a| 
+Se o desvio de tempo exceder o limite configurado, é provável que haja um problema de hardware com o oscilador do relógio local. Se o problema persistir, contacte o suporte técnico para agendar uma substituição.
+
+
+
+ a| 
+NTSJ
+ a| 
+Jitter de fonte de tempo escolhido
+ a| 
+SSM
+ a| 
+Este valor indica a confiabilidade e estabilidade da fonte de tempo que o NTP no servidor local está usando como referência.
+
+Se um alarme for acionado, pode ser uma indicação de que o oscilador da fonte de tempo está com defeito ou que há um problema com o link WAN para a fonte de tempo.
+
+
+
+ a| 
+NTSU
+ a| 
+Estado NTP
+ a| 
+SSM
+ a| 
+Se o valor do Status NTP não estiver em execução, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+OPST
+ a| 
+Estado geral da alimentação
+ a| 
+SSM
+ a| 
+Um alarme é acionado se a alimentação de um aparelho StorageGRID se desviar da tensão de funcionamento recomendada.
+
+Verifique o estado da fonte de Alimentação A ou B para determinar qual fonte de alimentação está a funcionar de forma anormal.
+
+Se necessário, substitua a fonte de alimentação.
+
+
+
+ a| 
+OQRT
+ a| 
+Objetos em quarentena
+ a| 
+LDR
+ a| 
+Depois que os objetos são restaurados automaticamente pelo sistema StorageGRID, os objetos em quarentena podem ser removidos do diretório de quarentena.
+
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *site* > *nó de armazenamento* > *LDR* > *Verificação* > *Configuração* > *Principal*.
+. Selecione *Excluir objetos em quarentena*.
+. Clique em *aplicar alterações*.
+
+
+Os objetos em quarentena são removidos e a contagem é redefinida para zero.
+
+
+
+ a| 
+ORSU
+ a| 
+Estado replicação saída
+ a| 
+BLDR, BARC
+ a| 
+Um alarme indica que a replicação de saída não é possível: O armazenamento está em um estado em que os objetos não podem ser recuperados. Um alarme é acionado se a replicação de saída for desativada manualmente. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Replication* > *Configuration*.
+
+Um alarme é acionado se o serviço LDR não estiver disponível para replicação. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Storage*.
+
+
+
+ a| 
+OSLF
+ a| 
+Status do compartimento
+ a| 
+SSM
+ a| 
+Um alarme é acionado se o status de um dos componentes na prateleira de armazenamento de um dispositivo de armazenamento for degradado. Os componentes da prateleira de armazenamento incluem IOMs, ventiladores, fontes de alimentação e gavetas de unidade.se este alarme for acionado, consulte as instruções de manutenção do seu aparelho.
+
+
+
+ a| 
+PMEM
+ a| 
+Utilização da memória de serviço (percentagem)
+ a| 
+BADC, BAMS, BARC, BCLB, BCMN, BLDR, BNMS, BSSM, BDDS
+ a| 
+Pode ter um valor de mais de Y% de RAM, onde Y representa a porcentagem de memória que está sendo usada pelo servidor.
+
+Valores abaixo de 80% são normais. Mais de 90% é considerado um problema.
+
+Se o uso de memória for alto para um único serviço, monitore a situação e investigue.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+PSAS
+ a| 
+Estado da fonte de alimentação A.
+ a| 
+SSM
+ a| 
+Um alarme é acionado se a fonte de Alimentação A num aparelho StorageGRID se desviar da tensão de funcionamento recomendada.
+
+Se necessário, substitua a fonte de alimentação A.
+
+
+
+ a| 
+PSB
+ a| 
+Estado da fonte de alimentação B.
+ a| 
+SSM
+ a| 
+Um alarme é acionado se a fonte de alimentação B num aparelho StorageGRID se desviar da tensão de funcionamento recomendada.
+
+Se necessário, substitua a fonte de alimentação B..
+
+
+
+ a| 
+RDTE
+ a| 
+Estado do Tivoli Storage Manager
+ a| 
+BARC
+ a| 
+Disponível apenas para nós de arquivamento com um tipo de destino do Tivoli Storage Manager (TSM).
+
+Se o valor do estado do Tivoli Storage Manager estiver offline, verifique o status do Tivoli Storage Manager e resolva quaisquer problemas.
+
+Coloque o componente novamente online. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *ARC* > *Target* > *Configuration* > *Main*, selecione *Tivoli Storage Manager State* > *Online* e clique em *Apply Changes*.
+
+
+
+ a| 
+RDTU
+ a| 
+Status do Tivoli Storage Manager
+ a| 
+BARC
+ a| 
+Disponível apenas para nós de arquivamento com um tipo de destino do Tivoli Storage Manager (TSM).
+
+Se o valor do status do Gerenciador de armazenamento Tivoli for erro de configuração e o nó de arquivo tiver sido adicionado ao sistema StorageGRID, verifique se o servidor de middleware TSM está configurado corretamente.
+
+Se o valor do status do Gerenciador de armazenamento Tivoli for falha de conexão ou falha de conexão, tente novamente, verifique a configuração de rede no servidor middleware TSM e a conexão de rede entre o servidor de middleware TSM e o sistema StorageGRID.
+
+Se o valor do status do Gerenciador de armazenamento Tivoli for Falha de autenticação ou Falha de autenticação, reconetando, o sistema StorageGRID poderá se conetar ao servidor middleware TSM, mas não poderá autenticar a conexão. Verifique se o servidor de middleware TSM está configurado com o usuário, senha e permissões corretos e reinicie o serviço.
+
+Se o valor do status do Tivoli Storage Manager for Falha da sessão, uma sessão estabelecida foi perdida inesperadamente. Verifique a conexão de rede entre o servidor middleware TSM e o sistema StorageGRID. Verifique se há erros no servidor middleware.
+
+Se o valor do status do Tivoli Storage Manager for erro desconhecido, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+RIRF
+ a| 
+Replicações de entrada -- falhou
+ a| 
+BLDR, BARC
+ a| 
+Um alarme Inbound replicações -- Falha pode ocorrer durante períodos de alta carga ou interrupções temporárias da rede. Após a redução da atividade do sistema, este alarme deve ser apagado. Se a contagem de replicações falhadas continuar a aumentar, procure problemas de rede e verifique se os serviços LDR e ARC de origem e destino estão online e disponíveis.
+
+Para repor a contagem, selecione *support* > *Tools* > *Grid topoly* e, em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Replication* > *Configuration* > *Main*. Selecione *Redefinir contagem de falhas de replicação de entrada* e clique em *aplicar alterações*.
+
+
+
+ a| 
+RIRQ
+ a| 
+Replicações de entrada -- na fila
+ a| 
+BLDR, BARC
+ a| 
+Os alarmes podem ocorrer durante períodos de alta carga ou interrupção temporária da rede. Após a redução da atividade do sistema, este alarme deve ser apagado. Se a contagem de repetições em fila continuar a aumentar, procure problemas de rede e verifique se os serviços LDR e ARC de origem e destino estão online e disponíveis.
+
+
+
+ a| 
+RORQ
+ a| 
+Repetições de saída -- em fila
+ a| 
+BLDR, BARC
+ a| 
+A fila de replicação de saída contém dados de objeto que estão sendo copiados para satisfazer as regras e objetos ILM solicitados pelos clientes.
+
+Um alarme pode ocorrer como resultado de uma sobrecarga do sistema. Aguarde para ver se o alarme é apagado quando a atividade do sistema diminui. Se o alarme voltar a ocorrer, adicione capacidade adicionando nós de storage.
+
+
+
+ a| 
+SAVP
+ a| 
+Espaço utilizável total (percentagem)
+ a| 
+LDR
+ a| 
+Se o espaço utilizável atingir um limite baixo, as opções incluem a expansão do sistema StorageGRID ou a movimentação de dados de objetos para arquivamento por meio de um nó de arquivamento.
+
+
+
+ a| 
+SCAS
+ a| 
+Estado
+ a| 
+CMN
+ a| 
+Se o valor de Status para a tarefa de grade ativa for erro, procure a mensagem de tarefa de grade. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *CMN* > *Grid Tasks* > *Overview* > *Main*. A mensagem de tarefa de grade exibe informações sobre o erro (por exemplo, "verificação falhou no nó 12130011").
+
+Depois de investigar e corrigir o problema, reinicie a tarefa de grade. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *CMN* > *Grid Tasks* > *Configuration* > *Main* e selecione *Actions* > *Run*.
+
+Se o valor de Status para uma tarefa de grade que está sendo interrompida for erro, tente terminar novamente a tarefa de grade.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+SCEP
+ a| 
+Validade do certificado de Endpoints do Serviço de API de armazenamento
+ a| 
+CMN
+ a| 
+Acionado quando o certificado usado para acessar endpoints de API de armazenamento está prestes a expirar.
+
+. Selecione *CONFIGURATION* > *Security* > *Certificates*.
+. Na guia *Global*, selecione *S3 e Swift API certificate*.
+. link:../admin/configuring-custom-server-certificate-for-storage-node.html#add-a-custom-s3-and-swift-api-certificate["Faça upload de um novo certificado API S3 e Swift."]
+
+
+
+
+ a| 
+SCHR
+ a| 
+Estado
+ a| 
+CMN
+ a| 
+Se o valor de Status para a tarefa de grade histórica for abortado, investigue o motivo e execute a tarefa novamente, se necessário.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+SCSA
+ a| 
+Controlador de armazenamento A
+ a| 
+SSM
+ a| 
+Um alarme é acionado se houver um problema com o controlador de armazenamento A em um dispositivo StorageGRID.
+
+Se necessário, substituir o órgão.
+
+
+
+ a| 
+SCSB
+ a| 
+Controlador de armazenamento B
+ a| 
+SSM
+ a| 
+Um alarme é acionado se houver um problema com o controlador de armazenamento B em um dispositivo StorageGRID.
+
+Se necessário, substituir o órgão.
+
+Alguns modelos de aparelhos não têm um controlador de armazenamento B..
+
+
+
+ a| 
+SHLH
+ a| 
+Saúde
+ a| 
+LDR
+ a| 
+Se o valor de integridade para um armazenamento de objetos for erro, verifique e corrija:
+
+* problemas com o volume a ser montado
+* erros do sistema de arquivos
+
+
+
+
+ a| 
+SLSA
+ a| 
+Média de carga da CPU
+ a| 
+SSM
+ a| 
+Quanto maior for o valor, mais ocupado o sistema.
+
+Se a média de carga da CPU persistir em um valor alto, o número de transações no sistema deve ser investigado para determinar se isso se deve a uma carga pesada no momento. Veja um gráfico da média de carga da CPU: Selecione *SUPPORT* > *Tools* > *Grid topoly*. Em seguida, selecione *_site_* > *_grid node_* > *SSM* > *Resources* > *Reports* > *Charts*.
+
+Se a carga no sistema não for pesada e o problema persistir, contacte a assistência técnica.
+
+
+
+ a| 
+SMST
+ a| 
+Estado do monitor de registo
+ a| 
+SSM
+ a| 
+Se o valor do Estado do Monitor de Registos não estiver ligado durante um período de tempo persistente, contacte o suporte técnico.
+
+
+
+ a| 
+SMTT
+ a| 
+Total de eventos
+ a| 
+SSM
+ a| 
+Se o valor de Eventos totais for maior que zero, verifique se existem eventos conhecidos (como falhas de rede) que podem ser a causa. A menos que esses erros tenham sido apagados (ou seja, a contagem foi redefinida para 0), os alarmes de Total de Eventos podem ser acionados.
+
+Quando um problema for resolvido, reponha o contador para apagar o alarme. Selecione *NÓS* > *_site_* > *_grid node_* > *Eventos* > *Redefinir contagens de eventos*.
+
+
+NOTE: Para redefinir contagens de eventos, você deve ter a permissão de configuração de página de topologia de Grade.
+
+Se o valor de Total de Eventos for zero ou o número aumentar e o problema persistir, contacte o suporte técnico.
+
+
+
+ a| 
+SNST
+ a| 
+Estado
+ a| 
+CMN
+ a| 
+Um alarme indica que há um problema ao armazenar os pacotes de tarefas da grade. Se o valor de Status for erro de Checkpoint ou Quórum não atingido, confirme que a maioria dos serviços ADC está conetada ao sistema StorageGRID (50% mais um) e aguarde alguns minutos.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+SOSS
+ a| 
+Estado do sistema operativo de armazenamento
+ a| 
+SSM
+ a| 
+Um alarme é acionado se o sistema operacional SANtricity indicar que há um problema de "necessidade de atenção" com um componente em um dispositivo StorageGRID.
+
+Selecione *NODES*. Em seguida, selecione *nó de armazenamento do dispositivo* > *hardware*. Role para baixo para ver o status de cada componente. No SANtricity os, verifique outros componentes do dispositivo para isolar o problema.
+
+
+
+ a| 
+SSMA
+ a| 
+Estado SSM
+ a| 
+SSM
+ a| 
+Se o valor de Status SSM for erro, selecione *SUPPORT* > *Tools* > *Grid topoly* e, em seguida, selecione *_site_* > *_grid node_* > *SSM* > *Overview* > *Main* e *SSM* > *Overview* > *Alarmes* para determinar a causa do alarme.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+SSME
+ a| 
+Estado SSM
+ a| 
+SSM
+ a| 
+Se o valor do estado SSM for Standby (em espera), continue a monitorização e, se o problema persistir, contacte a assistência técnica.
+
+Se o valor do estado SSM for Offline, reinicie o serviço. Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+SSTS
+ a| 
+Estado de armazenamento
+ a| 
+ERRO
+ a| 
+Se o valor do Status do armazenamento for espaço utilizável insuficiente, não haverá mais armazenamento disponível no nó de armazenamento e os ingeries de dados serão redirecionados para outro nó de armazenamento disponível. As solicitações de recuperação podem continuar a ser entregues a partir deste nó de grade.
+
+Armazenamento adicional deve ser adicionado. Ele não está impactando a funcionalidade do usuário final, mas o alarme persiste até que o armazenamento adicional seja adicionado.
+
+Se o valor de Status do armazenamento for volume(s) indisponível(s), uma parte do armazenamento não estará disponível. O armazenamento e a recuperação destes volumes não são possíveis. Verifique o volume's Health (Saúde do volume) para obter mais informações: Selecione *SUPPORT* > *Tools* (SUPORTE* > Ferramentas* > *Grid topology*). Em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Storage* > *Overview* > *Main*. O volume's Health (Saúde do volume) está listado em Object Stores.
+
+Se o valor do Status do armazenamento for erro, entre em Contato com o suporte técnico.
+
+link:../troubleshoot/troubleshooting-storage-status-alarm.html["Solucione o problema do alarme de Status de armazenamento (SSTS)"]
+
+
+
+ a| 
+SVST
+ a| 
+Estado
+ a| 
+SSM
+ a| 
+Este alarme é apagado quando outros alarmes relacionados a um serviço que não está em execução são resolvidos. Acompanhe os alarmes de serviço de origem para restaurar a operação.
+
+Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *SSM* > *Serviços* > *Visão geral* > *Principal*. Quando o status de um serviço é mostrado como não em execução, seu estado é administrativamente inativo. O status do serviço pode ser listado como não em execução pelos seguintes motivos:
+
+* O serviço foi interrompido manualmente (`/etc/init.d/<service\> stop`).
+* Há um problema com o banco de dados MySQL e o Server Manager desliga o serviço MI.
+* Um nó de grade foi adicionado, mas não iniciado.
+* Durante a instalação, um nó de grade ainda não se conetou ao nó Admin.
+
+
+Se um serviço estiver listado como não em execução, reinicie o serviço (`/etc/init.d/<service\> restart`).
+
+Esse alarme também pode indicar que o armazenamento de metadados (banco de dados Cassandra) para um nó de armazenamento requer reconstrução.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+link:../troubleshoot/troubleshooting-metadata-issues.html["Solucionar problemas do alarme Serviços: Status - Cassandra (SVST)"]
+
+
+
+ a| 
+TMEM
+ a| 
+Memória instalada
+ a| 
+SSM
+ a| 
+Os nós executados com menos de 24 GiB de memória instalada podem levar a problemas de performance e instabilidade do sistema. A quantidade de memória instalada no sistema deve ser aumentada para pelo menos 24 GiB.
+
+
+
+ a| 
+TPOP
+ a| 
+Operações pendentes
+ a| 
+ADC
+ a| 
+Uma fila de mensagens pode indicar que o serviço ADC está sobrecarregado. Poucos serviços ADC podem ser conetados ao sistema StorageGRID. Em uma grande implantação, o serviço ADC pode exigir a adição de recursos computacionais, ou o sistema pode exigir serviços ADC adicionais.
+
+
+
+ a| 
+UMEM
+ a| 
+Memória disponível
+ a| 
+SSM
+ a| 
+Se a RAM disponível ficar baixa, determine se este é um problema de hardware ou software. Se não for um problema de hardware ou se a memória disponível for inferior a 50 MB (o limite de alarme predefinido), contacte o suporte técnico.
+
+
+
+ a| 
+VMFI
+ a| 
+Entradas disponíveis
+ a| 
+SSM
+ a| 
+Esta é uma indicação de que é necessário um armazenamento adicional. Entre em Contato com o suporte técnico.
+
+
+
+ a| 
+VMFR
+ a| 
+Espaço disponível
+ a| 
+SSM
+ a| 
+Se o valor de espaço disponível ficar muito baixo (consulte limiares de alarme), ele precisa ser investigado se há arquivos de log crescendo fora de proporção, ou objetos ocupando muito espaço em disco (veja limiares de alarme) que precisam ser reduzidos ou excluídos.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+
+
+ a| 
+VMST
+ a| 
+Estado
+ a| 
+SSM
+ a| 
+Um alarme é acionado se o valor de Status para o volume montado for desconhecido. Um valor desconhecido ou Offline pode indicar que o volume não pode ser montado ou acessado devido a um problema com o dispositivo de armazenamento subjacente.
+
+
+
+ a| 
+VPRI
+ a| 
+Prioridade de verificação
+ a| 
+BLDR, BARC
+ a| 
+Por padrão, o valor da prioridade de verificação é adaptável. Se a prioridade de verificação estiver definida como alta, um alarme é acionado porque a verificação do armazenamento pode retardar as operações normais do serviço.
+
+
+
+ a| 
+VSTU
+ a| 
+Estado Verificação Objeto
+ a| 
+ERRO
+ a| 
+Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *_site_* > *_grid node_* > *LDR* > *Storage* > *Overview* > *Main*.
+
+Verifique se existem sinais de erros no sistema operativo ou no sistema de ficheiros.
+
+Se o valor do Status de Verificação de Objeto for erro desconhecido, ele geralmente indica um problema de hardware ou sistema de arquivos de baixo nível (erro de e/S) que impede que a tarefa de Verificação de armazenamento acesse conteúdo armazenado. Entre em Contato com o suporte técnico.
+
+
+
+ a| 
+XAMS
+ a| 
+Repositórios de auditoria inalcançáveis
+ a| 
+BADC, BARC, BCLB, BCMN, BLDR, BNMS
+ a| 
+Verifique a conetividade de rede ao servidor que hospeda o nó Admin.
+
+Se o problema persistir, entre em Contato com o suporte técnico.
+
+|===

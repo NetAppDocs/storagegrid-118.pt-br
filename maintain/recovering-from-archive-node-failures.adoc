@@ -1,0 +1,28 @@
+---
+permalink: maintain/recovering-from-archive-node-failures.html 
+sidebar: sidebar 
+keywords: recover, archive node failure, workflow 
+summary: Você deve concluir uma sequência de tarefas na ordem exata para recuperar de uma falha de nó de arquivo. 
+---
+= Recuperar de falhas do Archive Node: Fluxo de trabalho
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve concluir uma sequência de tarefas na ordem exata para recuperar de uma falha de nó de arquivo.
+
+image::../media/overview_archive_node_recovery.gif[Visão geral do fluxograma da recuperação do Archive Node]
+
+A recuperação do nó de arquivamento é afetada pelos seguintes problemas:
+
+* Se a política ILM estiver configurada para replicar uma única cópia.
++
+Em um sistema StorageGRID configurado para fazer uma única cópia de objetos, uma falha de nó de arquivo pode resultar em uma perda irrecuperável de dados. Se houver uma falha, todos esses objetos serão perdidos; no entanto, você ainda deve executar procedimentos de recuperação para "limpar" seu sistema StorageGRID e limpar as informações de objetos perdidos do banco de dados.
+
+* Se ocorrer uma falha do nó de arquivamento durante a recuperação do nó de storage.
++
+Se o nó de arquivo falhar ao processar recuperações em massa como parte de uma recuperação do nó de armazenamento, você deve repetir o procedimento para recuperar cópias de dados de objeto para o nó de armazenamento desde o início para garantir que todos os dados de objeto recuperados do nó de arquivo sejam restaurados para o nó de armazenamento.
+
+

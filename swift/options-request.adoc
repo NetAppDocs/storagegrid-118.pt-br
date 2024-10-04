@@ -1,0 +1,45 @@
+---
+permalink: swift/options-request.html 
+sidebar: sidebar 
+keywords: swift options request 
+summary: A SOLICITAÇÃO DE OPÇÕES verifica a disponibilidade de um serviço Swift individual. A SOLICITAÇÃO DE OPÇÕES é processada pelo nó de armazenamento ou nó de gateway especificado no URL. 
+---
+= Pedido de OPÇÕES
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A SOLICITAÇÃO DE OPÇÕES verifica a disponibilidade de um serviço Swift individual. A SOLICITAÇÃO DE OPÇÕES é processada pelo nó de armazenamento ou nó de gateway especificado no URL.
+
+
+
+== Método de OPÇÕES
+
+Por exemplo, os aplicativos clientes podem emitir uma SOLICITAÇÃO DE OPÇÕES para a porta Swift em um nó de armazenamento, sem fornecer credenciais de autenticação Swift, para determinar se o nó de armazenamento está disponível. Você pode usar essa solicitação para monitoramento ou para permitir que balanceadores de carga externos identifiquem quando um nó de storage está inativo.
+
+Quando usado com o URL info ou o URL de armazenamento, o método OPTIONS retorna uma lista de verbos suportados para o URL dado (por exemplo, HEAD, GET, OPTIONS E PUT). O método DE OPÇÕES não pode ser usado com a URL de autenticação.
+
+É necessário o seguinte parâmetro de pedido:
+
+* `Account`
+
+
+Os seguintes parâmetros de pedido são opcionais:
+
+* `Container`
+* `Object`
+
+
+Uma execução bem-sucedida retorna os seguintes cabeçalhos com uma resposta "HTTP/1,1 204 sem conteúdo". A SOLICITAÇÃO DE OPÇÕES para o URL de armazenamento não exige que o destino exista.
+
+* `Allow` (Uma lista de verbos suportados para o URL dado, por exemplo, HEAD, GET, OPTIONS e PUT)
+* `Content-Length`
+* `Content-Type`
+* `Date`
+* `X-Trans-Id`
+
+
+.Informações relacionadas
+link:supported-swift-api-endpoints.html["Endpoints de API Swift compatíveis"]

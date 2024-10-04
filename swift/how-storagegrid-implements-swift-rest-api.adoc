@@ -1,0 +1,36 @@
+---
+permalink: swift/how-storagegrid-implements-swift-rest-api.html 
+sidebar: sidebar 
+keywords: implement swift rest api 
+summary: Um aplicativo cliente pode usar chamadas de API REST do Swift para se conetar a nós de storage e nós de Gateway para criar contentores e armazenar e recuperar objetos. Isso permite que aplicativos orientados a serviços desenvolvidos para o OpenStack Swift se conetem com storage de objetos no local fornecido pelo sistema StorageGRID. 
+---
+= Como o StorageGRID implementa a API Swift REST
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um aplicativo cliente pode usar chamadas de API REST do Swift para se conetar a nós de storage e nós de Gateway para criar contentores e armazenar e recuperar objetos. Isso permite que aplicativos orientados a serviços desenvolvidos para o OpenStack Swift se conetem com storage de objetos no local fornecido pelo sistema StorageGRID.
+
+
+
+== Gerenciamento de objetos Swift
+
+Depois que os objetos Swift foram ingeridos no sistema StorageGRID, eles são gerenciados pelas regras de gerenciamento de ciclo de vida da informação (ILM) nas políticas ativas do ILM. link:../ilm/what-ilm-rule-is.html["Regras do ILM"]link:../ilm/creating-ilm-policy.html["Políticas do ILM"] E determine como o StorageGRID cria e distribui cópias de dados de objetos e como gerencia essas cópias ao longo do tempo. Por exemplo, uma regra ILM pode se aplicar a objetos em contentores Swift específicos e pode especificar que várias cópias de objetos sejam salvas em vários data centers por um certo número de anos.
+
+Entre em Contato com seu consultor de Serviços profissionais da NetApp ou com o administrador do StorageGRID se você precisar entender como as regras e políticas da grade afetarão os objetos em sua conta de locatário do Swift.
+
+
+
+== Solicitações de cliente conflitantes
+
+As solicitações de cliente conflitantes, como dois clientes escrevendo para a mesma chave, são resolvidas com base em "vitórias mais recentes". O tempo para a avaliação "últimos ganhos" é baseado em quando o sistema StorageGRID completa uma determinada solicitação, e não em quando clientes Swift iniciam uma operação.
+
+
+
+== Garantias de consistência e controles
+
+Por padrão, o StorageGRID fornece consistência de leitura após gravação para objetos recém-criados e consistência para atualizações de objetos e operações HEAD. Qualquer link:get-container-consistency-request.html["OBTER"] um dos seguintes dados concluídos com êxito link:put-container-consistency-request.html["COLOQUE"]poderá ler os dados recém-escritos. As substituições de objetos existentes, atualizações de metadados e exclusões são, eventualmente, consistentes. As substituições geralmente levam segundos ou minutos para se propagar, mas podem levar até 15 dias.
+
+O StorageGRID também permite que você controle a consistência por contentor. Os valores de consistência fornecem um equilíbrio entre a disponibilidade dos objetos e a consistência desses objetos em diferentes nós de storage e locais, conforme exigido pela aplicação.

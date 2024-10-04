@@ -1,0 +1,41 @@
+---
+permalink: admin/configuring-archive-node-retrieve-settings.html 
+sidebar: sidebar 
+keywords: archive node, retrieve settings 
+summary: Você pode configurar as configurações de recuperação de um nó de arquivo para definir o estado como Online ou Offline, ou redefinir as contagens de falhas que estão sendo rastreadas para os alarmes associados. 
+---
+= Configurar as definições de recuperação do nó de arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode configurar as configurações de recuperação de um nó de arquivo para definir o estado como Online ou Offline, ou redefinir as contagens de falhas que estão sendo rastreadas para os alarmes associados.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *Archive Node* > *ARC* > *Retrieve*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/archive_node_retreive.gif[Página de configuração para um nó de arquivo > recuperar definições]
+
+. Modifique as seguintes definições, conforme necessário:
++
+** *Retrieve State*: Defina o estado do componente para:
++
+*** On-line: O nó de grade está disponível para recuperar dados de objeto do dispositivo de Mídia de arquivamento.
+*** Offline: O nó de grade não está disponível para recuperar dados de objeto.
+
+
+** Reset Request Failures Count (Redefinir contagem de falhas de pedido): Selecione a caixa de verificação para repor o contador para falhas de pedido. Isso pode ser usado para limpar o alarme ARRF (falhas de solicitação).
+** Redefinir contagem de falhas de verificação: Marque a caixa de seleção para redefinir o contador para falhas de verificação em dados de objetos recuperados. Isso pode ser usado para limpar o alarme ARRV (falhas de verificação).
+
+
+. Selecione *aplicar alterações*.
+

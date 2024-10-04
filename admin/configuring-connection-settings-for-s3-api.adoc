@@ -1,0 +1,74 @@
+---
+permalink: admin/configuring-connection-settings-for-s3-api.html 
+sidebar: sidebar 
+keywords: archive node connection to s3, arc service 
+summary: Se você estiver se conetando a um nó de Arquivo usando a interface S3, você deverá configurar as configurações de conexão para a API S3. Até que essas configurações sejam configuradas, o serviço ARC permanece em um estado de alarme principal, pois não é possível se comunicar com o sistema de armazenamento de arquivos externo. 
+---
+= Configure as configurações de conexão para a API S3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você estiver se conetando a um nó de Arquivo usando a interface S3, você deverá configurar as configurações de conexão para a API S3. Até que essas configurações sejam configuradas, o serviço ARC permanece em um estado de alarme principal, pois não é possível se comunicar com o sistema de armazenamento de arquivos externo.
+
+[CAUTION]
+====
+O suporte para nós de arquivo está obsoleto e será removido em uma versão futura. Mover objetos de um nó de arquivamento para um sistema de armazenamento de arquivamento externo por meio da API S3 foi substituído por ILM Cloud Storage Pools, que oferecem mais funcionalidade.
+
+A opção Cloud Tiering - Simple Storage Service (S3) também está obsoleta. Se você estiver usando atualmente um nó de arquivo com essa opção, link:../admin/migrating-objects-from-cloud-tiering-s3-to-cloud-storage-pool.html["Migre seus objetos para um Cloud Storage Pool"] em vez disso.
+
+Além disso, você deve remover nós de arquivamento da política ILM ativa no StorageGRID 11,7 ou anterior. A remoção de dados de objetos armazenados nos nós de arquivamento simplificará futuras atualizações. link:../ilm/working-with-ilm-rules-and-ilm-policies.html["Trabalhando com regras de ILM e políticas de ILM"]Consulte .
+
+====
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+* Você criou um bucket no sistema de storage de arquivamento de destino:
++
+** O bucket é dedicado a um único nó de arquivo. Ele não pode ser usado por outros nós de arquivamento ou outras aplicações.
+** O balde tem a região apropriada selecionada para a sua localização.
+** O bucket deve ser configurado com o controle de versão suspenso.
+
+
+* A Segmentação de objetos está ativada e o tamanho máximo do segmento é menor ou igual a 4,5 GiB (4.831.838.208 bytes). S3 solicitações de API que excederem esse valor falharão se S3 for usado como sistema de armazenamento de arquivamento externo.
+
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *Archive Node* > *ARC* > *Target*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/archive_node_s3_middleware.gif[Página de configuração de um nó de arquivo]
+
+. Selecione *disposição em camadas na nuvem - Serviço de armazenamento simples (S3)* na lista suspensa tipo de destino.
++
+
+NOTE: As configurações ficam indisponíveis até que você selecione um tipo de destino.
+
+. Configurar a conta Cloud Tiering (S3) através da qual o Archive Node se conetará ao sistema de storage de arquivamento externo de destino com capacidade para S3.
++
+A maioria dos campos nesta página são auto-explicativos. A seguir descreve os campos para os quais você pode precisar de orientação.
+
++
+** *Região*: Disponível somente se *usar AWS* estiver selecionado. A região selecionada tem de corresponder à região do balde.
+** *Endpoint* e *Use AWS*: Para Amazon Web Services (AWS), selecione *Use AWS*. *Endpoint* é então preenchido automaticamente com um URL de endpoint baseado nos atributos Nome do bucket e região. Por exemplo:
++
+`\https://bucket.region.amazonaws.com`
+
++
+Para um destino que não seja AWS, insira o URL do sistema que hospeda o bucket, incluindo o número da porta. Por exemplo:
+
++
+`\https://system.com:1080`
+
+** *Autenticação de ponto final*: Ativada por padrão. Se a rede para o sistema de armazenamento de arquivos externo for confiável, você pode desmarcar a caixa de seleção para desativar o certificado SSL de endpoint e a verificação de hostname para o sistema de armazenamento de arquivos externo de destino. Se outra instância de um sistema StorageGRID for o dispositivo de armazenamento de arquivamento de destino e o sistema estiver configurado com certificados assinados publicamente, você poderá manter a caixa de seleção selecionada.
+** *Classe de armazenamento*: Selecione *Standard (padrão)* para armazenamento regular. Selecione *redundância reduzida* apenas para objetos que possam ser facilmente recriados. *Redundância reduzida* fornece armazenamento de menor custo com menos confiabilidade. Se o sistema de armazenamento de arquivos de destino for outra instância do sistema StorageGRID, *Classe de armazenamento* controla quantas cópias provisórias do objeto são feitas na ingestão no sistema de destino, se a confirmação dupla for usada quando os objetos forem ingeridos lá.
+
+
+. Selecione *aplicar alterações*.
++
+As configurações especificadas são validadas e aplicadas ao seu sistema StorageGRID. Depois que as configurações são aplicadas, o alvo não pode ser alterado.
+
+

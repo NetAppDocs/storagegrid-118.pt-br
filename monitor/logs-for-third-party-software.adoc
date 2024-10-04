@@ -1,0 +1,65 @@
+---
+permalink: monitor/logs-for-third-party-software.html 
+sidebar: sidebar 
+keywords: troubleshooting, logs 
+summary: Você pode usar os logs de software de terceiros para solucionar problemas. 
+---
+= Logs para software de terceiros
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar os logs de software de terceiros para solucionar problemas.
+
+[cols="1a,2a,3a,1a"]
+|===
+| Categoria | Nome do ficheiro | Notas | Encontrado em 
+
+
+ a| 
+Arquivamento
+| /var/local/log/dsierror.log  a| 
+Informações de erro para as APIs do cliente TSM.
+ a| 
+Nós de arquivamento
+
+
+
+ a| 
+MySQL
+| /var/local/log/mysql.err /var/local/log/mysql-slow.log  a| 
+Arquivos de log gerados pelo MySQL.
+
+`mysql.err` captura erros de banco de dados e eventos, como startups e paradas.
+
+`mysql-slow.log` (O log de consulta lenta) captura as instruções SQL que levaram mais de 10 segundos para serem executadas.
+ a| 
+Nós de administração
+
+
+
+ a| 
+Sistema operacional
+| /var/local/log/messages  a| 
+Este diretório contém ficheiros de registo para o sistema operativo. Os erros contidos nesses logs também são exibidos no Gerenciador de Grade. Selecione *SUPPORT* > *Tools* > *Grid topology*. Em seguida, selecione *topologia* > *_Site_* > *_Node_* > *SSM* > *Eventos*.
+ a| 
+Todos os nós
+
+
+
+ a| 
+NTP
+| /var/local/log/ntp.log /var/lib/ntp/var/log/ntpstats/  a| 
+`/var/local/log/ntp.log` Contém o arquivo de log para mensagens de erro NTP.
+
+`/var/lib/ntp/var/log/ntpstats/` O diretório contém estatísticas de tempo NTP.
+
+`loopstats` registra informações estatísticas de filtro de loop.
+
+`peerstats` registra informações estatísticas de pares.
+ a| 
+Todos os nós
+
+|===

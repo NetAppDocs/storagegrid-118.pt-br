@@ -1,0 +1,22 @@
+---
+permalink: admin/setting-custom-alarms-for-archive-node.html 
+sidebar: sidebar 
+keywords: archive node, custom alarm, arql, arrl 
+summary: Você deve estabelecer alarmes personalizados para os atributos ARQL e ARRL que são usados para monitorar a velocidade e eficiência da recuperação de dados de objetos do sistema de armazenamento de arquivos pelo nó Archive. 
+---
+= Definir alarmes personalizados para o nó de arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve estabelecer alarmes personalizados para os atributos ARQL e ARRL que são usados para monitorar a velocidade e eficiência da recuperação de dados de objetos do sistema de armazenamento de arquivos pelo nó Archive.
+
+* ARQL: Comprimento médio da fila. O tempo médio, em microssegundos, em que os dados do objeto são enfileirados para recuperação do sistema de armazenamento de arquivamento.
+* ARRL: Latência média da solicitação. O tempo médio, em microssegundos, necessário pelo nó de arquivo para recuperar dados de objetos do sistema de armazenamento de arquivamento.
+
+
+Os valores aceitáveis para esses atributos dependem de como o sistema de armazenamento de arquivos é configurado e usado. (Vá para *ARC* > *Retrieve* > *Overview* > *Main*.) Os valores definidos para tempos limite de solicitação e o número de sessões disponibilizadas para solicitações de recuperação são particularmente influentes.
+
+Depois que a integração estiver concluída, monitorize as recuperações de dados de objetos do nó de Arquivo para estabelecer valores para tempos de recuperação normais e comprimentos de fila. Em seguida, crie alarmes personalizados para ARQL e ARRL que serão acionados se surgir uma condição operacional anormal. Consulte as instruções para link:../monitor/managing-alarms.html["gerenciamento de alarmes (sistema legado)"].

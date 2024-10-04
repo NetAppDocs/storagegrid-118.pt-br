@@ -1,0 +1,26 @@
+---
+permalink: admin/defining-domain-policy-and-registering-node.html 
+sidebar: sidebar 
+keywords: domain policy, tsm, tivoli storage manager 
+summary: Você precisa definir uma política de domínio que use a classe de gerenciamento TSM para os dados salvos do nó de arquivamento e, em seguida, Registrar um nó para usar essa diretiva de domínio. 
+---
+= Defina uma política de domínio e Registre um nó
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa definir uma política de domínio que use a classe de gerenciamento TSM para os dados salvos do nó de arquivamento e, em seguida, Registrar um nó para usar essa diretiva de domínio.
+
+
+NOTE: Os processos do nó de arquivamento podem vazar memória se a senha do cliente para o nó de arquivamento no Tivoli Storage Manager (TSM) expirar. Certifique-se de que o servidor TSM está configurado para que o nome de utilizador/palavra-passe do cliente para o nó de arquivo nunca expire.
+
+Ao Registrar um nó no servidor TSM para o uso do nó de arquivo (ou atualizar um nó existente), você deve especificar o número de pontos de montagem que o nó pode usar para operações de gravação especificando o parâmetro MAXNUMMP para o comando DE NÓ DE REGISTRO. O número de pontos de montagem é normalmente equivalente ao número de cabeças de unidade de fita alocadas ao nó de arquivo. O número especificado para MAXNUMMP no servidor TSM deve ser pelo menos tão grande quanto o valor definido para *ARC* > *Target* > *Configuration* > *Main* > *Maximum Store Sessions* para o Archive Node, que é definido para um valor de 0 ou 1, já que as sessões de armazenamento simultâneas não são suportadas pelo Archive Node.
+
+O valor de MAXSESSIONS definido para o servidor TSM controla o número máximo de sessões que podem ser abertas para o servidor TSM por todos os aplicativos clientes. O valor de MAXSESSIONS especificado no TSM deve ser pelo menos tão grande quanto o valor especificado para *ARC* > *Target* > *Configuration* > *Main* > *Number of Sessions* no Grid Manager para o Archive Node. O nó de arquivo cria simultaneamente, no máximo, uma sessão por ponto de montagem, mais um pequeno número (inferior a 5) de sessões adicionais.
+
+O nó TSM atribuído ao nó de arquivo usa uma política de domínio personalizada `tsm-domain` . A `tsm-domain` política de domínio é uma versão modificada da política de domínio "padrão", configurada para gravar em fita e com o destino do arquivo definido como o pool de armazenamento do sistema StorageGRID (`_SGWSDiskPool_`).
+
+
+NOTE: Você deve fazer login no servidor TSM com Privileges administrativo e usar a ferramenta dsmadmc para criar e ativar a diretiva de domínio.

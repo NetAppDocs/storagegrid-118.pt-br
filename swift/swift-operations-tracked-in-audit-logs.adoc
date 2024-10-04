@@ -1,0 +1,48 @@
+---
+permalink: swift/swift-operations-tracked-in-audit-logs.html 
+sidebar: sidebar 
+keywords: swift options request 
+summary: Todas as operações bem-sucedidas de EXCLUSÃO, RECEBIMENTO, CABEÇALHO, POST e PUT DE armazenamento são rastreadas no log de auditoria do StorageGRID. Falhas e solicitações de informações, autenticação ou OPÇÕES não são registradas. 
+---
+= Operações rápidas rastreadas nos logs de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Todas as operações bem-sucedidas de EXCLUSÃO, RECEBIMENTO, CABEÇALHO, POST e PUT DE armazenamento são rastreadas no log de auditoria do StorageGRID. Falhas e solicitações de informações, autenticação ou OPÇÕES não são registradas.
+
+
+
+== Operações de conta
+
+* link:account-operations.html["OBTER conta"]
+* link:account-operations.html["Conta principal"]
+
+
+
+
+== Operações de contêiner
+
+* link:container-operations.html["ELIMINAR recipiente"]
+* link:container-operations.html["PEGUE o recipiente"]
+* link:container-operations.html["Recipiente DA cabeça"]
+* link:container-operations.html["COLOQUE o recipiente"]
+
+
+
+
+== Operações de objetos
+
+* link:object-operations.html["ELIMINAR objeto"]
+* link:object-operations.html["OBTER objeto"]
+* link:object-operations.html["Objeto PRINCIPAL"]
+* link:object-operations.html["COLOQUE o objeto"]
+
+
+.Informações relacionadas
+* link:../audit/accessing-audit-log-file.html["Acessar o arquivo de log de auditoria"]
+* link:../audit/client-write-audit-messages.html["O cliente escreve mensagens de auditoria"]
+* link:../audit/client-read-audit-messages.html["O cliente lê mensagens de auditoria"]
+

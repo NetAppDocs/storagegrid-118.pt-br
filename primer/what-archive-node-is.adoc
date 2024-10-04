@@ -1,0 +1,48 @@
+---
+permalink: primer/what-archive-node-is.html 
+sidebar: sidebar 
+keywords: archive node 
+summary: O suporte para nós de arquivo está obsoleto e será removido em uma versão futura. 
+---
+= O que é um nó de arquivo?
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O suporte para nós de arquivo está obsoleto e será removido em uma versão futura.
+
+[CAUTION]
+====
+O suporte para nós de arquivo está obsoleto e será removido em uma versão futura. Mover objetos de um nó de arquivamento para um sistema de armazenamento de arquivamento externo por meio da API S3 foi substituído por ILM Cloud Storage Pools, que oferecem mais funcionalidade.
+
+A opção Cloud Tiering - Simple Storage Service (S3) também está obsoleta. Se você estiver usando atualmente um nó de arquivo com essa opção, link:../admin/migrating-objects-from-cloud-tiering-s3-to-cloud-storage-pool.html["Migre seus objetos para um Cloud Storage Pool"] em vez disso.
+
+Além disso, você deve remover nós de arquivamento das políticas de ILM ativas no StorageGRID 11,7 ou anterior. A remoção de dados de objetos armazenados nos nós de arquivamento simplificará futuras atualizações. link:../ilm/working-with-ilm-rules-and-ilm-policies.html["Trabalhando com regras de ILM e políticas de ILM"]Consulte .
+
+====
+
+
+== Serviços primários para nós de arquivamento
+
+A tabela a seguir mostra os serviços primários para nós de arquivamento; no entanto, essa tabela não lista todos os serviços de nós.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Arquivo (ARC)
+ a| 
+Comunica com um sistema de armazenamento de fita externo do Tivoli Storage Manager (TSM).
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===

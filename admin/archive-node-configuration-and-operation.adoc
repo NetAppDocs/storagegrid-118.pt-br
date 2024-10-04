@@ -1,0 +1,26 @@
+---
+permalink: admin/archive-node-configuration-and-operation.html 
+sidebar: sidebar 
+keywords: archive node configuration 
+summary: Seu sistema StorageGRID gerencia o nó de arquivo como um local onde os objetos são armazenados indefinidamente e são sempre acessíveis. 
+---
+= Configuração e operação do nó de arquivamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Seu sistema StorageGRID gerencia o nó de arquivo como um local onde os objetos são armazenados indefinidamente e são sempre acessíveis.
+
+Quando um objeto é ingerido, cópias são feitas em todos os locais necessários, incluindo nós de arquivo, com base nas regras de gerenciamento do ciclo de vida das informações (ILM) definidas para o seu sistema StorageGRID. O nó de arquivo atua como um cliente para um servidor TSM, e as bibliotecas de cliente TSM são instaladas no nó de arquivo pelo processo de instalação do software StorageGRID. Os dados do objeto direcionados para o nó de arquivo para armazenamento são salvos diretamente no servidor TSM à medida que são recebidos. O nó de arquivo não armazena os dados do objeto antes de salvá-los no servidor TSM, nem realiza agregação de objetos. No entanto, o nó de arquivo pode enviar várias cópias para o servidor TSM em uma única transação quando as taxas de dados são garantidas.
+
+Depois que o nó de arquivo salva os dados do objeto no servidor TSM, os dados do objeto são gerenciados pelo servidor TSM usando suas políticas de ciclo de vida/retenção. Essas políticas de retenção devem ser definidas para serem compatíveis com a operação do nó de arquivo. Ou seja, os dados de objeto salvos pelo nó de arquivo devem ser armazenados indefinidamente e devem sempre ser acessíveis pelo nó de arquivo, a menos que sejam excluídos pelo nó de arquivo.
+
+Não há conexão entre as regras de ILM do sistema StorageGRID e as políticas de ciclo de vida/retenção do servidor TSM. Cada um opera independentemente do outro; no entanto, à medida que cada objeto é ingerido no sistema StorageGRID, você pode atribuir a ele uma classe de gerenciamento TSM. Essa classe de gerenciamento é passada para o servidor TSM junto com os dados do objeto. A atribuição de diferentes classes de gerenciamento a diferentes tipos de objetos permite configurar o servidor TSM para colocar dados de objetos em diferentes pools de armazenamento ou aplicar diferentes políticas de migração ou retenção, conforme necessário. Por exemplo, os objetos identificados como backups de banco de dados (conteúdo temporário que pode ser substituído por dados mais recentes) podem ser tratados de forma diferente dos dados da aplicação (conteúdo fixo que deve ser mantido indefinidamente).
+
+O nó de arquivo pode ser integrado a um servidor TSM novo ou existente; ele não requer um servidor TSM dedicado. Os servidores TSM podem ser compartilhados com outros clientes, desde que o servidor TSM seja dimensionado adequadamente para a carga máxima esperada. O TSM deve ser instalado em um servidor ou máquina virtual separado do nó de arquivo.
+
+É possível configurar mais de um nó de arquivo para gravar no mesmo servidor TSM; no entanto, esta configuração só é recomendada se os nós de arquivo gravarem conjuntos diferentes de dados no servidor TSM. A configuração de mais de um nó de arquivo para gravação no mesmo servidor TSM não é recomendada quando cada nó de arquivo grava cópias dos mesmos dados de objeto no arquivo. No último cenário, ambas as cópias estão sujeitas a um único ponto de falha (o servidor TSM) para o que é suposto ser cópias independentes e redundantes de dados de objeto.
+
+Os nós de arquivamento não fazem uso do componente HSM (Hierarchical Storage Management) do TSM.

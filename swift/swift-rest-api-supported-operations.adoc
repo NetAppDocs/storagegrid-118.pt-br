@@ -1,0 +1,34 @@
+---
+permalink: swift/swift-rest-api-supported-operations.html 
+sidebar: sidebar 
+keywords: OpenStack, Swift API, REST API 
+summary: O sistema StorageGRID dá suporte à maioria das operações na API OpenStack Swift. Antes de integrar clientes API REST do Swift com o StorageGRID, revise os detalhes de implementação para operações de conta, contentor e objeto. 
+---
+= Operações suportadas pela API REST Swift
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O sistema StorageGRID dá suporte à maioria das operações na API OpenStack Swift. Antes de integrar clientes API REST do Swift com o StorageGRID, revise os detalhes de implementação para operações de conta, contentor e objeto.
+
+
+
+== Operações suportadas no StorageGRID
+
+As seguintes operações da API Swift são suportadas:
+
+* link:account-operations.html["Operações de conta"]
+* link:container-operations.html["Operações de contêiner"]
+* link:object-operations.html["Operações de objetos"]
+
+
+
+
+== Cabeçalhos de resposta comuns para todas as operações
+
+O sistema StorageGRID implementa todos os cabeçalhos comuns para operações com suporte, conforme definido pela API de armazenamento de objetos OpenStack Swift v1.
+
+.Informações relacionadas
+http://docs.openstack.org/developer/swift/api/object_api_v1_overview.html["OpenStack: API de storage de objetos"^]

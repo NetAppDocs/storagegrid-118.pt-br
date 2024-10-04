@@ -1,0 +1,30 @@
+= Tarefas opcionais
+:allow-uri-read: 
+
+
+* link:../admin/managing-tenants.html["Crie uma conta de locatário"] Para cada protocolo de cliente (Swift ou S3) que será usado para armazenar objetos em seu sistema StorageGRID.
+* link:../admin/controlling-storagegrid-access.html["Controle o acesso ao sistema"] configurando grupos e contas de usuário. Opcionalmente, você pode link:../admin/using-identity-federation.html["configure uma fonte de identidade federada"] (como ative Directory ou OpenLDAP), para que você possa importar grupos de administração e usuários. Ou, você pode link:../admin/managing-users.html#create-a-local-user["crie grupos locais e usuários"].
+* Integre e teste os link:../s3/configuring-tenant-accounts-and-connections.html["S3 API"]aplicativos cliente ou link:../swift/configuring-tenant-accounts-and-connections.html["Swift API"]que você usará para fazer upload de objetos para o seu sistema StorageGRID.
+* link:../ilm/index.html["Configure as regras de gerenciamento do ciclo de vida das informações (ILM) e a política ILM"] você deseja usar para proteger os dados do objeto.
+* Se a instalação incluir nós de storage do dispositivo, use o SANtricity os para concluir as seguintes tarefas:
++
+** Ligue a cada dispositivo StorageGRID.
+** Verifique a receção dos dados do AutoSupport.
++
+ https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-hardware.html["Configure o hardware"^]Consulte .
+
+
+
+* Analise e siga o link:../harden/index.html["Diretrizes de fortalecimento do sistema StorageGRID"] para eliminar os riscos de segurança.
+* link:../monitor/email-alert-notifications.html["Configurar notificações por e-mail para alertas do sistema"].
+* Se o seu sistema StorageGRID incluir qualquer nó de arquivo (obsoleto), configure a conexão do nó de arquivamento ao sistema de armazenamento de arquivamento externo de destino.
+
+
+
+
+== Tarefas opcionais
+
+* link:../maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html["Atualize os endereços IP do nó da grade"] Se eles foram alterados desde que você planejou sua implantação e gerou o Pacote de recuperação.
+* link:../admin/changing-network-options-object-encryption.html["Configurar a criptografia de armazenamento"], se necessário.
+* link:../admin/configuring-stored-object-compression.html["Configurar a compressão de armazenamento"] para reduzir o tamanho dos objetos armazenados, se necessário.
+

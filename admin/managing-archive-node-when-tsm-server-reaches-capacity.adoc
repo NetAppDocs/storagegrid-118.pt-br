@@ -1,0 +1,59 @@
+---
+permalink: admin/managing-archive-node-when-tsm-server-reaches-capacity.html 
+sidebar: sidebar 
+keywords: archive node, tsm server, full capacity, node is full 
+summary: O servidor TSM não tem como notificar o nó de arquivo quando o banco de dados TSM ou o armazenamento de Mídia de arquivamento gerenciado pelo servidor TSM estiver próximo da capacidade. Esta situação pode ser evitada através do monitoramento proativo do servidor TSM. 
+---
+= Gerencie um nó de arquivo quando o servidor TSM atingir a capacidade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O servidor TSM não tem como notificar o nó de arquivo quando o banco de dados TSM ou o armazenamento de Mídia de arquivamento gerenciado pelo servidor TSM estiver próximo da capacidade. Esta situação pode ser evitada através do monitoramento proativo do servidor TSM.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Sobre esta tarefa
+O nó de arquivo continua a aceitar dados de objeto para transferência para o servidor TSM depois que o servidor TSM parar de aceitar novo conteúdo. Este conteúdo não pode ser escrito em Mídia gerenciada pelo servidor TSM. Um alarme é acionado se isso acontecer.
+
+
+
+== Impedir que o serviço ARC envie conteúdo para o servidor TSM
+
+Para evitar que o serviço ARC envie mais conteúdo para o servidor TSM, você pode colocar o nó de Arquivo offline, colocando o componente *ARC* > *Store* offline. Este procedimento também pode ser útil na prevenção de alarmes quando o servidor TSM não estiver disponível para manutenção.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Store*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/tsm_offline.gif[Página de configuração de um nó de arquivo]
+
+. Altere *Estado de armazenamento* para `Offline`.
+. Selecione *Archive Store Disabled on Startup*.
+. Selecione *aplicar alterações*.
+
+
+
+
+== Defina Archive Node como somente leitura se o middleware TSM atingir a capacidade
+
+Se o servidor de middleware TSM visado atingir a capacidade, o nó de arquivo pode ser otimizado para executar apenas recuperações.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Target*.
+. Selecione *Configuração* > *Principal*.
+. Altere as sessões de recuperação máxima para ser igual ao número de sessões simultâneas listadas em número de sessões.
+. Altere o máximo de sessões de armazenamento para 0.
++
+
+NOTE: Não é necessário alterar o máximo de sessões de armazenamento para 0 se o nó de arquivo for apenas leitura. As sessões de armazenamento não serão criadas.
+
+. Selecione *aplicar alterações*.
+

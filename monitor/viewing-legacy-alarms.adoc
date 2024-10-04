@@ -1,0 +1,101 @@
+---
+permalink: monitor/viewing-legacy-alarms.html 
+sidebar: sidebar 
+keywords: legacy alarms 
+summary: Os alarmes são acionados quando os atributos do sistema atingem valores de limite de alarme. Pode visualizar os alarmes atualmente ativos a partir da página Alarmes atuais. 
+---
+= Ver alarmes legados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os alarmes (sistema legado) são acionados quando os atributos do sistema atingem os valores de limite de alarme. Pode visualizar os alarmes atualmente ativos a partir da página Alarmes atuais.
+
+
+NOTE: Embora o sistema de alarme antigo continue a ser suportado, o sistema de alerta oferece benefícios significativos e é mais fácil de usar.
+
+.Antes de começar
+* Você deve estar conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+
+
+.Passos
+. Selecione *SUPPORT* > *Alarmes (legacy)* > *Current Alarmes*.
++
+image::../media/current_alarms_page.png[Página Alarmes atuais]
+
++
+O ícone de alarme indica a gravidade de cada alarme, da seguinte forma:
+
++
+[cols="1a,1a,1a,3a"]
+|===
+| Ícone | Cor | Gravidade do alarme | Significado 
+
+
+ a| 
+image:../media/icon_alarm_yellow_notice.gif["ícone quadrado amarelo"]
+ a| 
+Amarelo
+ a| 
+Aviso
+ a| 
+O nó está conetado à grade, mas existe uma condição incomum que não afeta as operações normais.
+
+
+
+ a| 
+image:../media/icon_alert_yellow_minor.png["ícone de diamante laranja claro"]
+ a| 
+Laranja claro
+ a| 
+Menor
+ a| 
+O nó está conetado à grade, mas existe uma condição anormal que pode afetar a operação no futuro. Você deve investigar para evitar o escalonamento.
+
+
+
+ a| 
+image:../media/icon_alert_orange_major.png["ícone de diamante laranja escuro"]
+ a| 
+Laranja escuro
+ a| 
+Maior
+ a| 
+O nó está conetado à grade, mas existe uma condição anormal que afeta atualmente a operação. Isso requer atenção imediata para evitar o escalonamento.
+
+
+
+ a| 
+image:../media/icon_alert_red_critical.png["ícone vermelho x"]
+ a| 
+Vermelho
+ a| 
+Crítico
+ a| 
+O nó está conetado à grade, mas existe uma condição anormal que parou as operações normais. Você deve resolver o problema imediatamente.
+
+|===
+. Para saber mais sobre o atributo que fez com que o alarme fosse acionado, clique com o botão direito do Mouse no nome do atributo na tabela.
+. Para ver detalhes adicionais sobre um alarme, clique no nome do serviço na tabela.
++
+A guia Alarmes para o serviço selecionado é exibida (*SUPPORT* > *Tools* > *Grid topology* > *_Grid Node_* > *_Service_* > *Alarmes*).
+
++
+image::../media/alarms_acknowledging.png[Reconhecimento de alarmes]
+
+. Se você quiser limpar a contagem de alarmes atuais, você pode, opcionalmente, fazer o seguinte:
++
+** Confirme o alarme. Um alarme reconhecido não é mais incluído na contagem de alarmes herdados, a menos que seja acionado no próximo nível de gravidade ou seja resolvido e ocorra novamente.
+** Desative um alarme padrão específico ou um alarme personalizado global para todo o sistema para evitar que ele seja acionado novamente.
+
+
+
+
+.Informações relacionadas
+link:alarms-reference.html["Referência de alarmes (sistema legado)"]
+
+link:managing-alarms.html["Reconhecer alarmes atuais (sistema legado)"]
+
+link:managing-alarms.html["Desativar alarmes (sistema legado)"]

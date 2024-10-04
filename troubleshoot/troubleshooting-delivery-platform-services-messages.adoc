@@ -1,0 +1,35 @@
+---
+permalink: troubleshoot/troubleshooting-delivery-platform-services-messages.html 
+sidebar: sidebar 
+keywords: how to troubleshoot delivery of platform services message, how to troubleshoot smtt alarm 
+summary: 'O alarme Total de Eventos (SMTT) é acionado no Grid Manager se uma mensagem de serviço de plataforma for entregue a um destino que não possa aceitar os dados.' 
+---
+= Solucionar problemas de entrega de mensagens de serviços da plataforma (alarme SMTT)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O alarme Total Events (SMTT) é acionado no Grid Manager se uma mensagem de serviço de plataforma for entregue a um destino que não possa aceitar os dados.
+
+.Sobre esta tarefa
+Por exemplo, um upload multipart S3 pode ser bem-sucedido mesmo que a replicação ou a mensagem de notificação associada não possa ser entregue ao endpoint configurado. Ou, uma mensagem para replicação do CloudMirror pode não ser entregue se os metadados forem muito longos.
+
+O alarme SMTT contém uma mensagem de último evento que diz, `Failed to publish notifications for _bucket-name object key_` para o último objeto cuja notificação falhou.
+
+As mensagens de evento também são listadas no `/var/local/log/bycast-err.log` arquivo de log. Consulte link:../monitor/logs-files-reference.html["Referência de ficheiros de registo"].
+
+Para obter informações adicionais, consulte o link:../admin/troubleshooting-platform-services.html["Solucionar problemas de serviços de plataforma"]. Talvez seja necessário link:../tenant/signing-in-to-tenant-manager.html["Acesse o locatário do Gerenciador do Locatário"]depurar um erro de serviço de plataforma.
+
+.Passos
+. Para visualizar o alarme, selecione *NÓS* > *_site_* > *_grid node_* > *Eventos*.
+. Veja o último evento na parte superior da tabela.
++
+As mensagens de evento também são listadas em `/var/local/log/bycast-err.log`.
+
+. Siga as orientações fornecidas no conteúdo do alarme SMTT para corrigir o problema.
+. Selecione *Redefinir contagens de eventos*.
+. Notificar o locatário dos objetos cujas mensagens de serviços da plataforma não foram entregues.
+. Instrua o locatário a acionar a replicação ou notificação com falha atualizando os metadados ou as tags do objeto.
+

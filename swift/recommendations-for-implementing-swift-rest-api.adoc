@@ -1,0 +1,60 @@
+---
+permalink: swift/recommendations-for-implementing-swift-rest-api.html 
+sidebar: sidebar 
+keywords: implement swift rest api 
+summary: Você deve seguir estas recomendações ao implementar a API REST do Swift para uso com o StorageGRID. 
+---
+= Recomendações para a implementação da API Swift REST
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve seguir estas recomendações ao implementar a API REST do Swift para uso com o StorageGRID.
+
+
+
+== Recomendações para heads to non-existent objects
+
+Se seu aplicativo rotineiramente verifica se um objeto existe em um caminho onde você não espera que o objeto realmente exista, você deve usar a consistência "disponível". Por exemplo, você deve usar a consistência "disponível" se o aplicativo executar uma operação DE CABEÇA para um local antes de executar uma OPERAÇÃO DE COLOCAÇÃO nesse local.
+
+Caso contrário, se a operação PRINCIPAL não encontrar o objeto, você poderá receber um número alto de 500 erros de servidor interno se um ou mais nós de storage não estiverem disponíveis.
+
+Pode definir a consistência "disponível" para cada recipiente utilizando o link:put-container-consistency-request.html["COLOQUE o pedido de consistência do recipiente"]. Você exibe a consistência "disponível" para cada contentor usando o link:get-container-consistency-request.html["OBTER solicitação de consistência de contêiner"].
+
+
+
+== Recomendações para nomes de objetos
+
+Para contêineres criados no StorageGRID 11,4 ou posterior, a restrição de nomes de objetos para atender às práticas recomendadas de performance não é mais necessária. Por exemplo, agora você pode usar valores aleatórios para os primeiros quatro carateres de nomes de objetos.
+
+Para contêineres que foram criados em versões anteriores ao StorageGRID 11,4, siga estas recomendações para nomes de objetos:
+
+* Você não deve usar valores aleatórios como os primeiros quatro carateres de nomes de objetos. Isso está em contraste com a antiga recomendação da AWS para prefixos de nomes. Em vez disso, você deve usar prefixos não aleatórios e não exclusivos, como `image` .
+* Se você seguir a antiga recomendação da AWS para usar carateres aleatórios e exclusivos em prefixos de nome, você deve prefixar os nomes de objeto com um nome de diretório. Ou seja, use este formato:
++
+[listing]
+----
+mycontainer/mydir/f8e3-image3132.jpg
+----
++
+Em vez deste formato:
+
++
+[listing]
+----
+mycontainer/f8e3-image3132.jpg
+----
+
+
+
+
+== Recomendações para "leituras de intervalo"
+
+Se o link:../admin/configuring-stored-object-compression.html["opção global para comprimir objetos armazenados"] estiver ativado, os aplicativos cliente Swift devem evitar executar operações DE objeto GET que especificam um intervalo de bytes que serão retornados. Essas operações de "leitura de intervalo" são ineficientes porque o StorageGRID deve descompactar efetivamente os objetos para acessar os bytes solicitados. As operações GET Object que solicitam um pequeno intervalo de bytes de um objeto muito grande são especialmente ineficientes; por exemplo, é muito ineficiente ler um intervalo de 10 MB de um objeto compactado de 50 GB.
+
+Se os intervalos forem lidos a partir de objetos compatados, as solicitações do cliente podem expirar.
+
+
+NOTE: Se você precisar compactar objetos e seu aplicativo cliente precisar usar leituras de intervalo, aumente o tempo limite de leitura para o aplicativo.

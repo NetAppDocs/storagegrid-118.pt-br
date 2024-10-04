@@ -1,0 +1,13 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+permalink: landing-install-upgrade/index.html 
+summary: Um sistema StorageGRID consiste em nós individuais baseados em hardware e em software. Primeiro, você instala o hardware para cada nó de dispositivo e configura cada host Linux ou VMware. Em seguida, você instala o software StorageGRID em cada dispositivo ou host de software e coneta os nós a uma grade. 
+---
+= Instale, atualize e hotfix StorageGRID
+:hardbreaks:
+:allow-uri-read: 
+:linkattrs: 
+:imagesdir: ./media/
+
+

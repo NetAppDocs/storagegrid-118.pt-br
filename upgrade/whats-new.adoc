@@ -1,0 +1,113 @@
+---
+permalink: upgrade/whats-new.html 
+sidebar: sidebar 
+keywords: what is new in StorageGRID 11.8 
+summary: Esta versão do StorageGRID apresenta os seguintes recursos. 
+---
+= Novidades do StorageGRID 11,8
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta versão do StorageGRID introduz os seguintes recursos e alterações funcionais.
+
+
+
+== Instale, atualize, hotfix
+
+Senhas de instalação temporária:: Quando você link:../vmware/deploying-storagegrid-node-as-virtual-machine.html["Implante um nó StorageGRID como uma máquina virtual"] ou usa o VMware vSphere para link:../vmware/automating-grid-node-deployment-in-vmware-vsphere.html["automatize a implantação do nó de grade"], você será solicitado a definir uma senha de instalação temporária. Essa senha é usada somente se você precisar acessar o console da VM ou usar SSH antes que o novo nó se una à grade.
+
+
+
+
+== Aparelhos
+
+Site de documentação para aparelhos:: A documentação dos dispositivos StorageGRID foi transferida para um novo link:https://docs.netapp.com/us-en/storagegrid-appliances/["site de documentação de eletrodomésticos"^].
+Suporte FIPS:: Suporte para criptografia validada FIPS 140-2.
+SGF6112 melhorias:: Suporte para o firmware do instalador do dispositivo StorageGRID 11,8 e StorageGRID versão 3.8.0:
++
+--
+* Desempenho DE COLOCAÇÃO significativamente melhorado para novas instalações SGF6112.
+* Inicialização segura UEFI em nós SGF6112 atualizados e novos.
+* Gerenciador de chaves local para senhas da unidade SSD DAS NVMe.
+
+
+--
+
+
+
+
+== Configurar e gerenciar
+
+Padrão de toda a grade de consistência:: Você pode alterar o link:../s3/consistency-controls.html["consistência padrão em toda a grade"] usando o Gerenciador de Grade ou o endpoint de configuração de grade link:../admin/using-grid-management-api.html["Grid Management API privada"]do . O novo padrão será aplicado aos buckets criados após a alteração.
+Destinos de auditoria predefinidos:: Instalações recentes do StorageGRID 11,8 padrão para destinos de auditoria de nós locais. Anteriormente, as mensagens de auditoria eram enviadas para o log de auditoria (`/var/local/log/audit.log`) somente em nós de administração.
++
+--
+Para obter informações sobre como alterar os destinos do log de auditoria, link:../monitor/configure-audit-messages.html#Select-audit-information-destinations["Selecione destinos de informações de auditoria"]consulte .
+
+--
+Tags de política ILM:: Permite políticas de ILM por bucket controladas com etiquetas de bucket. Várias políticas ILM ativas e inativas podem existir ao mesmo tempo. link:../ilm/ilm-policy-overview.html["Políticas ILM:Visão geral"]Consulte .
+Pontos finais Kafka:: Suporte para terminais Kafka para link:../tenant/understanding-notifications-for-buckets.html["notificações de eventos de intervalo"].
+Balanceador de carga para tráfego de interface de gerenciamento:: Crie pontos de extremidade do balanceador de carga para gerenciar o workload da interface de gerenciamento em nós de administração. link:../admin/managing-load-balancing.html["considerações para balanceamento de carga"]Consulte . Como parte dessa alteração, agora você pode usar as portas 443, 8443 e 9443 do Gerenciador de Grade e do Gerenciador de Tenant ao criar endpoints de balanceador de carga HTTPS para acesso de clientes S3 ou Swift.
+Separador gerir unidades:: Adicionado link:../monitor/viewing-manage-drives-tab.html["Separador gerir unidades"] para o aparelho SGF6112.
+Nós de storage somente de metadados:: Agora você pode especificar que um novo link:../primer/what-storage-node-is.html#types-of-storage-nodes["Nó de storage baseado em software"]será usado para armazenar apenas metadados em vez de objetos e metadados.
+SSO suporta nomes principais de usuário:: Quando link:../admin/configuring-sso.html["Configurando o logon único (SSO)"] para o ative Directory Federation Service (AD FS) ou PingFederate, agora você pode mapear o nome principal do usuário para `Name ID` na regra de reivindicações ou para `sAMAccountName=${username}` na instância do adaptador.
+Configuração de política TLS e suporte ao KMIP::
++
+--
+* O StorageGRID agora oferece suporte ao protocolo TLS 1,2 ou TLS 1,3 para conexões KMIP. link:../admin/kms-considerations-and-requirements.html["Considerações e requisitos para usar um servidor de gerenciamento de chaves"]Consulte .
+* link:../admin/kms-configuring-storagegrid-as-client.html["Hashicorp agora é totalmente compatível com KMIP"].
+* Melhorias foram feitas no link:../admin/manage-tls-ssh-policy.html["Configuração da política TLS"].
+
+
+--
+
+
+
+
+== Expanda a grade, mantenha a grade, recupere ou substitua nós
+
+Melhoria do clone de conta:: As contas existentes podem ser clonadas para uma grade remota. link:../admin/grid-federation-what-is-account-clone.html["O que é o clone de conta"]Consulte .
+Os nós de arquivamento podem ser desativados:: Agora você pode usar o procedimento Decommission Nodes para remover todos os nós de Arquivo não utilizados que estão desconetados da grade. link:../maintain/decommissioning-disconnected-grid-nodes.html["Desativar nós de grade desconetados"]Consulte .
++
+--
+
+NOTE: Os nós de arquivamento foram obsoletos no StorageGRID 11,7.
+
+--
+Restauração automática de volume:: Adicionada uma alternância para que a restauração de volume ocorra automaticamente. link:../maintain/restoring-volume.html["Restaure dados de objetos usando o Gerenciador de Grade"]Consulte .
+Codificação de apagamento, alterações nas configurações e procedimento de rebalancear:: Melhorias nas configurações de codificação de apagamento.
++
+--
+Redistribuir fragmentos codificados por apagamento entre nós de storage novos e existentes. Recalcular o equilíbrio durante as tarefas de manutenção para proporcionar uma melhor distribuição quando as tarefas estiverem concluídas. link:../expand/rebalancing-erasure-coded-data-after-adding-storage-nodes.html["Procedimento de rebalanceamento de codificação de apagamento"]Consulte .
+
+--
+Rastreamento de pilha de API de gerenciamento:: A configuração de segurança *Management API stack trace* permite controlar se um rastreamento de pilha é retornado nas respostas de erro do Grid Manager e do Tenant Manager API. link:../admin/changing-browser-session-timeout-interface.html["Alterar as definições de segurança da interface"]Consulte .
+Procedimento de reinicialização a rolar:: Agora, você pode usar o link:../maintain/rolling-reboot-procedure.html["procedimento de reinicialização a rolar"] para reinicializar vários nós de grade sem causar uma interrupção do serviço.
+
+
+
+
+== Gerenciador de grade
+
+Redes de clientes não confiáveis, informações sobre portas adicionais:: A lista de portas do Gerenciador de Grade abertas para a rede cliente não confiável está agora localizada em uma coluna chamada "Open to unTrusted Client network" em *CONFIGURATION* > *Network* > *Load balancer endpoints* > *Management interface* (anteriormente localizada na página de controle do Firewall). link:../admin/configuring-load-balancer-endpoints.html["Configurar pontos de extremidade do balanceador de carga"]Consulte .
+
+
+
+
+== Gerente do locatário
+
+S3 Console não é mais experimental:: Funcionalidade adicional descrita em link:../tenant/use-s3-console.html["Use o Console S3"].
+Permissão do locatário:: O link:../tenant/tenant-management-permissions.html["permissão de gerenciamento do locatário"], Exibir todos os buckets foi adicionado.
+
+
+
+
+== S3 API REST
+
+* link:../s3/changes-to-s3-rest-api-support.html["Alterações ao suporte à API REST do S3"].
+* S3 eliminar marcadores com UUIDs. link:../ilm/how-objects-are-deleted.html#delete-s3-versioned-objects["Como os objetos são excluídos"]Consulte e link:../audit/sdel-s3-delete.html["SDEL: S3 DELETE"].
+* link:../s3/select-object-content.html["S3 selecione ScanRange"] É usado quando fornecido em solicitações de arquivos CSV e Parquet.
+

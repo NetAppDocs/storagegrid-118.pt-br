@@ -1,0 +1,111 @@
+---
+permalink: swift/error-responses-to-swift-api-operations.html 
+sidebar: sidebar 
+keywords: swift api error responses 
+summary: Entender as possíveis respostas de erro pode ajudá-lo a solucionar problemas de operações. 
+---
+= Respostas de erro às operações da API Swift
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Entender as possíveis respostas de erro pode ajudá-lo a solucionar problemas de operações.
+
+Os seguintes códigos de status HTTP podem ser retornados quando erros ocorrem durante uma operação:
+
+|===
+| Nome de erro Swift | Status HTTP 
+
+
+ a| 
+AccountNameToLong, ContainerNameToLong, HeaderToBig, InvalidContainerName, InvalidRequest, InvalidURI, MetadataNameToLong, MetadataValueToBig, MissingSecurityHeader, ObjectNameToLong, ToManyContainers, ToManyMetadataItems, TotalMetataTooLarge
+ a| 
+400 pedido incorreto
+
+
+
+ a| 
+AccessDenied
+ a| 
+403 proibido
+
+
+
+ a| 
+ContainerNotEmpty, ContainerAlreadyExists
+ a| 
+409 conflito
+
+
+
+ a| 
+InternalError (erro internacional)
+ a| 
+500 erro interno do servidor
+
+
+
+ a| 
+Intervalo Invalidável
+ a| 
+416 intervalo solicitado não satisfatório
+
+
+
+ a| 
+MetodNotAlloved
+ a| 
+Método 405 não permitido
+
+
+
+ a| 
+MissingContentLength
+ a| 
+411 comprimento necessário
+
+
+
+ a| 
+Não encontrado
+ a| 
+404 não encontrado
+
+
+
+ a| 
+Sem Implementado
+ a| 
+501 não implementado
+
+
+
+ a| 
+Pré-condiçãoFailed
+ a| 
+412 Pré-condição falhou
+
+
+
+ a| 
+ResourceNotFound
+ a| 
+404 não encontrado
+
+
+
+ a| 
+Não autorizado
+ a| 
+401 não autorizado
+
+
+
+ a| 
+UnprocessableEntity
+ a| 
+422 entidade não processável
+
+|===

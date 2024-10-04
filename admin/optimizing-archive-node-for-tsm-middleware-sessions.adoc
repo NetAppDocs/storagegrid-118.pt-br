@@ -1,0 +1,33 @@
+---
+permalink: admin/optimizing-archive-node-for-tsm-middleware-sessions.html 
+sidebar: sidebar 
+keywords: archive node optimization 
+summary: 'Você pode otimizar o desempenho de um nó de arquivo que se coneta ao Tivoli Server Manager (TSM) configurando as sessões do nó de arquivo.' 
+---
+= Otimize um nó de arquivo para sessões de middleware TSM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode otimizar o desempenho de um nó de arquivo que se coneta ao Tivoli Server Manager (TSM) configurando as sessões do nó de arquivo.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Sobre esta tarefa
+Normalmente, o número de sessões simultâneas que o Archive Node tem aberto ao servidor middleware TSM é definido para o número de unidades de fita que o servidor TSM dedicou ao Archive Node. Uma unidade de fita é alocada para armazenamento enquanto o resto é alocado para recuperação. No entanto, em situações em que um nó de armazenamento está sendo reconstruído a partir de cópias do nó de arquivo ou o nó de arquivo está operando no modo somente leitura, você pode otimizar o desempenho do servidor TSM definindo o número máximo de sessões de recuperação para ser o mesmo que o número de sessões simultâneas. O resultado é que todas as unidades podem ser usadas simultaneamente para recuperação e, no máximo, uma dessas unidades também pode ser usada para armazenamento, se aplicável.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Target*.
+. Selecione *Configuração* > *Principal*.
+. Altere *sessões de recuperação máxima* para ser o mesmo que *número de sessões*.
++
+image::../media/optimizing_tivoli_storage_manager.gif[Página de configuração do nó de arquivo]
+
+. Selecione *aplicar alterações*.
+

@@ -1,0 +1,51 @@
+---
+permalink: audit/arem-archive-object-remove.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, AREM, Archive Object Remove 
+summary: A mensagem de auditoria Remover Objeto de Arquivo indica que um bloco de conteúdo foi excluído com sucesso ou sem sucesso de um nó de Arquivo. Se o resultado for bem-sucedido, o nó de arquivo informou com sucesso o sistema de armazenamento de arquivamento externo de que o StorageGRID liberou um local de objeto. Se o objeto é removido do sistema de armazenamento de arquivos externo depende do tipo de sistema e sua configuração. 
+---
+= AFEM: Remoção de objetos de Arquivo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A mensagem de auditoria Remover Objeto de Arquivo indica que um bloco de conteúdo foi excluído com sucesso ou sem sucesso de um nó de Arquivo. Se o resultado for bem-sucedido, o nó de arquivo informou com sucesso o sistema de armazenamento de arquivamento externo de que o StorageGRID liberou um local de objeto. Se o objeto é removido do sistema de armazenamento de arquivos externo depende do tipo de sistema e sua configuração.
+
+[cols="1a,1a,4a"]
+|===
+| Código | Campo | Descrição 
+
+
+ a| 
+CBID
+ a| 
+ID do bloco de conteúdo
+ a| 
+O identificador exclusivo do bloco de conteúdo a ser recuperado do sistema de Mídia de arquivamento externo.
+
+
+
+ a| 
+VLID
+ a| 
+Identificador de volume
+ a| 
+O identificador do volume no qual os dados do objeto foram arquivados.
+
+
+
+ a| 
+RSLT
+ a| 
+Resultado
+ a| 
+O estado de conclusão do processo de remoção do arquivo:
+
+* SUCS: Bem-sucedido
+* ARUN: Falhou (sistema de armazenamento de arquivamento externo indisponível)
+* GERR: Falhou (erro geral)
+
+
+|===

@@ -1,0 +1,172 @@
+---
+permalink: audit/object-storage-audit-messages.html 
+sidebar: sidebar 
+keywords: audit, object storage, object management, object retrieval, node transfer, verification, APCT, ARCB, ARCE, ARCT, AREM, ASCE, ASCT, ATCE, AVCC, BROR, CBSE, CBRE, CGRR, EBDL, EBKR, SCMT, SREM 
+summary: Você deve estar familiarizado com as mensagens de auditoria pertencentes à categoria de auditoria de armazenamento de objetos. Estes são eventos relacionados ao armazenamento e gerenciamento de objetos no sistema StorageGRID. Isso inclui armazenamento de objetos e recuperações, transferências de nó de grade para nó de grade e verificações. 
+---
+= Mensagens de auditoria de armazenamento de objetos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As mensagens de auditoria pertencentes à categoria de auditoria de armazenamento de objetos são usadas para eventos relacionados ao armazenamento e gerenciamento de objetos dentro do sistema StorageGRID. Isso inclui armazenamento de objetos e recuperações, transferências de nó de grade para nó de grade e verificações.
+
+[cols="1a,2a,1a"]
+|===
+| Código | Descrição | Consulte 
+
+
+ a| 
+APCT
+ a| 
+Limpeza de arquivamento da camada da nuvem: Os dados de objetos arquivados são excluídos de um sistema de storage de arquivamento externo, que se conecta ao StorageGRID por meio da API S3.
+ a| 
+link:apct-archive-purge-from-cloud-tier.html["APCT: Purga de arquivamento do nível de nuvem"]
+
+
+
+ a| 
+ARCB
+ a| 
+Início da recuperação de objetos de arquivamento: O serviço ARC inicia a recuperação de dados de objetos do sistema de armazenamento de arquivos externo.
+ a| 
+link:arcb-archive-object-retrieve-begin.html["ARCB: Início da recuperação de objetos de arquivamento"]
+
+
+
+ a| 
+ARCE
+ a| 
+Fim de recuperação de objetos de arquivamento: Os dados de objetos foram recuperados de um sistema de armazenamento de arquivos externo e o serviço ARC relata o status da operação de recuperação.
+ a| 
+link:arce-archive-object-retrieve-end.html["ARCE: Fim de recuperação de objetos de arquivamento"]
+
+
+
+ a| 
+ARCT
+ a| 
+Recuperação de arquivos do Cloud-Tier: Os dados de objetos arquivados são recuperados de um sistema de armazenamento de arquivamento externo, que se coneta ao StorageGRID por meio da API S3.
+ a| 
+link:arct-archive-retrieve-from-cloud-tier.html["ARCT: Recuperação de arquivos do Cloud-Tier"]
+
+
+
+ a| 
+ACEM
+ a| 
+Remoção de objeto de arquivamento: Um bloco de conteúdo foi excluído com sucesso ou sem sucesso do sistema de armazenamento de arquivos externo.
+ a| 
+link:arem-archive-object-remove.html["AFEM: Remoção de objetos de Arquivo"]
+
+
+
+ a| 
+ASCE
+ a| 
+Fim do armazenamento de objetos de arquivamento: Um bloco de conteúdo foi gravado no sistema de armazenamento de arquivos externo e o serviço ARC relata o status da operação de gravação.
+ a| 
+link:asce-archive-object-store-end.html["ASCE: Fim do armazenamento de objetos de Arquivo"]
+
+
+
+ a| 
+ASCT
+ a| 
+Camada de nuvem: Os dados de objetos são armazenados em um sistema de storage de arquivamento externo, que se conecta ao StorageGRID por meio da API S3.
+ a| 
+link:asct-archive-store-cloud-tier.html["ASCT: Archive Store Cloud-Tier"]
+
+
+
+ a| 
+ATCE
+ a| 
+Início do armazenamento de objetos de arquivamento: A gravação de um bloco de conteúdo em um armazenamento de arquivamento externo foi iniciada.
+ a| 
+link:atce-archive-object-store-begin.html["ATCE: Início do armazenamento de objetos de arquivo"]
+
+
+
+ a| 
+AVCC
+ a| 
+Archive Validate Cloud-Tier Configuration: As configurações de conta e bucket fornecidas foram validadas com êxito ou sem sucesso.
+ a| 
+link:avcc-archive-validate-cloud-tier-configuration.html["AVCC: Arquivamento Validar Configuração de nível de nuvem"]
+
+
+
+ a| 
+BROR
+ a| 
+Pedido apenas de leitura do balde: Um balde entrou ou saiu do modo só de leitura.
+ a| 
+link:bror-bucket-read-only-request.html["BROR: Pedido apenas de leitura do balde"]
+
+
+
+ a| 
+CBSE
+ a| 
+Fim de envio de objeto: A entidade de origem concluiu uma operação de transferência de dados de nó de grade para nó de grade.
+ a| 
+link:cbse-object-send-end.html["CBSE: Fim de envio de objeto"]
+
+
+
+ a| 
+CBRE
+ a| 
+Fim de recebimento de objeto: A entidade de destino concluiu uma operação de transferência de dados de nó de grade para nó de grade.
+ a| 
+link:cbre-object-receive-end.html["CBRE: Fim de recebimento do objeto"]
+
+
+
+ a| 
+CGRR
+ a| 
+Solicitação de replicação entre grades: O StorageGRID tentou uma operação de replicação entre grades para replicar objetos entre buckets em uma conexão de federação de grade.
+ a| 
+link:cgrr-cross-grid-replication-request.html["CGRR: Solicitação de replicação de Grade cruzada"]
+
+
+
+ a| 
+EBDL
+ a| 
+Esvaziar balde Excluir: O scanner ILM excluiu um objeto em um bucket que está excluindo todos os objetos (executando uma operação de bucket vazia).
+ a| 
+link:ebdl-empty-bucket-delete.html["EBDL: Apagar balde vazio"]
+
+
+
+ a| 
+EBKR
+ a| 
+Solicitação de balde vazio: Um usuário enviou uma solicitação para ativar ou desativar o bucket vazio (ou seja, para excluir objetos do bucket ou parar de excluir objetos).
+ a| 
+link:ebkr-empty-bucket-request.html["EBKR: Pedido de balde vazio"]
+
+
+
+ a| 
+SCMT
+ a| 
+Object Store commit: Um bloco de conteúdo foi completamente armazenado e verificado, e agora pode ser solicitado.
+ a| 
+link:scmt-object-store-commit.html["SCMT: Solicitação de confirmação do armazenamento de objetos"]
+
+
+
+ a| 
+SREM
+ a| 
+Remoção do armazenamento de objetos: Um bloco de conteúdo foi excluído de um nó de grade e não pode mais ser solicitado diretamente.
+ a| 
+link:srem-object-store-remove.html["SREM: Armazenamento de objetos Remover"]
+
+|===

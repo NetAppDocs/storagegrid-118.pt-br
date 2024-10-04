@@ -1,0 +1,27 @@
+---
+permalink: maintain/resetting-archive-node-connection-to-cloud.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, archive node connection, reset archive node connection, resetting archive node connection, reset cloud connection, resetting cloud connections 
+summary: 'Depois de recuperar um nó de arquivo que segmenta a nuvem através da API S3, você precisa modificar as configurações para redefinir as conexões. Um alarme de estado de replicação de saída (ORSU) é acionado se o nó de arquivo não conseguir recuperar dados de objeto.' 
+---
+= Repor a ligação Archive Node à nuvem
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depois de recuperar um nó de arquivo que segmenta a nuvem através da API S3, você precisa modificar as configurações para redefinir as conexões. Um alarme de Estado de replicação de saída (ORSU) é acionado se o nó de arquivo não conseguir recuperar dados de objeto.
+
+
+NOTE: Se o seu nó de arquivo se conetar ao armazenamento externo por meio do middleware TSM, o nó será redefinido automaticamente e você não precisará reconfigurar.
+
+.Antes de começar
+Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *Archive Node* > *ARC* > *Target*.
+. Edite o campo *chave de acesso* inserindo um valor incorreto e clique em *aplicar alterações*.
+. Edite o campo *chave de acesso* inserindo o valor correto e clique em *aplicar alterações*.
+

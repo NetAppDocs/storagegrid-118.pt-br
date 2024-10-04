@@ -1,0 +1,23 @@
+---
+permalink: maintain/grid-node-recovery-procedures.html 
+sidebar: sidebar 
+keywords: storagegrid, recovery 
+summary: Se um nó de grade falhar, você poderá recuperá-lo substituindo o servidor físico ou virtual com falha, reinstalando o software StorageGRID e restaurando dados recuperáveis. 
+---
+= Procedimentos de recuperação do nó de grade: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se um nó de grade falhar, você poderá recuperá-lo substituindo o servidor físico ou virtual com falha, reinstalando o software StorageGRID e restaurando dados recuperáveis.
+
+Os nós de grade podem falhar se uma falha de hardware, virtualização, sistema operacional ou software tornar o nó inoperável ou não confiável. Há muitos tipos de falha que podem desencadear a necessidade de recuperar um nó de grade.
+
+As etapas para recuperar um nó de grade variam, dependendo da plataforma onde o nó de grade está hospedado e do tipo de nó de grade. Cada tipo de nó de grade tem um procedimento de recuperação específico, que você deve seguir exatamente.
+
+Geralmente, você tenta preservar os dados do nó de grade com falha quando possível, reparar ou substituir o nó com falha, usar o Gerenciador de Grade para configurar o nó de substituição e restaurar os dados do nó.
+
+
+NOTE: Se um site StorageGRID inteiro falhar, entre em Contato com o suporte técnico. O suporte técnico trabalhará com você para desenvolver e executar um plano de recuperação de local que maximiza a quantidade de dados recuperados e atende aos seus objetivos de negócios. link:how-site-recovery-is-performed-by-technical-support.html["Como o suporte técnico recupera um site"]Consulte .

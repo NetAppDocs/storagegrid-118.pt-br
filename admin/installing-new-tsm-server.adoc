@@ -1,0 +1,17 @@
+---
+permalink: admin/installing-new-tsm-server.html 
+sidebar: sidebar 
+keywords: install tsm server, tivoli storage manager, integrate archive node with tsm 
+summary: Você pode integrar o nó de arquivo a um servidor TSM novo ou existente. Se você estiver instalando um novo servidor TSM, siga as instruções na documentação do TSM para concluir a instalação. 
+---
+= Instale um novo servidor TSM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode integrar o nó de arquivo a um servidor TSM novo ou existente. Se você estiver instalando um novo servidor TSM, siga as instruções na documentação do TSM para concluir a instalação.
+
+
+NOTE: Um nó de arquivo não pode ser co-hospedado com um servidor TSM.

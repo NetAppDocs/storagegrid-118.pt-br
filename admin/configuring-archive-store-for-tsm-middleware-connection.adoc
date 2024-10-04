@@ -1,0 +1,44 @@
+---
+permalink: admin/configuring-archive-store-for-tsm-middleware-connection.html 
+sidebar: sidebar 
+keywords: archive node, tsm server, tivoli storage manager, archive store 
+summary: Se o seu Archive Node se conetar a um servidor middleware TSM, você poderá configurar o estado de armazenamento de arquivo de um Archive Node para Online ou Offline. Você também pode desativar o armazenamento de arquivos quando o nó de arquivo é iniciado pela primeira vez ou redefinir a contagem de falhas sendo rastreada para o alarme associado. 
+---
+= Configure o estado do arquivo e os contadores para o TSM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se o seu Archive Node se conetar a um servidor middleware TSM, você poderá configurar o estado de armazenamento de arquivo de um Archive Node para Online ou Offline. Você também pode desativar o armazenamento de arquivos quando o nó de arquivo é iniciado pela primeira vez ou redefinir a contagem de falhas sendo rastreada para o alarme associado.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Store*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/archive_store_tsm.gif[Configure o armazenamento de arquivos para conexão de middleware TSM]
+
+. Modifique as seguintes definições, conforme necessário:
++
+** Estado da loja: Defina o estado do componente para:
++
+*** On-line: O Archive Node está disponível para processar dados de objetos para armazenamento no sistema de armazenamento de arquivamento.
+*** Offline: O nó de arquivo não está disponível para processar dados de objeto para armazenamento no sistema de armazenamento de arquivo.
+
+
+** Archive Store Disabled on Startup (armazenamento de arquivo desativado na inicialização): Quando selecionado, o componente Archive Store (armazenamento de arquivo) permanece no estado Read-Only (somente leitura) quando reiniciado. Usado para desativar persistentemente o armazenamento para o sistema de armazenamento de arquivo visado. Útil quando o sistema de armazenamento de arquivos visado não consegue aceitar conteúdo.
+** Repor contagem de falhas de armazenamento: Reponha o contador para falhas de armazenamento. Isso pode ser usado para limpar o alarme ARVF (falha de armazenamento).
+
+
+. Selecione *aplicar alterações*.
+
+
+.Informações relacionadas
+link:managing-archive-node-when-tsm-server-reaches-capacity.html["Gerencie um nó de arquivo quando o servidor TSM atingir a capacidade"]

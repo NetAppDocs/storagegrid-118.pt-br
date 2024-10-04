@@ -1,0 +1,71 @@
+---
+permalink: troubleshoot/troubleshooting-storage-status-alarm.html 
+sidebar: sidebar 
+keywords: how to troubleshoot storage status alarm, how to troubleshoot ssts alarm 
+summary: 'O alarme de Estado de armazenamento (SSTS) é acionado se um nó de armazenamento tiver espaço livre insuficiente restante para armazenamento de objetos.' 
+---
+= Solucione o problema do alarme de Status de armazenamento (SSTS)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O alarme de Estado de armazenamento (SSTS) é acionado se um nó de armazenamento tiver espaço livre insuficiente restante para armazenamento de objetos.
+
+.Antes de começar
+* Você deve estar conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:../admin/admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Sobre esta tarefa
+O alarme SSTS (Storage Status) é acionado no nível de aviso quando a quantidade de espaço livre em cada volume em um nó de armazenamento cai abaixo do valor do volume de armazenamento Soft Read Only Watermark (*CONFIGURATION* > *System* > *Storage options*).
+
+image::../media/storage_watermarks.png[Visão geral das opções de armazenamento]
+
+Por exemplo, suponha que o volume de armazenamento Soft Read-Only Watermark esteja definido como 10 GB, que é o valor padrão. O alarme SSTS é acionado se menos de 10 GB de espaço utilizável permanecer em cada volume de armazenamento no nó de armazenamento. Se algum dos volumes tiver 10 GB ou mais de espaço disponível, o alarme não será acionado.
+
+Se um alarme SSTS tiver sido acionado, você pode seguir estes passos para entender melhor o problema.
+
+.Passos
+. Selecione *SUPPORT* > *Alarmes (legacy)* > *Current Alarmes*.
+. Na coluna Serviço, selecione o data center, o nó e o serviço associados ao alarme SSTS.
++
+É apresentada a página Grid Topology (topologia de grelha). A guia Alarmes mostra os alarmes ativos para o nó e serviço selecionados.
+
++
+image::../media/ssts_alarm.png[Nó de armazenamento > LDR > armazenamento > separador Alarmes]
+
++
+Neste exemplo, os alarmes SSTS (Storage Status) e SAVP (Total usable Space (Percent)) foram acionados no nível de Aviso.
+
++
+
+NOTE: Normalmente, tanto o alarme SSTS como o alarme SAVP são acionados aproximadamente ao mesmo tempo; no entanto, se ambos os alarmes são acionados depende da definição da marca d'água em GB e da definição do alarme SAVP em percentagem.
+
+. Para determinar quanto espaço utilizável está realmente disponível, selecione *LDR* > *Storage* > *Overview* e encontre o atributo espaço utilizável total (STAS).
++
+image::../media/storage_node_total_usable_space.png[Espaço utilizável total]
+
++
+Neste exemplo, apenas 19,6 GB dos 164 GB de espaço neste nó de armazenamento permanecem disponíveis. Observe que o valor total é a soma dos valores *disponíveis* para os três volumes de armazenamento de objetos. O alarme SSTS foi acionado porque cada um dos três volumes de armazenamento tinha menos de 10 GB de espaço disponível.
+
+. Para entender como o armazenamento foi usado ao longo do tempo, selecione a guia *relatórios* e plote o espaço utilizável total nas últimas horas.
++
+Neste exemplo, o espaço utilizável total caiu de cerca de 155 GB em 12:00 para 20 GB em 12:35, o que corresponde ao momento em que o alarme SSTS foi acionado.
+
++
+image::../media/total_usable_space_chart.png[Espaço utilizável total - Gráfico]
+
+. Para entender como o armazenamento está sendo usado como uma porcentagem do total, plote o espaço utilizável total (porcentagem) nas últimas horas.
++
+Neste exemplo, o espaço utilizável total caiu de 95% para pouco mais de 10%, aproximadamente ao mesmo tempo.
+
++
+image::../media/total_usable_storage_percent_chart.png[Espaço utilizável total (percentagem) - Gráfico]
+
+. Conforme necessário, link:../expand/guidelines-for-adding-object-capacity.html["adicionar capacidade de armazenamento"].
++
+Consulte também link:../admin/managing-full-storage-nodes.html["Gerencie nós de storage completos"].
+
+

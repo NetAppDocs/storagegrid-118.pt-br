@@ -1,0 +1,37 @@
+---
+permalink: tenant/using-search-integration-service.html 
+sidebar: sidebar 
+keywords: how to use search integration service 
+summary: O serviço de integração de pesquisa é um dos três serviços da plataforma StorageGRID. Você pode habilitar esse serviço para enviar metadados de objetos para um índice de pesquisa de destino sempre que um objeto for criado, excluído ou seus metadados ou tags forem atualizados. 
+---
+= Use o serviço de integração de pesquisa
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O serviço de integração de pesquisa é um dos três serviços da plataforma StorageGRID. Você pode habilitar esse serviço para enviar metadados de objetos para um índice de pesquisa de destino sempre que um objeto for criado, excluído ou seus metadados ou tags forem atualizados.
+
+Você pode configurar a integração de pesquisa usando o Gerenciador de inquilinos para aplicar XML de configuração personalizada do StorageGRID a um bucket.
+
+
+NOTE: Como o serviço de integração de pesquisa faz com que os metadados de objeto sejam enviados para um destino, seu XML de configuração é chamado de configuração de notificação de _metadata XML_. Esse XML de configuração é diferente da configuração _notificação XML_ usada para ativar notificações de eventos.
+
+Consulte o link:../s3/index.html["Instruções para a implementação de aplicativos cliente S3"] para obter detalhes sobre as seguintes operações personalizadas da API REST do StorageGRID S3:
+
+* ELIMINAR configuração de notificação de metadados do bucket
+* OBTER configuração de notificação de metadados do bucket
+* COLOQUE a configuração de notificação de metadados do bucket
+
+
+.Informações relacionadas
+link:configuration-xml-for-search-configuration.html["Configuração XML para integração de pesquisa"]
+
+link:object-metadata-included-in-metadata-notifications.html["Metadados de objetos incluídos nas notificações de metadados"]
+
+link:json-generated-by-search-integration-service.html["JSON gerado pelo serviço de integração de pesquisa"]
+
+link:configuring-search-integration-service.html["Configurar o serviço de integração de pesquisa"]
+
+link:../s3/index.html["USE A API REST DO S3"]

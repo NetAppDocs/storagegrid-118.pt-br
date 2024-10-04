@@ -1,0 +1,13 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+permalink: landing-monitor-troubleshoot/index.html 
+summary: Quando o sistema estiver funcionando, você deve monitorar suas atividades regularmente e solucionar problemas e resolver quaisquer alertas. Você também pode querer configurar um servidor syslog externo, usar monitoramento SNMP ou coletar dados adicionais. 
+---
+= Monitore e solucione problemas de um sistema StorageGRID
+:hardbreaks:
+:allow-uri-read: 
+:linkattrs: 
+:imagesdir: ./media/
+
+

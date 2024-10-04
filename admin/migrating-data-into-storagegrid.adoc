@@ -1,0 +1,114 @@
+---
+permalink: admin/migrating-data-into-storagegrid.html 
+sidebar: sidebar 
+keywords: data migration, move data into storagegrid 
+summary: É possível migrar grandes quantidades de dados para o sistema StorageGRID e, simultaneamente, usar o sistema StorageGRID para operações diárias. 
+---
+= Migrar dados para o StorageGRID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+É possível migrar grandes quantidades de dados para o sistema StorageGRID e, simultaneamente, usar o sistema StorageGRID para operações diárias.
+
+Use este guia para Planejar a migração de grandes quantidades de dados para o sistema StorageGRID. Ele não é um guia geral para a migração de dados e não inclui etapas detalhadas para a execução de uma migração. Siga as diretrizes e instruções nesta seção para garantir que os dados sejam migrados com eficiência para o sistema StorageGRID sem interferir nas operações diárias e que os dados migrados sejam tratados adequadamente pelo sistema StorageGRID.
+
+
+
+== Confirme a capacidade do sistema StorageGRID
+
+Antes de migrar grandes quantidades de dados para o sistema StorageGRID, confirme se o sistema StorageGRID tem a capacidade de disco para lidar com o volume esperado.
+
+Se o sistema StorageGRID incluir um nó de arquivo e uma cópia de objetos migrados tiver sido salva em armazenamento near-line (como fita), verifique se o armazenamento do nó de arquivamento tem capacidade suficiente para o volume esperado de dados migrados.
+
+Como parte da avaliação de capacidade, observe o perfil de dados dos objetos que você planeja migrar e calcule a quantidade de capacidade de disco necessária. Para obter detalhes sobre como monitorar a capacidade de disco do sistema StorageGRID, consulte link:managing-storage-nodes.html["Gerenciar nós de storage"] e as instruções para link:../monitor/index.html["Monitorização do StorageGRID"].
+
+
+
+== Determine a política de ILM para dados migrados
+
+A política ILM do sistema StorageGRID determina quantas cópias são feitas, os locais para os quais as cópias são armazenadas e por quanto tempo essas cópias são mantidas. Uma política ILM consiste em um conjunto de regras ILM que descrevem como filtrar objetos e gerenciar dados de objetos ao longo do tempo.
+
+Dependendo de como os dados migrados são usados e de seus requisitos de dados migrados, talvez você queira definir regras exclusivas de ILM para dados migrados que são diferentes das regras de ILM usadas para operações diárias. Por exemplo, se houver requisitos regulatórios diferentes para o gerenciamento diário de dados do que os dados incluídos na migração, talvez você queira um número diferente de cópias dos dados migrados em um nível diferente de storage.
+
+Você pode configurar regras que se aplicam exclusivamente aos dados migrados se for possível distinguir de forma exclusiva entre dados migrados e dados de objetos salvos de operações diárias.
+
+Se você puder distinguir de forma confiável entre os tipos de dados usando um dos critérios de metadados, use esses critérios para definir uma regra de ILM que se aplica apenas aos dados migrados.
+
+Antes de iniciar a migração de dados, certifique-se de que compreende a política de ILM do sistema StorageGRID e de que forma será aplicada aos dados migrados e de que fez e testou quaisquer alterações à política ILM. link:../ilm/index.html["Gerenciar objetos com ILM"]Consulte .
+
+
+CAUTION: Uma política de ILM que foi incorretamente especificada pode causar perda de dados irrecuperável. Revise cuidadosamente todas as alterações feitas em uma política ILM antes de ativá-la para garantir que a política funcionará conforme pretendido.
+
+
+
+== Avaliar o impactos da migração nas operações
+
+O sistema StorageGRID foi desenvolvido para fornecer operações eficientes de storage e recuperação de objetos, além de fornecer excelente proteção contra a perda de dados por meio da criação otimizada de cópias redundantes de dados de objetos e metadados.
+
+No entanto, a migração de dados deve ser cuidadosamente gerenciada de acordo com as instruções deste guia para evitar ter impacto nas operações diárias do sistema ou, em casos extremos, colocar os dados em risco de perda em caso de falha no sistema StorageGRID.
+
+A migração de grandes quantidades de dados coloca carga adicional no sistema. Quando o sistema StorageGRID está muito carregado, ele responde mais lentamente às solicitações para armazenar e recuperar objetos. Isso pode interferir com as solicitações de armazenamento e recuperação que são parte integrante das operações diárias. A migração também pode causar outros problemas operacionais. Por exemplo, quando um nó de armazenamento está próximo da capacidade, a carga intermitente pesada devido à ingestão de lote pode fazer com que o nó de armazenamento alterne entre somente leitura e leitura-gravação, gerando notificações.
+
+Se o carregamento pesado persistir, as filas podem se desenvolver para várias operações que o sistema StorageGRID deve executar para garantir a redundância total dos dados e metadados do objeto.
+
+A migração de dados deve ser cuidadosamente gerenciada de acordo com as diretrizes deste documento para garantir o funcionamento seguro e eficiente do sistema StorageGRID durante a migração. Ao migrar dados, ingira objetos em lotes ou controle continuamente a ingestão. Em seguida, monitore continuamente o sistema StorageGRID para garantir que vários valores de atributo não sejam excedidos.
+
+
+
+== Agendar e monitorar a migração de dados
+
+A migração de dados deve ser agendada e monitorada conforme necessário para garantir que os dados sejam colocados de acordo com a política de ILM dentro do prazo exigido.
+
+
+
+=== Agendar a migração de dados
+
+Evite migrar dados durante o horário operacional principal. Limite a migração de dados para noites, fins de semana e outras ocasiões em que o uso do sistema é baixo.
+
+Se possível, não programe a migração de dados durante períodos de alta atividade. No entanto, se não for prático evitar completamente o período de atividade elevada, é seguro prosseguir desde que monitorize de perto os atributos relevantes e tome medidas se excederem os valores aceitáveis.
+
+
+
+=== Monitorar a migração de dados
+
+Esta tabela lista os atributos que você deve monitorar durante a migração de dados e os problemas que eles representam.
+
+Se você usar políticas de classificação de tráfego com limites de taxa para reduzir a ingestão, poderá monitorar a taxa observada em conjunto com as estatísticas descritas na tabela a seguir e reduzir os limites, se necessário.
+
+[cols="1a,2a"]
+|===
+| Monitorar | Descrição 
+
+
+ a| 
+Número de objetos aguardando avaliação ILM
+ a| 
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_deployment_* > *Overview* > *Main*.
+. Na seção ILM Activity, monitore o número de objetos mostrados para os seguintes atributos:
++
+** *Aguardando - todos (XQUZ)*: O número total de objetos aguardando avaliação ILM.
+** *Aguardando - Cliente (XCQZ)*: O número total de objetos aguardando avaliação ILM das operações do cliente (por exemplo, ingest).
+
+
+. Se o número de objetos mostrados para qualquer um desses atributos exceder 100.000, diminua a taxa de ingestão de objetos para reduzir a carga no sistema StorageGRID.
+
+
+
+
+ a| 
+Capacidade de armazenamento do sistema de arquivamento direcionado
+ a| 
+Se a política de ILM salvar uma cópia dos dados migrados para um sistema de armazenamento de arquivamento de destino (fita ou nuvem), monitore a capacidade do sistema de armazenamento de arquivamento de destino para garantir que haja capacidade suficiente para os dados migrados.
+
+
+
+ a| 
+*Archive Node* > *ARC* > *Store*
+ a| 
+Se um alarme para o atributo *Store Failures (ARVF)* for acionado, o sistema de armazenamento de arquivos alvo pode ter atingido a capacidade. Verifique o sistema de armazenamento de arquivos alvo e resolva quaisquer problemas que acionaram um alarme.
+
+|===

@@ -1,0 +1,269 @@
+---
+permalink: admin/storage-node-configuration-settings.html 
+sidebar: sidebar 
+keywords: storage node, configuration settings, counters 
+summary: 'Cada nó de armazenamento usa várias configurações e contadores. Talvez seja necessário exibir as configurações atuais ou redefinir contadores para limpar alarmes (sistema legado).' 
+---
+= Configurações do nó de storage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cada nó de armazenamento usa várias configurações e contadores. Talvez seja necessário exibir as configurações atuais ou redefinir contadores para apagar alarmes (sistema legado).
+
+
+CAUTION: Exceto quando especificamente instruído na documentação, você deve consultar o suporte técnico antes de modificar qualquer configuração do nó de armazenamento. Conforme necessário, você pode redefinir contadores de eventos para limpar alarmes legados.
+
+Siga estes passos para aceder às definições e contadores de configuração de um nó de armazenamento.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_site_* > *_Storage Node_*.
+. Expanda o nó de armazenamento e selecione o serviço ou componente.
+. Selecione a guia *Configuração*.
+
+
+As tabelas a seguir resumem as configurações do nó de armazenamento.
+
+
+
+== LDR
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Estado HTTP
+ a| 
+HSTE
+ a| 
+O estado atual de HTTP para S3, Swift e outro tráfego interno de StorageGRID:
+
+* Offline: Não são permitidas operações e qualquer aplicativo cliente que tente abrir uma sessão HTTP para o serviço LDR recebe uma mensagem de erro. As sessões ativas estão graciosamente fechadas.
+* Online: A operação continua normalmente
+
+
+
+
+ a| 
+Auto-Iniciar HTTP
+ a| 
+HTAS
+ a| 
+* Se selecionado, o estado do sistema ao reiniciar depende do estado do componente *LDR* > *Storage*. Se o componente *LDR* > *Storage* for somente leitura ao reiniciar, a interface HTTP também será somente leitura. Se o componente *LDR* > *Storage* estiver Online, o HTTP também estará Online. Caso contrário, a interface HTTP permanece no estado Offline.
+* Se não estiver selecionada, a interface HTTP permanece Offline até explicitamente ativada.
+
+
+|===
+
+
+== LDR > armazenamento de dados
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Repor contagem de objetos perdidos
+ a| 
+RCOR
+ a| 
+Redefina o contador para o número de objetos perdidos neste serviço.
+
+|===
+
+
+== LDR > armazenamento
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Estado de armazenamento -- desejado
+ a| 
+SSDS
+ a| 
+Uma configuração configurável pelo usuário para o estado desejado do componente de armazenamento. O serviço LDR lê este valor e tenta corresponder ao estado indicado por este atributo. O valor é persistente entre as reinicializações.
+
+Por exemplo, você pode usar essa configuração para forçar o armazenamento a se tornar somente leitura, mesmo quando houver amplo espaço de armazenamento disponível. Isso pode ser útil para a solução de problemas.
+
+O atributo pode ter um dos seguintes valores:
+
+* Offline: Quando o estado desejado é Offline, o serviço LDR coloca o componente *LDR* > *Storage* offline.
+* Somente leitura: Quando o estado desejado é somente leitura, o serviço LDR move o estado de armazenamento para somente leitura e pára de aceitar novo conteúdo. No entanto, o serviço LDR continua a aceitar pedidos de purga e eliminação orientados por S3 ou ILM. Observe que o conteúdo pode continuar sendo salvo no nó de armazenamento por um curto período de tempo até que as sessões abertas sejam fechadas.
+* Online: Deixe o valor em Online durante as operações normais do sistema. O estado de armazenamento -- a corrente do componente de armazenamento será definida dinamicamente pelo serviço com base na condição do serviço LDR, como a quantidade de espaço de armazenamento de objetos disponível. Se o espaço for baixo, o componente torna-se somente leitura.
+
+
+
+
+ a| 
+Tempo limite de verificação de integridade
+ a| 
+SHCT
+ a| 
+O limite de tempo em segundos no qual um teste de verificação de integridade deve ser concluído para que um volume de armazenamento seja considerado saudável. Altere este valor apenas quando direcionado para o fazer pelo suporte.
+
+|===
+
+
+== LDR > Verificação
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Repor contagem de objetos em falta
+ a| 
+VCMI
+ a| 
+Redefine a contagem de objetos perdidos detetados (OMIS). Use somente depois que a verificação existência do objeto for concluída. Os dados de objeto replicado em falta são restaurados automaticamente pelo sistema StorageGRID.
+
+
+
+ a| 
+Taxa de verificação
+ a| 
+VPRI
+ a| 
+Defina a taxa em que a verificação de fundo ocorre. Consulte informações sobre como configurar a taxa de verificação em segundo plano.
+
+
+
+ a| 
+Repor contagem de objetos corrompidos
+ a| 
+VCCR
+ a| 
+Redefina o contador para obter dados de objeto replicado corrompidos encontrados durante a verificação em segundo plano. Esta opção pode ser usada para limpar a condição de alarme objetos corrompidos detetados (OCOR).
+
+
+
+ a| 
+Excluir objetos em quarentena
+ a| 
+OQRT
+ a| 
+Exclua objetos corrompidos do diretório de quarentena, redefina a contagem de objetos em quarentena para zero e limpe o alarme objetos em quarentena detetados (OQRT). Esta opção é usada depois que objetos corrompidos foram restaurados automaticamente pelo sistema StorageGRID.
+
+Se um alarme de objetos perdidos for acionado, o suporte técnico pode querer acessar os objetos em quarentena. Em alguns casos, objetos em quarentena podem ser úteis para a recuperação de dados ou para depurar os problemas subjacentes que causaram as cópias de objetos corrompidas.
+
+|===
+
+
+== LDR > codificação de apagamento
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Repor gravações contagem de falhas
+ a| 
+RSWF
+ a| 
+Redefina o contador para falhas de gravação de dados de objetos codificados por apagamento no nó de storage.
+
+
+
+ a| 
+A reinicialização lê a contagem de falhas
+ a| 
+RSRF
+ a| 
+Redefina o contador para falhas de leitura de dados de objetos codificados por apagamento a partir do nó de armazenamento.
+
+
+
+ a| 
+A reposição elimina a contagem de falhas
+ a| 
+RSDF
+ a| 
+Redefina o contador para falhas de exclusão de dados de objetos codificados por apagamento do nó de storage.
+
+
+
+ a| 
+Repor contagem de cópias corrompidas detetadas
+ a| 
+RSCC
+ a| 
+Redefina o contador para o número de cópias corrompidas de dados de objetos codificados por apagamento no nó de storage.
+
+
+
+ a| 
+Repor a contagem de fragmentos corrompidos detetados
+ a| 
+RSCD
+ a| 
+Redefina o contador de fragmentos corrompidos de dados de objetos codificados por apagamento no nó de storage.
+
+
+
+ a| 
+Repor contagem de fragmentos detetados em falta
+ a| 
+RSMD
+ a| 
+Redefina o contador de fragmentos ausentes de dados de objetos codificados por apagamento no nó de storage. Use somente depois que a verificação existência do objeto for concluída.
+
+|===
+
+
+== LDR > replicação
+
+[cols="2a,1a,3a"]
+|===
+| Nome do atributo | Código | Descrição 
+
+
+ a| 
+Repor contagem de falhas de replicação de entrada
+ a| 
+RICR
+ a| 
+Redefina o contador para falhas de replicação de entrada. Isso pode ser usado para limpar o alarme RIRF (replicação de entrada -- Falha).
+
+
+
+ a| 
+Repor contagem de falhas de replicação efetuada
+ a| 
+ROCR
+ a| 
+Redefina o contador para falhas de replicação de saída. Isso pode ser usado para limpar o alarme RORF (Outbound replicações -- Failed).
+
+
+
+ a| 
+Desativar replicação de entrada
+ a| 
+DSIR
+ a| 
+Selecione para desativar a replicação de entrada como parte de um procedimento de manutenção ou teste. Deixe desmarcado durante o funcionamento normal.
+
+Quando a replicação de entrada é desativada, os objetos podem ser recuperados do nó de armazenamento para cópia para outros locais no sistema StorageGRID, mas os objetos não podem ser copiados para este nó de armazenamento a partir de outros locais: O serviço LDR é somente leitura.
+
+
+
+ a| 
+Desativar replicação efetuada
+ a| 
+DSOR
+ a| 
+Selecione para desativar a replicação de saída (incluindo solicitações de conteúdo para recuperações HTTP) como parte de um procedimento de manutenção ou teste. Deixe desmarcado durante o funcionamento normal.
+
+Quando a replicação de saída é desativada, os objetos podem ser copiados para este nó de armazenamento, mas os objetos não podem ser recuperados do nó de armazenamento para serem copiados para outros locais no sistema StorageGRID. O serviço LDR é apenas de escrita.
+
+|===

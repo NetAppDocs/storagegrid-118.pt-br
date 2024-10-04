@@ -1,0 +1,37 @@
+---
+permalink: audit/avcc-archive-validate-cloud-tier-configuration.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, AVCC, Archive Validate Cloud-Tier Configuration 
+summary: 'Essa mensagem é gerada quando as configurações são validadas para um tipo de destino Cloud Tiering - Simple Storage Service(S3).' 
+---
+= AVCC: Arquivamento Validar Configuração de nível de nuvem
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Essa mensagem é gerada quando as configurações são validadas para um tipo de destino Cloud Tiering - Simple Storage Service (S3).
+
+[cols="1a,1a,4a"]
+|===
+| Código | Campo | Descrição 
+
+
+ a| 
+RSLT
+ a| 
+Código do resultado
+ a| 
+Retorna bem-sucedido (SUCS) ou o erro relatado pelo back-end.
+
+
+
+ a| 
+SUID
+ a| 
+Identificador exclusivo de armazenamento
+ a| 
+UUID associado ao sistema de armazenamento de arquivamento externo sendo validado.
+
+|===

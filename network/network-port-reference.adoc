@@ -1,0 +1,16 @@
+---
+permalink: network/network-port-reference.html 
+sidebar: sidebar 
+keywords: network port reference 
+summary: Você deve garantir que a infraestrutura de rede possa fornecer comunicação interna e externa entre nós dentro da grade e para clientes e serviços externos. Você pode precisar de acesso em firewalls internos e externos, sistemas de comutação e sistemas de roteamento. 
+---
+= Referência da porta de rede
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve garantir que a infraestrutura de rede possa fornecer comunicação interna e externa entre nós dentro da grade e para clientes e serviços externos. Você pode precisar de acesso em firewalls internos e externos, sistemas de comutação e sistemas de roteamento.
+
+Utilize os detalhes fornecidos para link:internal-grid-node-communications.html["Comunicações internas do nó da grade"] e link:external-communications.html["Comunicações externas"]para determinar como configurar cada porta necessária.

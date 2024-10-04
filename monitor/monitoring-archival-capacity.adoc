@@ -1,0 +1,29 @@
+---
+permalink: monitor/monitoring-archival-capacity.html 
+sidebar: sidebar 
+keywords: archive, monitor, monitoring, monitoring archival capacity 
+summary: Não é possível monitorar diretamente a capacidade de um sistema de storage de arquivamento externo por meio do sistema StorageGRID. No entanto, você pode monitorar se o nó Arquivo ainda pode enviar dados de objeto para o destino do arquivamento, o que pode indicar que uma expansão de Mídia de arquivamento é necessária. 
+---
+= Monitorar a capacidade de arquivamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Não é possível monitorar diretamente a capacidade de um sistema de armazenamento de arquivamento externo por meio do sistema StorageGRID. No entanto, você pode monitorar se o nó Arquivo ainda pode enviar dados de objeto para o destino do arquivamento, o que pode indicar que uma expansão de Mídia de arquivamento é necessária.
+
+.Sobre esta tarefa
+Você pode monitorar o componente armazenar para verificar se o nó de arquivo ainda pode enviar dados de objeto para o sistema de armazenamento de arquivamento de destino. O alarme de falhas de armazenamento (ARVF) também pode indicar que o sistema de armazenamento de arquivos visado atingiu a capacidade e não pode mais aceitar dados de objetos.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC**> Overview**> Main*.
+. Verifique os atributos Estado da Loja e Estado da Loja para confirmar se o componente da Loja está Online sem erros.
++
+image::../media/store_status_attribute.gif[Captura de tela mostrando ARC > Visão geral > Principal]
+
++
+Um componente de armazenamento offline ou um com erros pode indicar que o sistema de armazenamento de arquivos de destino não pode mais aceitar dados de objeto porque atingiu a capacidade.
+
+

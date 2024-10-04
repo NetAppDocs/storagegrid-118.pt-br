@@ -1,0 +1,54 @@
+---
+permalink: audit/arce-archive-object-retrieve-end.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, ARCE, Archive Object Retrieve End 
+summary: Esta mensagem é gerada quando uma tentativa do nó de arquivo para recuperar dados de objetos de um sistema de armazenamento de arquivos externo é concluída. Se for bem-sucedida, a mensagem indica que os dados do objeto solicitado foram completamente lidos a partir do local do arquivo e foram verificados com sucesso. Depois que os dados do objeto forem recuperados e verificados, eles serão entregues ao serviço solicitante. 
+---
+= ARCE: Fim de recuperação de objetos de arquivamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta mensagem é gerada quando uma tentativa do nó de arquivo para recuperar dados de objetos de um sistema de armazenamento de arquivos externo é concluída. Se for bem-sucedida, a mensagem indica que os dados do objeto solicitado foram completamente lidos a partir do local do arquivo e foram verificados com sucesso. Depois que os dados do objeto forem recuperados e verificados, eles serão entregues ao serviço solicitante.
+
+[cols="1a,1a,4a"]
+|===
+| Código | Campo | Descrição 
+
+
+ a| 
+CBID
+ a| 
+ID do bloco de conteúdo
+ a| 
+O identificador exclusivo do bloco de conteúdo a ser recuperado do sistema de armazenamento de arquivos externo.
+
+
+
+ a| 
+VLID
+ a| 
+Identificador de volume
+ a| 
+O identificador do volume no qual os dados foram arquivados. Se uma localização de arquivo para o conteúdo não for encontrada, uma ID de volume de 0 será retornada.
+
+
+
+ a| 
+RSLT
+ a| 
+Resultado de recuperação
+ a| 
+O estado de conclusão do processo de recuperação do arquivo:
+
+* SUCS: Bem-sucedido
+* VRFL: Falhou (falha na verificação de objetos)
+* ARUN: Falhou (sistema de armazenamento de arquivamento externo indisponível)
+* CANC: Falha (operação de recuperação cancelada)
+* GERR: Falhou (erro geral)
+
+
+|===
+A correspondência desta mensagem com a mensagem ARCB correspondente pode indicar o tempo necessário para executar a recuperação do arquivo. Esta mensagem indica se a recuperação foi bem-sucedida e, em caso de falha, a causa da falha na recuperação do bloco de conteúdo.

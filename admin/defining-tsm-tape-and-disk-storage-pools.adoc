@@ -1,0 +1,135 @@
+---
+permalink: admin/defining-tsm-tape-and-disk-storage-pools.html 
+sidebar: sidebar 
+keywords: archive node, tsm, tape storage pool, tivoli storage manager 
+summary: O nó de arquivamento grava em um pool de armazenamento em disco. Para arquivar conteúdo em fita, você deve configurar o pool de armazenamento em disco para mover o conteúdo para um pool de armazenamento em fita. 
+---
+= Defina conjuntos de armazenamento em disco e fita TSM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O nó de arquivamento grava em um pool de armazenamento em disco. Para arquivar conteúdo em fita, você deve configurar o pool de armazenamento em disco para mover o conteúdo para um pool de armazenamento em fita.
+
+.Sobre esta tarefa
+Para um servidor TSM, você deve definir um pool de armazenamento em fita e um pool de armazenamento em disco no Tivoli Storage Manager. Depois que o pool de discos for definido, crie um volume de disco e atribua-o ao pool de discos. Não é necessário um pool de fitas se o servidor TSM usar storage somente em disco.
+
+Você deve concluir várias etapas em seu servidor TSM antes de criar um pool de armazenamento de fita. (Crie uma biblioteca de fitas e pelo menos uma unidade na biblioteca de fitas. Defina um caminho do servidor para a biblioteca e do servidor para as unidades e, em seguida, defina uma classe de dispositivo para as unidades.) Os detalhes dessas etapas podem variar dependendo da configuração de hardware e dos requisitos de armazenamento do site. Para obter mais informações, consulte a documentação do TSM.
+
+O seguinte conjunto de instruções ilustra o processo. Você deve estar ciente de que os requisitos para o seu site podem ser diferentes, dependendo dos requisitos da sua implantação. Para obter detalhes de configuração e instruções, consulte a documentação do TSM.
+
+
+NOTE: Você deve fazer login no servidor com Privileges administrativo e usar a ferramenta dsmadmc para executar os seguintes comandos.
+
+.Passos
+. Crie uma biblioteca de fitas.
++
+`define library _tapelibrary_ libtype=_scsi_`
+
++
+ `_tapelibrary_`Onde é escolhido um nome arbitrário para a biblioteca de fitas, e o valor de `libtype` pode variar dependendo do tipo de biblioteca de fitas.
+
+. Defina um caminho do servidor para a biblioteca de fitas.
++
+`define path _servername tapelibrary_ srctype=server desttype=library device=_lib-devicename_`
+
++
+** `_servername_` É o nome do servidor TSM
+** `_tapelibrary_` é o nome da biblioteca de fitas que você definiu
+** `_lib-devicename_` é o nome do dispositivo para a biblioteca de fitas
+
+
+. Defina uma unidade para a biblioteca.
++
+`define drive _tapelibrary_ _drivename_`
+
++
+** `_drivename_` é o nome que você deseja especificar para a unidade
+** `_tapelibrary_` é o nome da biblioteca de fitas que você definiu
++
+Você pode querer configurar uma unidade ou unidades adicionais, dependendo da configuração do hardware. (Por exemplo, se o servidor TSM estiver conetado a um switch Fibre Channel que tenha duas entradas de uma biblioteca de fitas, talvez você queira definir uma unidade para cada entrada.)
+
+
+
+. Defina um caminho do servidor para a unidade definida.
++
+`define path _servername_ drivename srctype=server desttype=drive library=_tapelibrary_ device=_drive-dname_`
+
++
+** `_drive-dname_` é o nome do dispositivo para a unidade
+** `_tapelibrary_` é o nome da biblioteca de fitas que você definiu
++
+Repita para cada unidade definida para a biblioteca de fitas, usando uma unidade `_drivename_` separada e `_drive-dname_` para cada unidade.
+
+
+
+. Defina uma classe de dispositivo para as unidades.
++
+`define devclass _DeviceClassName_ devtype=_lto_ library=_tapelibrary_ format=_tapetype_`
+
++
+** `_DeviceClassName_` é o nome da classe de dispositivo
+** `_lto_` é o tipo de unidade conetada ao servidor
+** `_tapelibrary_` é o nome da biblioteca de fitas que você definiu
+** `_tapetype_` é o tipo de fita; por exemplo, ultrium3
+
+
+. Adicione volumes de fita ao inventário da biblioteca.
++
+`checkin libvolume _tapelibrary_`
+
++
+`_tapelibrary_` é o nome da biblioteca de fitas que você definiu.
+
+. Crie o pool de armazenamento de fita primário.
++
+`define stgpool _SGWSTapePool_ _DeviceClassName_ description=_description_ _collocate=filespace_ maxscratch=_XX_`
+
++
+** `_SGWSTapePool_` É o nome do conjunto de armazenamento de fita do nó de arquivo. Você pode selecionar qualquer nome para o pool de armazenamento de fita (desde que o nome use as convenções de sintaxe esperadas pelo servidor TSM).
+** `_DeviceClassName_` é o nome do nome da classe do dispositivo para a biblioteca de fitas.
+** `_description_` É uma descrição do pool de armazenamento que pode ser exibido no servidor TSM usando o `query stgpool` comando. Por exemplo: "Pool de armazenamento de fita para o nó de arquivo."
+** `_collocate=filespace_` Especifica que o servidor TSM deve gravar objetos do mesmo espaço de arquivo em uma única fita.
+** `XX` é um dos seguintes:
++
+*** O número de fitas vazias na biblioteca de fitas (caso o nó de arquivo seja o único aplicativo que usa a biblioteca).
+*** O número de fitas alocadas para uso pelo sistema StorageGRID (nos casos em que a biblioteca de fitas é compartilhada).
+
+
+
+
+. Em um servidor TSM, crie um pool de armazenamento em disco. Na consola administrativa do servidor TSM, introduza
++
+`define stgpool _SGWSDiskPool_ disk description=_description_ maxsize=_maximum_file_size nextstgpool=SGWSTapePool_ highmig=_percent_high_ lowmig=_percent_low_`
+
++
+** `_SGWSDiskPool_` É o nome do conjunto de discos do nó de arquivo. Você pode selecionar qualquer nome para o pool de armazenamento em disco (desde que o nome use as convenções de sintaxe esperadas pelo TSM).
+** `_description_` É uma descrição do pool de armazenamento que pode ser exibido no servidor TSM usando o `query stgpool` comando. Por exemplo, "conjunto de armazenamento em disco para o nó de arquivo".
+**  `_maximum_file_size_` força objetos maiores do que esse tamanho a serem gravados diretamente na fita, em vez de serem armazenados em cache no pool de discos. Recomenda-se definir `_maximum_file_size_` para 10 GB.
+** `_nextstgpool=SGWSTapePool_` Refere o pool de armazenamento em disco ao pool de armazenamento em fita definido para o nó de arquivo.
+**  `_percent_high_` define o valor no qual o pool de discos começa a migrar seu conteúdo para o pool de fitas. Recomenda-se definir `_percent_high_` como 0 para que a migração de dados comece imediatamente
+**  `_percent_low_` define o valor no qual a migração para o conjunto de fitas pára. Recomenda-se definir `_percent_low_` como 0 para limpar o pool de discos.
+
+
+. Em um servidor TSM, crie um volume de disco (ou volumes) e atribua-o ao pool de discos.
++
+`define volume _SGWSDiskPool_ _volume_name_ formatsize=_size_`
+
++
+** `_SGWSDiskPool_` é o nome do pool de discos.
+** `_volume_name_` É o caminho completo para o local do volume (por exemplo, `/var/local/arc/stage6.dsm` ) no servidor TSM onde grava o conteúdo do pool de discos em preparação para transferência para fita.
+** `_size_` É o tamanho, em MB, do volume do disco.
++
+Por exemplo, para criar um único volume de disco de modo que o conteúdo de um pool de discos preencha uma única fita, defina o valor de tamanho como 200000 quando o volume da fita tiver uma capacidade de 200 GB.
+
++
+No entanto, pode ser desejável criar vários volumes de disco de um tamanho menor, já que o servidor TSM pode gravar em cada volume no pool de discos. Por exemplo, se o tamanho da fita for de 250 GB, crie 25 volumes de disco com um tamanho de 10 GB (10000) cada.
+
++
+O servidor TSM prealoca espaço no diretório para o volume de disco. Isso pode levar algum tempo para ser concluído (mais de três horas para um volume de disco de 200 GB).
+
+
+
+

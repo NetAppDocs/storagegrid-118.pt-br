@@ -1,0 +1,95 @@
+---
+permalink: maintain/recovering-storage-node-that-has-been-down-more-than-15-days.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, storage node failure 
+summary: Se um nó de storage único estiver offline e não estiver conetado a outros nós de storage por mais de 15 dias, você deverá reconstruir o Cassandra no nó. 
+---
+= Recupere o nó de storage abaixo mais de 15 dias
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se um nó de storage único estiver offline e não estiver conetado a outros nós de storage por mais de 15 dias, você deverá reconstruir o Cassandra no nó.
+
+.Antes de começar
+* Você verificou que a desativação de um nó de storage não está em andamento ou interrompeu o procedimento de desativação do nó. (No Gerenciador de Grade, selecione *MAINTENANCE* > *Tasks* > *Decommission*.)
+* Você verificou que uma expansão não está em andamento. (No Gerenciador de Grade, selecione *MAINTENANCE* > *Tasks* > *Expansion*.)
+
+
+.Sobre esta tarefa
+Os nós de storage têm um banco de dados Cassandra que inclui metadados de objetos. Se um nó de storage não conseguir se comunicar com outros nós de storage por mais de 15 dias, o StorageGRID presume que o banco de dados Cassandra do nó está obsoleto. O nó de storage não pode reingressar na grade até que o Cassandra tenha sido reconstruído usando informações de outros nós de storage.
+
+Use este procedimento para reconstruir o Cassandra somente se um nó de armazenamento único estiver inativo. Entre em Contato com o suporte técnico se nós de armazenamento adicionais estiverem offline ou se o Cassandra tiver sido reconstruído em outro nó de armazenamento nos últimos 15 dias; por exemplo, o Cassandra pode ter sido reconstruído como parte dos procedimentos para recuperar volumes de armazenamento com falha ou para recuperar um nó de armazenamento com falha.
+
+
+CAUTION: Se mais de um nó de armazenamento tiver falhado (ou estiver offline), contacte o suporte técnico. Não execute o seguinte procedimento de recuperação. Pode ocorrer perda de dados.
+
+
+CAUTION: Se esta for a segunda falha do nó de storage em menos de 15 dias após uma falha ou recuperação do nó de storage, entre em Contato com o suporte técnico. Não execute o seguinte procedimento de recuperação. Pode ocorrer perda de dados.
+
+
+NOTE: Se mais de um nó de armazenamento em um local tiver falhado, um procedimento de recuperação do local pode ser necessário. link:how-site-recovery-is-performed-by-technical-support.html["Como o suporte técnico recupera um site"]Consulte .
+
+.Passos
+. Se necessário, ligue o nó de armazenamento que precisa ser recuperado.
+. Faça login no nó da grade:
++
+.. Introduza o seguinte comando: `ssh admin@_grid_node_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver logado como root, o prompt muda de `$` para `#`
+
++
+
+NOTE: Se você não conseguir fazer login no nó da grade, o disco do sistema pode não estar intacto. Vá para o procedimento para link:recovering-from-system-drive-failure.html["recuperando-se da falha da unidade do sistema"].
+
+
+
+. Execute as seguintes verificações no nó de storage:
++
+.. Emita este comando: `nodetool status`
++
+A saída deve ser de `Connection refused`
+
+.. No Gerenciador de Grade, selecione *support* > *Tools* > *Grid topology*.
+.. Selecione *_Site_* > *nó de armazenamento* > *SSM* > *Serviços*. Verifique se o serviço Cassandra exibe `Not Running`.
+.. Selecione *nó de armazenamento* > *SSM* > *recursos*. Verifique se não há status de erro na seção volumes.
+.. Emita este comando: `grep -i Cassandra /var/local/log/servermanager.log`
++
+Você deve ver a seguinte mensagem na saída:
+
++
+[listing]
+----
+Cassandra not started because it has been offline for more than 15 day grace period - rebuild Cassandra
+----
+
+
+. Emita este comando e monitore a saída do script: `check-cassandra-rebuild`
++
+** Se o serviço Cassandra dependendo do volume 0 estiver em execução, você será solicitado a pará-lo. Digite: *Y*
++
+
+NOTE: Se o serviço Cassandra já estiver parado, você não será solicitado. O serviço Cassandra é interrompido apenas para o volume 0.
+
+** Reveja os avisos no script. Se nenhum deles se aplicar, confirme que você deseja reconstruir o Cassandra. Digite: *Y*
++
+
+NOTE: Alguns procedimentos de recuperação do StorageGRID usam o Reaper para lidar com reparos do Cassandra. As reparações ocorrem automaticamente assim que os serviços relacionados ou necessários tiverem sido iniciados. Você pode notar saída de script que menciona "Reaper" ou "Cassandra repair". Se aparecer uma mensagem de erro indicando que a reparação falhou, execute o comando indicado na mensagem de erro.
+
+
+
+. Após a conclusão da reconstrução, execute as seguintes verificações:
++
+.. No Gerenciador de Grade, selecione *support* > *Tools* > *Grid topology*.
+.. Selecione *_Site_* > *nó de armazenamento recuperado* > *SSM* > *Serviços*.
+.. Confirme se todos os serviços estão em execução.
+.. Selecione *DDS* > *Data Store*.
+.. Confirme se o *Status do armazenamento de dados* está "para cima" e o *Estado do armazenamento de dados* é "normal".
+
+
+

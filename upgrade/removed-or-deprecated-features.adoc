@@ -1,0 +1,105 @@
+---
+permalink: upgrade/removed-or-deprecated-features.html 
+sidebar: sidebar 
+keywords:  
+summary: Alguns recursos e recursos foram removidos ou obsoletos nesta versão. Revise esses itens para entender se você precisa atualizar aplicativos do cliente ou modificar sua configuração antes de atualizar. 
+---
+= Recursos e recursos removidos ou obsoletos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Alguns recursos e recursos foram removidos ou obsoletos nesta versão. Revise esses itens para entender se você precisa atualizar aplicativos do cliente ou modificar sua configuração antes de atualizar.
+
+
+
+== Definições
+
+Obsoleto:: O recurso *não deve* ser usado em novos ambientes de produção. Os ambientes de produção existentes podem continuar usando o recurso.
+Fim da vida:: Última versão enviada que contém o recurso. Nenhuma versão futura suportará o recurso.
+Removido:: Primeira versão que *não contém* o recurso.
+
+
+
+
+== Suporte de fim de recurso do StorageGRID 11,8
+
+Os recursos obsoletos serão removidos em mais de 2 versões principais. Por exemplo, se um recurso estiver obsoleto na versão N (por exemplo, 6,3), a última versão em que o recurso existirá é N-1 (por exemplo, 6,4). A versão N-2 (por exemplo, 6,5) é a primeira versão quando o recurso não existe no produto.
+
+Consulte https://mysupport.netapp.com/site/info/version-support["Página de suporte da versão de software"^] para obter informações adicionais.
+
+
+NOTE: Em certas situações, o NetApp pode terminar o suporte para recursos específicos mais cedo do que o indicado.
+
+[cols="3a,1a,1a,1a"]
+|===
+| Recurso | Obsoleto | Fim da vida | Removido 
+
+
+ a| 
+Suporte ao Archive Node
+ a| 
+11,7
+ a| 
+11,8
+ a| 
+11,9
+
+
+
+ a| 
+Auditoria de exportação através de CIFS/Samba
+ a| 
+11,1
+ a| 
+11,6
+ a| 
+11,7
+
+
+
+ a| 
+Serviço CLB
+ a| 
+11,4
+ a| 
+11,6
+ a| 
+11,7
+
+
+
+ a| 
+Runtime do contentor do Docker
+ a| 
+11,8
+ a| 
+11,9
+ a| 
+12,0
+
+
+
+ a| 
+Exportação de auditoria NFS
+ a| 
+11,8
+ a| 
+11,9
+ a| 
+12,0
+
+
+
+ a| 
+Suporte à API Swift
+ a| 
+11,7
+ a| 
+11,9
+ a| 
+12,0
+
+|===

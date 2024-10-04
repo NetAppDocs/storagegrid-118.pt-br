@@ -1,0 +1,31 @@
+---
+indexpage:
+  tiles:
+  - title: Comece agora
+    links:
+    - title: Visão geral da manutenção
+      url: "../maintain/index.html"
+    - title: Baixar Recovery Package
+      url: "../maintain/downloading-recovery-package.html"
+  - title: Desativar nós ou locais
+    links:
+    - title: Visão geral
+      url: "../maintain/decommission-procedure.html"
+    - title: Remova um nó de grade
+      url: "../maintain/grid-node-decommissioning.html"
+    - title: Remova um local
+      url: "../maintain/considerations-for-removing-site.html"
+  - title: Procedimentos de manutenção adicionais
+    links:
+    - title: Renomeie grade, site ou nó
+      url: "../maintain/rename-grid-site-node-overview.html"
+    - title: Procedimentos do nó
+      url: "../maintain/grid-node-procedures.html"
+    - title: Procedimentos de rede
+      url: "../maintain/updating-subnets-for-grid-network.html"
+    - title: Procedimentos de host e middleware
+      url: "../maintain/linux-migrating-grid-node-to-new-host.html"
+  - title: Manter dispositivos StorageGRID
+    links:
+    - title: Documentação do StorageGRID Appliances
+      url: https://docs.netapp.com/us-en/storagegrid-appliances/

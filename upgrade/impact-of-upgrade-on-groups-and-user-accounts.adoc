@@ -1,0 +1,35 @@
+---
+permalink: upgrade/impact-of-upgrade-on-groups-and-user-accounts.html 
+sidebar: sidebar 
+keywords: upgrade, permissions 
+summary: Talvez seja necessário atualizar grupos e contas de usuário adequadamente após a conclusão da atualização. 
+---
+= Impacto de uma atualização em grupos e contas de usuários
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário atualizar grupos e contas de usuário adequadamente após a conclusão da atualização.
+
+
+
+== Alterações nas permissões e opções de grupo
+
+Depois de atualizar para o StorageGRID 11,8, atribua opcionalmente as novas permissões a seguir aos grupos de usuários de locatário.
+
+[cols="1a,2a,2a"]
+|===
+| Permissão | Descrição | Detalhes 
+
+
+ a| 
+Veja todos os baldes
+ a| 
+Permite que os usuários visualizem todas as configurações de buckets e bucket.
+ a| 
+A permissão Gerenciar todos os buckets substitui a permissão Ver todos os buckets.
+
+|===
+link:../tenant/tenant-management-permissions.html["Permissões de gerenciamento do locatário"]Consulte .

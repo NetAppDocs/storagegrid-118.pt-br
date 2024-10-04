@@ -1,0 +1,21 @@
+---
+permalink: maintain/recovering-from-system-drive-failure.html 
+sidebar: sidebar 
+keywords: recover, system drive failure, workflow 
+summary: Se a unidade do sistema em um nó de storage baseado em software tiver falhado, o nó de storage não estará disponível para o sistema StorageGRID. Você deve concluir um conjunto específico de tarefas para recuperar de uma falha na unidade do sistema. 
+---
+= Recuperar de falha na unidade do sistema: Fluxo de trabalho
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se a unidade do sistema em um nó de storage baseado em software tiver falhado, o nó de storage não estará disponível para o sistema StorageGRID. Você deve concluir um conjunto específico de tarefas para recuperar de uma falha na unidade do sistema.
+
+Use este procedimento para recuperar de uma falha na unidade do sistema em um nó de armazenamento baseado em software. Este procedimento inclui as etapas a seguir se algum volume de armazenamento também falhou ou não pode ser remontado.
+
+
+NOTE: Este procedimento aplica-se apenas a nós de storage baseados em software. Deve seguir um procedimento diferente para link:recovering-storagegrid-appliance-storage-node.html["Recupere um nó de storage do dispositivo"].
+
+image::../media/storage_node_recovery_system_drive.gif[Etapas de recuperação para unidade de sistema com falha no nó de storage baseado em software]

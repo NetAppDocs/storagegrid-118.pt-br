@@ -1,0 +1,37 @@
+---
+permalink: upgrade/changes-to-grid-management-api.html 
+sidebar: sidebar 
+keywords: grid management api, api, api version, swagger, rest api 
+summary: O StorageGRID 11,8 usa a versão 4 da API de gerenciamento de grade. A versão 4 desconsidera a versão 3; no entanto, as versões 1, 2 e 3 ainda são suportadas. 
+---
+= Alterações na API Grid Management
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O StorageGRID 11,8 usa a versão 4 da API de gerenciamento de grade. A versão 4 desconsidera a versão 3; no entanto, as versões 1, 2 e 3 ainda são suportadas.
+
+
+NOTE: Você pode continuar usando versões obsoletas da API de gerenciamento com o StorageGRID 11,8; no entanto, o suporte para essas versões da API será removido em uma versão futura do StorageGRID. Depois de atualizar para o StorageGRID 11,8, as APIs obsoletas podem ser desativadas usando a `PUT /grid/config/management` API.
+
+Para saber mais, link:../admin/using-grid-management-api.html["Use a API de gerenciamento de grade"]acesse .
+
+
+
+== Alterações para `ilm-policies` a API v4
+
+A partir do StorageGRID 11,8, a versão 4 `ilm-policies` da API contém as seguintes diferenças em relação à versão 3:
+
+* As políticas históricas já não são devolvidas. Uma nova API separada para obter dados históricos de política e tag foi adicionada em `/grid/ilm-history`.
+* Propriedades removidas `proposed`: `historical`, , `historicalRules`, `activationTime`.
+* Propriedades adicionadas: `active` (boolean) `activatedBy`, (array de UUUIDs de tag a que a política é atribuída).
+* O parâmetro opcional type query para `GET ilm-policies` Now leva os valores `inactive` e `active.` os valores anteriores foram `proposed`, `active` e `historical`.
+
+
+
+
+== Novos pontos de extremidade para gerenciamento de unidades
+
+Você pode usar os endpoints da API */grid/drive-details/(nodeId)* para executar operações nas unidades em modelos específicos de nós de armazenamento de dispositivos.

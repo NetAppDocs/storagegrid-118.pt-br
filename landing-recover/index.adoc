@@ -1,0 +1,13 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+permalink: landing-recover/index.html 
+summary: Se um nó de grade falhar, você poderá recuperá-lo substituindo o servidor físico ou virtual com falha, reinstalando o software StorageGRID e restaurando dados recuperáveis. 
+---
+= Recuperar ou substituir nós
+:hardbreaks:
+:allow-uri-read: 
+:linkattrs: 
+:imagesdir: ./media/
+
+

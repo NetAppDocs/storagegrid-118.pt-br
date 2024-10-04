@@ -1,0 +1,34 @@
+---
+permalink: admin/modifying-cloud-tiering-service-state.html 
+sidebar: sidebar 
+keywords: cloud tiering 
+summary: Você pode controlar a capacidade de leitura e gravação do nó de arquivamento no sistema de storage de arquivamento externo de destino que se conecta à API S3, alterando o estado do Cloud Tiering Service. 
+---
+= Modifique o estado Cloud Tiering Service
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode controlar a capacidade de leitura e gravação do nó de arquivamento no sistema de storage de arquivamento externo de destino que se conecta pela API S3, alterando o estado do Cloud Tiering Service.
+
+.Antes de começar
+* Você deve estar conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+* O nó de arquivo deve ser configurado.
+
+
+.Sobre esta tarefa
+Você pode efetivamente colocar o nó de arquivo offline alterando o estado do Serviço de disposição em categorias na nuvem para *leitura-escrita desativada*.
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/modifying_middleware_state.gif[Estado do Cloud Tiering Service]
+
+. Selecione um *Estado do Serviço de disposição em camadas na nuvem*.
+. Selecione *aplicar alterações*.
+

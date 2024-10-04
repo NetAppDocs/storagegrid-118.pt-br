@@ -1,0 +1,33 @@
+---
+permalink: admin/resetting-store-failure-count-for-s3-api-connection.html 
+sidebar: sidebar 
+keywords: archive node, store failure count 
+summary: 'Se o seu nó de arquivo se conetar a um sistema de armazenamento de arquivos por meio da API S3, você pode redefinir a contagem de falhas de armazenamento, que pode ser usada para limpar o alarme ARVF (falhas de armazenamento).' 
+---
+= Redefina a contagem de falhas de armazenamento para conexão API S3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se o seu nó de arquivo se conetar a um sistema de armazenamento de arquivos por meio da API S3, você poderá redefinir a contagem de falhas de armazenamento, que pode ser usada para limpar o alarme ARVF (falhas de armazenamento).
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você link:admin-group-permissions.html["permissões de acesso específicas"]tem .
+
+
+.Passos
+. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+. Selecione *_Archive Node_* > *ARC* > *Store*.
+. Selecione *Configuração* > *Principal*.
++
+image::../media/archive_store_s3.gif[Configure as configurações de armazenamento para conexão API S3]
+
+. Selecione *Repor contagem de falhas de armazenamento*.
+. Selecione *aplicar alterações*.
++
+O atributo Store Failures (falhas de armazenamento) é reposto a zero.
+
+

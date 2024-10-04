@@ -1,0 +1,95 @@
+---
+permalink: admin/adding-nfs-audit-client-to-audit-share.html 
+sidebar: sidebar 
+keywords: nfs, audit client, audit share 
+summary: Os clientes de auditoria NFS têm acesso a um compartilhamento de auditoria com base em seu endereço IP. Conceda acesso ao compartilhamento de auditoria a um novo cliente de auditoria NFS adicionando seu endereço IP ao compartilhamento de auditoria. 
+---
+= Adicione um cliente de auditoria NFS a um compartilhamento de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os clientes de auditoria NFS têm acesso a um compartilhamento de auditoria com base em seu endereço IP. Conceda acesso ao compartilhamento de auditoria a um novo cliente de auditoria NFS adicionando seu endereço IP ao compartilhamento de auditoria.
+
+
+NOTE: O suporte para NFS foi obsoleto e será removido em uma versão futura.
+
+.Antes de começar
+* Você tem o `Passwords.txt` arquivo com a senha da conta root/admin.
+* Você tem o `Configuration.txt` arquivo (disponível no Pacote de recuperação).
+* O cliente de auditoria está usando o NFS versão 3 (NFSv3).
+
+
+.Passos
+. Faça login no nó de administração principal:
++
+.. Introduza o seguinte comando: `ssh admin@_primary_Admin_Node_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
+
+
+
+. Inicie o utilitário de configuração NFS: `config_nfs.rb`
++
+[listing]
+----
+
+-----------------------------------------------------------------
+| Shares               | Clients              | Config          |
+-----------------------------------------------------------------
+| add-audit-share      | add-ip-to-share      | validate-config |
+| enable-disable-share | remove-ip-from-share | refresh-config  |
+|                      |                      | help            |
+|                      |                      | exit            |
+-----------------------------------------------------------------
+----
+. Introduza: `add-ip-to-share`
++
+Uma lista de compartilhamentos de auditoria NFS habilitados no Admin Node é exibida. O compartilhamento de auditoria é listado como: `/var/local/log`
+
+. Introduza o número da partilha de auditoria: `_audit_share_number_`
+. Quando solicitado, insira o endereço IP ou o intervalo de endereços IP do cliente de auditoria para o compartilhamento de auditoria: `_client_IP_address_`
++
+O cliente de auditoria é adicionado ao compartilhamento de auditoria.
+
+. Quando solicitado, pressione *Enter*.
++
+O utilitário de configuração NFS é exibido.
+
+. Repita as etapas para cada cliente de auditoria que deve ser adicionado ao compartilhamento de auditoria.
+. Opcionalmente, verifique sua configuração: `validate-config`
++
+Os serviços são verificados e exibidos.
+
++
+.. Quando solicitado, pressione *Enter*.
++
+O utilitário de configuração NFS é exibido.
+
+
+
+. Feche o utilitário de configuração NFS: `exit`
+. Se a implantação do StorageGRID for um único local, vá para a próxima etapa.
++
+Caso contrário, se a implantação do StorageGRID incluir nós de administração em outros sites, ative opcionalmente esses compartilhamentos de auditoria, conforme necessário:
+
++
+.. Faça login remotamente no Admin Node de um site:
++
+... Introduza o seguinte comando: `ssh admin@_grid_node_IP_`
+... Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+... Digite o seguinte comando para mudar para root: `su -`
+... Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+
+
+.. Repita estas etapas para configurar os compartilhamentos de auditoria para cada nó de administração.
+.. Feche o login remoto do shell seguro para o Admin Node remoto: `exit`
+
+
+. Faça logout do shell de comando: `exit`
+
