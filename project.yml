@@ -2,6 +2,7 @@
 settings:
   name: StorageGRID 11.8
   search: storagegrid-enable,storagegrid-118,storagegrid-appliances
+  downlevel: true
   internal:
     pdf_enabled: false
     termcheck_enabled: false
