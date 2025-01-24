@@ -34,7 +34,7 @@ Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
 .. Introduza `cd /var/local/log`
 .. Identifique quais locatários estão usando objetos maiores que 5 GiB.
 +
-... Introduza `zgrep SPUT * | egrep "CSIZ\(UI64\):[0-9]*[5-9][0-9]{9}"`
+... Introduza `zgrep SPUT * | egrep "CSIZ\(UI64\):([5-9]|[1-9][0-9]+)[0-9]{9}"`
 ... Para cada mensagem de auditoria nos resultados, observe `S3AI` o campo para determinar o ID da conta do locatário. Use os outros campos da mensagem para determinar qual endereço IP foi usado pelo cliente, pelo bucket e pelo objeto:
 +
 [cols="1a,2a"]

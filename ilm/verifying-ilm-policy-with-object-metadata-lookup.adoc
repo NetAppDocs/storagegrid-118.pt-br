@@ -53,8 +53,6 @@ Os resultados da pesquisa de metadados de objeto aparecem. Esta página lista os
 ** Para cópias de objetos em um Cloud Storage Pool, o local do objeto, incluindo o nome do bucket externo e o identificador exclusivo do objeto.
 ** Para objetos segmentados e objetos de várias partes, uma lista de segmentos, incluindo identificadores de segmento e tamanhos de dados. Para objetos com mais de 100 segmentos, apenas os primeiros 100 segmentos são mostrados.
 ** Todos os metadados de objetos no formato de armazenamento interno não processado. Esses metadados brutos incluem metadados internos do sistema que não são garantidos para persistir de liberação para liberação.
-
-
 +
 O exemplo a seguir mostra os resultados da pesquisa de metadados de objeto para um objeto de teste S3 que é armazenado como duas cópias replicadas.
 
@@ -64,6 +62,8 @@ NOTE: A captura de tela a seguir é um exemplo. Seus resultados variam de acordo
 
 +
 image::../media/object_lookup_results.png[Resultados da Pesquisa de objetos]
+
+
 
 . Confirme se o objeto está armazenado no local ou locais corretos e se é o tipo correto de cópia.
 +
