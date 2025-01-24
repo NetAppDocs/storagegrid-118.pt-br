@@ -45,7 +45,7 @@ A criptografia de unidade não se aplica a unidades gerenciadas pelo SANtricity.
  a| 
 Conduza a segurança no Gerenciador de sistemas do SANtricity
  a| 
-Se o recurso Segurança da unidade estiver habilitado para um dispositivo de armazenamento SG5700 ou SG6000, você poderá usar https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/accessing-and-configuring-santricity-system-manager.html["Gerente do sistema da SANtricity"^] o para criar e gerenciar a chave de segurança. A chave é necessária para aceder aos dados nas unidades seguras.
+Se o recurso Segurança da unidade estiver ativado para o seu dispositivo StorageGRID, você poderá usar https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/accessing-and-configuring-santricity-system-manager.html["Gerente do sistema da SANtricity"^] o para criar e gerenciar a chave de segurança. A chave é necessária para aceder aos dados nas unidades seguras.
  a| 
 Dispositivos de storage com unidades Full Disk Encryption (FDE) ou unidades com autocriptografia. Todos os dados nas unidades protegidas são protegidos contra perda física ou remoção do data center. Não pode ser usado com alguns dispositivos de armazenamento ou com quaisquer dispositivos de serviços.
 
