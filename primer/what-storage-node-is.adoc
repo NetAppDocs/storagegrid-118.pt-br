@@ -33,6 +33,20 @@ NOTE: Você só pode selecionar o tipo nó de storage ao instalar inicialmente o
 
 A instalação de um nó somente de metadados geralmente não é necessária. No entanto, usar um nó de armazenamento exclusivo para metadados pode fazer sentido se sua grade armazenar um grande número de pequenos objetos. A instalação da capacidade de metadados dedicada fornece um melhor equilíbrio entre o espaço necessário para um grande número de pequenos objetos e o espaço necessário para os metadados para todos esses objetos.
 
+Os recursos de nó somente de metadados baseados em software devem corresponder aos recursos dos nós de storage existentes. Por exemplo:
+
+* Se o local do StorageGRID existente estiver usando dispositivos SG6000 ou SG6100, os nós somente de metadados baseados em software deverão atender aos seguintes requisitos mínimos:
++
+** 128 GB DE RAM
+** CPU de 8 núcleos
+** SSD de 8 TB ou armazenamento equivalente para o banco de dados Cassandra (rangedb/0)
+
+
+* Se o site StorageGRID existente estiver usando nós de armazenamento virtual com 24 GB de RAM, CPU de 8 núcleos e 3 TB ou 4TB TB de armazenamento de metadados, os nós somente de metadados baseados em software devem usar recursos semelhantes (24 GB de RAM, CPU de 8 núcleos e 4TB GB de armazenamento de metadados (rangedb/0).
+
+
+Ao adicionar um novo site StorageGRID, a capacidade total de metadados do novo local deve, no mínimo, corresponder aos locais StorageGRID existentes e os novos recursos do local devem corresponder aos nós de storage nos locais StorageGRID existentes.
+
 Ao instalar uma grade com nós somente metadados baseados em software, a grade também deve conter um número mínimo de nós para o storage de objetos:
 
 * Para uma grade de um único local, pelo menos dois nós de storage são configurados para objetos e metadados.

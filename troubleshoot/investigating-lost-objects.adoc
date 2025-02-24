@@ -59,7 +59,7 @@ image::../media/nodes_storage_nodes_objects_page_lost_object.png[Objeto perdido 
 
 . Use o `ObjectByUUID` comando para encontrar o objeto pelo seu identificador (UUID) e, em seguida, determinar se os dados estão em risco.
 +
-.. Telnet para localhost 1402 para acessar o console LDR.
+.. Use SSH para fazer login em qualquer nó de armazenamento. Em seguida, aceda à consola LDR introduzindo "telnet 0 1402".
 .. Introduza: `/proc/OBRP/ObjectByUUID UUID_value`
 +
 Neste primeiro exemplo, o objeto com `UUID 926026C4-00A4-449B-AC72-BCCA72DD1311` tem duas localizações listadas.
