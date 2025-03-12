@@ -1,5 +1,13 @@
 ---
 indexpage:
+  title: Documentação do StorageGRID 11,8
+  summary: O NetApp StorageGRID é um pacote de storage de objetos definido por software
+    compatível com uma grande variedade de casos de uso em ambientes multicloud híbrida,
+    privada e pública. A StorageGRID oferece suporte nativo à API Amazon S3 e oferece
+    inovações líderes do setor, como gerenciamento automatizado do ciclo de vida,
+    para armazenar, proteger e preservar dados não estruturados de maneira econômica
+    por longos períodos.
+  keywords: storagegrid 118 documentation
   lead: O NetApp StorageGRID é um pacote de storage de objetos definido por software
     compatível com uma grande variedade de casos de uso em ambientes multicloud híbrida,
     privada e pública. A StorageGRID oferece suporte nativo à API Amazon S3 e oferece
@@ -91,16 +99,8 @@ indexpage:
       url: https://netapp.com/blog/
     - title: NetApp comunidade
       url: https://community.netapp.com/
-  - title: Outras versões
+  - title: Versões antigas
     links:
-    - title: Documentação do StorageGRID 11,9
-      url: https://docs.netapp.com/us-en/storagegrid/index.html
-    - title: Documentação do StorageGRID 11,7
-      url: https://docs.netapp.com/us-en/storagegrid-117/index.html
-    - title: Documentação do StorageGRID 11,6
-      url: https://docs.netapp.com/us-en/storagegrid-116/index.html
-    - title: Documentação do StorageGRID 11,5
-      url: https://docs.netapp.com/us-en/storagegrid-115/index.html
     - title: Documentação do StorageGRID 11,4
       url: https://docs.netapp.com/sgws-114/index.jsp
     - title: Documentação do StorageGRID 11,3
