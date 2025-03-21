@@ -86,7 +86,9 @@ Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
 
 . Atualize as configurações de usuário e grupo para os arquivos de log de auditoria:
 +
-`cd /var/local/log` E
+`cd /var/local/log`
+
++
 `chown ams-user:bycast *`
 
 . Terminar sessão a partir do servidor:

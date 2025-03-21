@@ -184,7 +184,7 @@ Um banner verde indica que sua configuração foi salva.
 Opcionalmente, você pode configurar um servidor syslog externo para salvar logs de auditoria, logs de aplicativos e logs de eventos de segurança em um local fora da grade.
 
 
-NOTE: Se você não quiser usar um servidor syslog externo, pule esta etapa e vá para <<Select-audit-information-destinations,Selecione destinos de informações de auditoria>>.
+NOTE: Se você não quiser usar um servidor syslog externo, pule esta etapa e vá para <<select-audit-information-destinations,Selecione destinos de informações de auditoria>>.
 
 
 TIP: Se as opções de configuração disponíveis neste procedimento não forem flexíveis o suficiente para atender aos seus requisitos, opções de configuração adicionais podem ser aplicadas usando os `audit-destinations` endpoints, que estão na seção API privada do link:../admin/using-grid-management-api.html["API de gerenciamento de grade"]. Por exemplo, você pode usar a API se quiser usar diferentes servidores syslog para diferentes grupos de nós.
@@ -584,9 +584,15 @@ NOTE: As informações de auditoria do StorageGRID não são enviadas para o ser
 
 Você pode especificar onde os logs de auditoria, logs de eventos de segurança e link:../monitor/storagegrid-software-logs.html["Registos do software StorageGRID"] são enviados.
 
+[NOTE]
+====
+O StorageGRID usa o padrão de destinos de auditoria de nó local e armazena as informações de auditoria no `/var/local/log/localaudit.log`.
 
-NOTE: Alguns destinos só estão disponíveis se tiver configurado um servidor syslog externo.
+Ao usar `/var/local/log/localaudit.log`o , as entradas de log de auditoria do Gerenciador de Grade e do Gerenciador de locatário podem ser enviadas para um nó de armazenamento. Você pode encontrar qual nó tem as entradas mais recentes usando o `run-each-node --parallel "zgrep MGAU /var/local/log/localaudit.log | tail"` comando.
 
+Alguns destinos só estão disponíveis se tiver configurado um servidor syslog externo.
+
+====
 .Passos
 . Na página servidor de auditoria e syslog, selecione o destino para informações de auditoria.
 +
@@ -602,7 +608,7 @@ TIP: *Somente nós locais* e *servidor syslog externo* normalmente fornecem melh
  a| 
 Somente nós locais (padrão)
  a| 
-As mensagens de auditoria, os logs de eventos de segurança e os logs de aplicativos não são enviados para os nós de administração. Em vez disso, eles são salvos apenas nos nós que os geraram ("o nó local"). As informações de auditoria geradas em cada nó local são armazenadas `/var/local/log/localaudit.log`
+As mensagens de auditoria, os logs de eventos de segurança e os logs de aplicativos não são enviados para os nós de administração. Em vez disso, eles são salvos apenas nos nós que os geraram ("o nó local"). As informações de auditoria geradas em cada nó local são armazenadas no `/var/local/log/localaudit.log`.
 
 *Nota*: O StorageGRID remove periodicamente logs locais em uma rotação para liberar espaço. Quando o arquivo de log de um nó atinge 1 GB, o arquivo existente é salvo e um novo arquivo de log é iniciado. O limite de rotação para o log é de 21 arquivos. Quando a versão 22nd do arquivo de log é criada, o arquivo de log mais antigo é excluído. Em média, cerca de 20 GB de dados de log são armazenados em cada nó.
 
@@ -611,21 +617,25 @@ As mensagens de auditoria, os logs de eventos de segurança e os logs de aplicat
  a| 
 Nós de administração/nós locais
  a| 
-As mensagens de auditoria são enviadas para o log de auditoria (`/var/local/log/audit.log`) em nós de administração e os logs de eventos de segurança e de aplicativos são armazenados nos nós que as geraram.
+As mensagens de auditoria são enviadas para o log de auditoria nos nós de administração, e os logs de eventos de segurança e de aplicativos são armazenados nos nós que as geraram. As informações de auditoria são armazenadas nos seguintes arquivos:
+
+** Nós de administração (primários e não primários): `/var/local/audit/export/audit.log`
+** Todos os nós: O `/var/local/log/localaudit.log` arquivo está normalmente vazio ou ausente. Ele pode conter informações secundárias, como uma cópia adicional de algumas mensagens.
+
 
 
 
  a| 
 Servidor syslog externo
  a| 
-As informações de auditoria são enviadas para um servidor syslog externo e salvas nos nós locais. O tipo de informação enviada depende de como você configurou o servidor syslog externo. Esta opção só é ativada depois de ter configurado um servidor syslog externo.
+As informações de auditoria são enviadas para um servidor syslog externo e salvas nos nós locais (`/var/local/log/localaudit.log`). O tipo de informação enviada depende de como você configurou o servidor syslog externo. Esta opção só é ativada depois de ter configurado um servidor syslog externo.
 
 
 
  a| 
 Nó de administração e servidor syslog externo
  a| 
-As mensagens de auditoria são enviadas para o log de auditoria (`/var/local/log/audit.log`) em nós de administração e as informações de auditoria são enviadas para o servidor syslog externo e salvas no nó local. O tipo de informação enviada depende de como você configurou o servidor syslog externo. Esta opção só é ativada depois de ter configurado um servidor syslog externo.
+As mensagens de auditoria são enviadas para o log de auditoria (`/var/local/audit/export/audit.log`) em nós de administração e as informações de auditoria são enviadas para o servidor syslog externo e salvas no nó local (`/var/local/log/localaudit.log`). O tipo de informação enviada depende de como você configurou o servidor syslog externo. Esta opção só é ativada depois de ter configurado um servidor syslog externo.
 
 |===
 . Selecione *Guardar*.
