@@ -62,23 +62,7 @@ Depois de salvar sua configuração, todas as portas externas no Admin Node em s
 
 
 
-=== Exemplo 2: Limite o acesso ao Gerenciador de Grade e ao Gerenciador do Locatário
-
-Suponha que você queira limitar o acesso ao Gerenciador de Grade e ao gerenciador de locatário (portas predefinidas) por motivos de segurança. Você pode usar estas etapas gerais:
-
-. Use a alternância na guia Gerenciar acesso externo para bloquear a porta 443.
-. Use a opção na guia Gerenciar acesso externo para permitir o acesso à porta 8443.
-. Use a opção na guia Gerenciar acesso externo para permitir o acesso à porta 9443.
-
-
-Depois de salvar sua configuração, os hosts não poderão acessar a porta 443, mas ainda poderão acessar o Gerenciador de Grade pela porta 8443 e o Gerenciador de Tenant pela porta 9443.
-
-
-NOTE: As portas 443, 8443 e 9443 são as portas predefinidas para o Grid Manager e o Tenant Manager. Você pode alternar qualquer porta para limitar o acesso a um Gerenciador de Grade específico ou gerente de locatário.
-
-
-
-=== Exemplo 3: Bloquear portas sensíveis
+=== Exemplo 2: Bloquear portas sensíveis
 
 Suponha que você queira bloquear portas sensíveis e o serviço nessa porta (por exemplo, SSH na porta 22). Você pode usar as seguintes etapas gerais:
 
@@ -93,7 +77,7 @@ Depois de salvar sua configuração, a porta 22 e o serviço SSH estarão dispon
 
 
 
-=== Exemplo 4: Desativar o acesso a serviços não utilizados
+=== Exemplo 3: Desabilitar acesso a serviços não utilizados
 
 Em um nível de rede, você pode desativar alguns serviços que você não pretende usar. Por exemplo, se você não fornecer acesso Swift, você executaria as seguintes etapas gerais:
 
