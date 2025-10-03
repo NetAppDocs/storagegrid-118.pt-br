@@ -189,11 +189,18 @@ Um alarme de Eventos totais (SMTT) é acionado quando o banco de dados Cassandra
 Se ocorrer um erro de falta de memória para o banco de dados do Cassandra, um despejo de heap é criado, um alarme de Eventos totais (SMTT) é acionado e a contagem de erros de memória do Cassandra é incrementada por um.
 
 .Passos
-. Para visualizar o evento, selecione *support* > *Tools* > *Grid topology* > *Configuration*.
+. Veja o evento:
++
+.. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+.. Expanda o site e selecione *_grid_node_*.
+.. Selecione *SSM* e depois *Eventos* > *Configuração*.
+
+
 . Verifique se a contagem de erros de memória do Cassandra Heap é 1 ou superior.
 +
 Você pode link:../monitor/running-diagnostics.html["execute o diagnóstico"]obter informações adicionais sobre o estado atual da sua grade.
 
+. Efetue login no nó selecionado como "admin" usando SSH e alterne para o usuário root local.
 . Vá para `/var/local/core/`, compacte o `Cassandra.hprof` arquivo e envie-o para o suporte técnico.
 . Faça um backup do `Cassandra.hprof` arquivo e exclua-o do `/var/local/core/ directory`.
 +
