@@ -476,7 +476,9 @@ Todos os nós
  a| 
 Todos os nós
  a| 
-Fornece o serviço de DNS multicast (mDNS) que é usado para alterações de IP de grade completa e para descoberta de nó de administrador principal durante a instalação, expansão e recuperação.
+Fornece o serviço DNS multicast (mDNS) usado para alterações de IP em toda a grade e para a descoberta do nó administrativo primário durante a instalação, expansão e recuperação.
+
+*Nota*: A configuração desta porta é opcional.
 
 
 
