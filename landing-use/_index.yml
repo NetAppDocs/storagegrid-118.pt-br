@@ -1,5 +1,13 @@
 ---
 indexpage:
+  title: Use locatários e clientes do StorageGRID
+  summary: Após a conclusão da configuração inicial, as contas de locatário do StorageGRID
+    podem criar buckets e usar aplicativos cliente S3 para obter, recuperar e excluir
+    objetos.
+  keywords: applications, tenant, ingest, storagegrid systems, monitor, api, management
+  lead: Após a conclusão da configuração inicial, as contas de locatário do StorageGRID
+    podem criar buckets e usar aplicativos cliente S3 para obter, recuperar e excluir
+    objetos.
   tiles:
   - title: Saiba mais sobre inquilinos
     links:

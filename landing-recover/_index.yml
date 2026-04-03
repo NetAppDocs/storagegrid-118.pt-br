@@ -1,5 +1,13 @@
 ---
 indexpage:
+  title: Recuperar ou substituir nós
+  summary: Se um nó de grade falhar, você poderá recuperá-lo substituindo o servidor
+    físico ou virtual com falha, reinstalando o software StorageGRID e restaurando
+    dados recuperáveis.
+  keywords: recover, replace, warnings, grid, node, storagegrid systems
+  lead: Se um nó de grade falhar, você poderá recuperá-lo substituindo o servidor
+    físico ou virtual com falha, reinstalando o software StorageGRID e restaurando
+    dados recuperáveis.
   tiles:
   - title: Comece agora
     links:

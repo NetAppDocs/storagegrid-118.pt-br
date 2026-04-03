@@ -1,5 +1,11 @@
 ---
 indexpage:
+  title: Expanda uma grade
+  summary: Você pode expandir a capacidade ou as funcionalidades do sistema StorageGRID
+    sem interromper as operações do sistema.
+  keywords: storagegrid system, capacity, grid, capabilities, operations, expansion
+  lead: Você pode expandir a capacidade ou as funcionalidades do sistema StorageGRID
+    sem interromper as operações do sistema.
   tiles:
   - title: Comece agora
     links:

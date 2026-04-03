@@ -1,5 +1,16 @@
 ---
 indexpage:
+  title: Instale, atualize e hotfix StorageGRID
+  summary: Um sistema StorageGRID consiste em nós individuais baseados em hardware
+    e em software. Primeiro, você instala o hardware para cada nó de dispositivo e
+    configura cada host Linux ou VMware. Em seguida, você instala o software StorageGRID
+    em cada dispositivo ou host de software e coneta os nós a uma grade.
+  keywords: storagegrid system, appliance hardware, software, install, vmware, red
+    gat, ubuntu, debian, automate
+  lead: Um sistema StorageGRID consiste em nós individuais baseados em hardware e
+    em software. Primeiro, você instala o hardware para cada nó de dispositivo e configura
+    cada host Linux ou VMware. Em seguida, você instala o software StorageGRID em
+    cada dispositivo ou host de software e coneta os nós a uma grade.
   tiles:
   - title: Início rápido
     links:

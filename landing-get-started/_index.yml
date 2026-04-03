@@ -1,5 +1,11 @@
 ---
 indexpage:
+  title: Comece a usar um sistema StorageGRID
+  summary: Antes de instalar e usar um sistema StorageGRID, dedique algum tempo para
+    aprender sobre o que é o StorageGRID.
+  keywords: storagegrid system, install, network, topology, data, manage
+  lead: Antes de instalar e usar um sistema StorageGRID, dedique algum tempo para
+    aprender sobre o que é o StorageGRID.
   tiles:
   - title: Aprenda e explore
     links:
