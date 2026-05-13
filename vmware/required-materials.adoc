@@ -31,7 +31,7 @@ Servidores para nós de grade:: Identifique um conjunto de servidores (físicos,
 NOTE: Se a instalação do StorageGRID não usar nós de armazenamento do StorageGRID Appliance (hardware), você deve usar o armazenamento RAID de hardware com cache de gravação (BBWC) com bateria. O StorageGRID não suporta o uso de redes de área de armazenamento virtual (VSANs), RAID de software ou nenhuma proteção RAID.
 
 --
-Migração de nós (se necessário):: Entenda o link:node-container-migration-requirements.html["requisitos para migração de nós"], se você quiser executar a manutenção programada em hosts físicos sem qualquer interrupção do serviço.
+Migração de nós (se necessário):: Entenda o link:../swnodes/node-container-migration-requirements.html["requisitos para migração de nós"] procedimento, caso queira realizar manutenção programada em hosts físicos sem interrupção de serviço.
 Informações relacionadas:: https://imt.netapp.com/matrix/#welcome["Ferramenta de Matriz de interoperabilidade do NetApp"^]
 
 

@@ -14,7 +14,7 @@ summary: Você pode usar o Swift CLI para testar sua conexão com o sistema Stor
 Você pode usar o Swift CLI para testar sua conexão com o sistema StorageGRID e verificar se você pode ler e escrever objetos.
 
 .Antes de começar
-* Você baixou e instalou o cliente da linha de comando Swift: https://platform.swiftstack.com/docs/integration/python-swiftclient.html["SwiftStack: python-swiftclient"^]
+* Você baixou e instalou o cliente de linha de comando Swift: https://docs.openstack.org/python-swiftclient/latest/["SwiftStack: python-swiftclient"^]
 * Opcionalmente, você link:../admin/configuring-load-balancer-endpoints.html["criou um ponto de extremidade do balanceador de carga"]tem . Caso contrário, você sabe o endereço IP do nó de armazenamento ao qual deseja se conetar e o número da porta a ser usado. link:../admin/summary-ip-addresses-and-ports-for-client-connections.html["Endereços IP e portas para conexões de clientes"]Consulte .
 * Você link:../admin/creating-tenant-account.html["Criou uma conta de locatário Swift"]tem .
 * Você entrou na conta de locatário e criou pelo menos um grupo e usuário. link:../tenant/creating-groups-for-swift-tenant.html["Crie grupos para um locatário Swift"]Consulte .
